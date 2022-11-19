@@ -19,6 +19,3 @@ func _set_transition(call: String, level: Node = null) -> void:
 	var makeref = funcref(self, call)
 	Transition.fade(makeref, level)
 
-
-
-

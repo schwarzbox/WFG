@@ -4,8 +4,7 @@ var player: Node2D = null
 
 var _views: Array = []
 var _views_scenes: Dictionary = {
-	"Level 1": preload("res://scenes/views/levels/level1/level1.tscn"),
-	"Level 2": preload("res://scenes/views/levels/level2/level2.tscn")
+	"Level": preload("res://scenes/views/levels/level/level.tscn")
 }
 var _player_scene: = preload("res://scenes/models/player/player.tscn")
 
