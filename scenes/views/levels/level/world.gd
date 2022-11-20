@@ -1,19 +1,25 @@
 extends Node
 
+signal number_enemies_changed
 signal world_cleared
 
 export (PackedScene) var enemy_scene
-export var _number_enemies: int = 0
+export var _number_enemies: int = 0 setget set_number_enemies
 
 func _ready() -> void:
+	prints(name, "ready")
+
 	for _i in range(_number_enemies):
 		var enemy: Node2D = enemy_scene.instance()
-		self.add_child(enemy)
+		add_child(enemy)
 		enemy.connect("enemy_died", self, "_on_Enemy_died")
+
+func set_number_enemies(value: int) -> void:
+	_number_enemies = value
+	emit_signal("number_enemies_changed", _number_enemies)
 
 func _on_Enemy_died(child: Node2D) -> void:
 	call_deferred("remove_child", child)
+	# use self because of setter
+	self._number_enemies -= 1
 
-	_number_enemies -= 1
-	if _number_enemies == 0:
-		emit_signal("world_cleared")
