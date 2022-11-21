@@ -17,3 +17,5 @@ text = "Enemies"
 script = ExtResource( 1 )
 enemy_scene = ExtResource( 4 )
 _number_enemies = 3
+
+[connection signal="number_enemies_changed" from="World" to="." method="_on_World_number_enemies_changed"]

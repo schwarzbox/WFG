@@ -4,9 +4,6 @@
 extends View
 #docstring
 # Main Scene
-# Autoload global vars
-# Globals from globals.gd
-# Transition from transition.tscn
 
 #inner classes
 #signals

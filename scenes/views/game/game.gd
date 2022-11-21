@@ -1,12 +1,12 @@
 extends View
 
+const PLAYER_SCENE: PackedScene = preload("res://scenes/models/player/player.tscn")
 var player: Node2D = null
 
 var _views: Array = []
 var _views_scenes: Dictionary = {
 	"Level": preload("res://scenes/views/levels/level/level.tscn")
 }
-var _player_scene: = preload("res://scenes/models/player/player.tscn")
 
 func _ready() -> void:
 	prints(name, "ready")
@@ -22,7 +22,7 @@ func _ready() -> void:
 	_setup()
 
 func _setup() -> void:
-	player = _player_scene.instance()
+	player = PLAYER_SCENE.instance()
 	_views.clear()
 
 	for view_scene in _views_scenes.values():

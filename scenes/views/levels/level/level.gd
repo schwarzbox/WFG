@@ -3,10 +3,7 @@ extends View
 func _ready() -> void:
 	prints(name, "ready")
 
-	$World.connect("number_enemies_changed", self, "_on_Enemies_changed")
-	$World._number_enemies = $World._number_enemies
-
-func _unhandled_input(event) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		if event.pressed:
 			if event.scancode == KEY_ESCAPE:
@@ -16,8 +13,7 @@ func _unhandled_input(event) -> void:
 			if event.scancode == KEY_P:
 				get_tree().paused = not get_tree().paused
 
-
-func _on_Enemies_changed(value: int) -> void:
+func _on_World_number_enemies_changed(value: int) -> void:
 	if not is_inside_tree():
 		yield(self, "ready")
 
