@@ -18,6 +18,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="CanvasLayer/Menu/VBoxContainer" index="0"]
 layout_mode = 2
 text = "Levels"
+horizontal_alignment = 1
 
 [node name="GridContainer" type="GridContainer" parent="CanvasLayer/Menu/VBoxContainer" index="1"]
 layout_mode = 2

@@ -23,4 +23,5 @@ func _process(delta: float) -> void:
 		position.x -= delta * _speed
 
 func _on_area_2d_area_entered(_area: Area2D) -> void:
+	print(_score)
 	_score += 1
