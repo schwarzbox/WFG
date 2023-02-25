@@ -1,12 +1,12 @@
 extends CanvasLayer
 
-var _reference: Reference = null
+var _reference: Callable
 var _level: Node = null
 
 func _ready() -> void:
 	prints(name, "ready")
 
-func fade(reference: Reference, level: Node =null) -> void:
+func fade(reference: Callable, level: Node =null) -> void:
 	_reference = reference
 	_level = level
 	$AnimationPlayer.play("Fade")
@@ -14,7 +14,7 @@ func fade(reference: Reference, level: Node =null) -> void:
 func _exe() -> void:
 	if _reference:
 		if _level:
-			_reference.call_func(_level)
+			_reference.call(_level)
 		else:
-			_reference.call_func()
+			_reference.call()
 

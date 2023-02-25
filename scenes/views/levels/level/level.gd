@@ -6,16 +6,16 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		if event.pressed:
-			if event.scancode == KEY_ESCAPE:
+			if event.keycode == KEY_ESCAPE:
 				emit_signal("view_exited", self)
-			if event.scancode == KEY_R:
+			if event.keycode == KEY_R:
 				emit_signal("view_restarted", self)
-			if event.scancode == KEY_P:
+			if event.keycode == KEY_P:
 				get_tree().paused = not get_tree().paused
 
-func _on_World_number_enemies_changed(value: int) -> void:
+func _on_world_number_enemies_changed(value: int) -> void:
 	if not is_inside_tree():
-		yield(self, "ready")
+		await self._ready
 
 	$CanvasLayer/Label.text = "Enemies " + str(value)
 
