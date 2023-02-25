@@ -9,7 +9,7 @@ func _ready() -> void:
 	for _i in range(_number_enemies):
 		var enemy: Node2D = _enemy_scene.instantiate()
 		add_child(enemy)
-		enemy.connect("enemy_died",Callable(self,"_on_enemy_died"))
+		enemy.connect("enemy_died", Callable(self, "_on_enemy_died"))
 
 	self._number_enemies = _number_enemies
 
@@ -20,5 +20,5 @@ func set_number_enemies(value: int) -> void:
 func _on_enemy_died(child: Node2D) -> void:
 	call_deferred("remove_child", child)
 	# use self because of setter
-	self._number_enemies -= 1
+	_number_enemies -= 1
 

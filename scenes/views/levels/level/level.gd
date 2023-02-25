@@ -15,7 +15,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _on_world_number_enemies_changed(value: int) -> void:
 	if not is_inside_tree():
-		await self._ready
+		await self.ready
 
 	$CanvasLayer/Label.text = "Enemies " + str(value)
 
