@@ -15,21 +15,21 @@ func _ready() -> void:
 	for i in range(keys.size()):
 		var button: Button = Button.new()
 		button.text = keys[i]
-		button.connect("pressed", self, "_on_View_started", [i])
+		button.connect("pressed", Callable(self, "_on_view_started").bind(i))
 
 		$CanvasLayer/Menu/VBoxContainer/GridContainer.add_child(button)
 
 	_setup()
 
 func _setup() -> void:
-	player = PLAYER_SCENE.instance()
+	player = PLAYER_SCENE.instantiate()
 	_views.clear()
 
 	for view_scene in _views_scenes.values():
-		var node: Node = view_scene.instance()
-		node.connect("view_restarted", self, "_on_View_restarted")
-		node.connect("view_changed", self, "_on_View_changed")
-		node.connect("view_exited", self, "_on_View_exited")
+		var node: Node = view_scene.instantiate()
+		node.connect("view_restarted", Callable(self, "_on_view_restarted"))
+		node.connect("view_changed", Callable(self, "_on_view_changed"))
+		node.connect("view_exited", Callable(self, "_on_view_exited"))
 		_views.append(node)
 
 	$CanvasLayer/Menu.show()
@@ -55,21 +55,21 @@ func _change(view: Node) -> void:
 		view.queue_free()
 		call_deferred("_setup")
 
-func _on_View_started(index: int) -> void:
+func _on_view_started(index: int) -> void:
 	call_deferred("_start", _views[index])
 
-func _on_View_restarted(view: Node) -> void:
+func _on_view_restarted(view: Node) -> void:
 	view.queue_free()
 	var index: int = _views.find(view)
 	_setup()
 	call_deferred("_start", _views[index])
 
-func _on_View_changed(view: Node) -> void:
-	_set_transition("_change", view)
+func _on_view_changed(view: Node) -> void:
+	_set_transition(_change, view)
 
-func _on_View_exited(view: Node) -> void:
+func _on_view_exited(view: Node) -> void:
 	view.queue_free()
-	_set_transition("_setup")
+	_set_transition(_setup)
 
-func _on_Exit_pressed() -> void:
+func _on_exit_pressed() -> void:
 	emit_signal("view_exited", self)
