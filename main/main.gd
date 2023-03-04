@@ -28,7 +28,7 @@ func _ready() -> void:
 	randomize()
 
 	# warning-ignore:return_value_discarded
-	connect("tree_exiting", self, "_on_Main_exited")
+	connect("tree_exiting",Callable(self,"_on_main_exited"))
 
 	_setup()
 #remaining built-in virtual methods
@@ -38,9 +38,9 @@ func _setup() -> void:
 	_views.clear()
 
 	for view in _views_scenes:
-		var node: Node = view.instance()
+		var node: Node = view.instantiate()
 		# warning-ignore:return_value_discarded
-		node.connect("view_exited", self, "_on_View_exited")
+		node.connect("view_exited",Callable(self,"_on_view_exited"))
 		_views.append(node)
 
 	$CanvasLayer/Menu.show()
@@ -51,20 +51,20 @@ func _start(view: Node) -> void:
 	if is_world_has_children():
 		$CanvasLayer/Menu.hide()
 #private signal receiver methods
-func _on_Game_pressed() -> void:
-	_set_transition("_start", _views[0])
+func _on_game_pressed() -> void:
+	_set_transition(_start, _views[0])
 
-func _on_Settings_pressed() -> void:
-	_set_transition("_start", _views[1])
+func _on_settings_pressed() -> void:
+	_set_transition(_start, _views[1])
 
-func _on_View_exited(view: Node) -> void:
+func _on_view_exited(view: Node) -> void:
 	view.queue_free()
-	_set_transition("_setup")
+	_set_transition(_setup)
 
-func _on_Exit_pressed() -> void:
+func _on_exit_pressed() -> void:
 	get_tree().quit()
 
-func _on_Main_exited() -> void:
+func _on_main_exited() -> void:
 	prints(name, "exited")
 #public static methods
 #private static methods

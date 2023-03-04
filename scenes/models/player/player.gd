@@ -1,6 +1,6 @@
 extends Node2D
 
-export (Globals.Models) var type
+@export var type: Globals.Models
 
 var _speed: int = 100
 var _score: int = 0
@@ -22,5 +22,6 @@ func _process(delta: float) -> void:
 	if Input.is_action_pressed("ui_left"):
 		position.x -= delta * _speed
 
-func _on_Area2D_area_entered(_area: Area2D) -> void:
+func _on_area_2d_area_entered(_area: Area2D) -> void:
+	print(_score)
 	_score += 1
