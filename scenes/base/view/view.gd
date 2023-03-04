@@ -16,6 +16,5 @@ func remove_world_child(child: Node) -> void:
 	$World.remove_child(child)
 
 func _set_transition(method: Callable, level: Node = null) -> void:
-#	var makeref = Callable(self, method)
 	Transition.fade(method, level)
 
