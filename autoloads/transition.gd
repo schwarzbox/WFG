@@ -6,7 +6,7 @@ var _level: Node = null
 func _ready() -> void:
 	prints(name, "ready")
 
-func fade(reference: Callable, level: Node =null) -> void:
+func fade(reference: Reference, level: Node = null) -> void:
 	_reference = reference
 	_level = level
 	$AnimationPlayer.play("Fade")
