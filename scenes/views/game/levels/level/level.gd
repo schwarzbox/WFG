@@ -13,7 +13,13 @@ func _unhandled_input(event: InputEvent) -> void:
 			if event.keycode == KEY_P:
 				get_tree().paused = not get_tree().paused
 
-func _on_world_number_enemies_changed(value: int) -> void:
+func add_models_child(child: Node) -> void:
+	$World/Models.add_child(child)
+
+func remove_models_child(child: Node) -> void:
+	$World/Models.remove_child(child)
+
+func _on_models_number_enemies_changed(value: int) -> void:
 	if not is_inside_tree():
 		await self.ready
 

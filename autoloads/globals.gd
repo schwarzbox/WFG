@@ -6,3 +6,7 @@ func _ready() -> void:
 enum Models {
 	PLAYER,
 }
+
+const FONTS: Dictionary = {
+	DEFAULT_FONT_SIZE = 24,
+}

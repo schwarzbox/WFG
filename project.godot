@@ -19,17 +19,19 @@ config/icon="res://icon.png"
 
 Transition="*res://autoloads/transition.tscn"
 Globals="*res://autoloads/globals.gd"
+Debug="*res://autoloads/debug.gd"
 
 [debug]
 
 gdscript/warnings/unsafe_cast=true
 gdscript/warnings/unsafe_call_argument=true
-settings/fps/force_fps=60
 gdscript/warnings/unused_class_variable=true
 
 [display]
 
-window/size/viewport_width=800
+window/size/viewport_width=1600
+window/size/viewport_height=1200
+window/vsync/vsync_mode=0
 
 [rendering]
 

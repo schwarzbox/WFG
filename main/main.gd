@@ -5,6 +5,10 @@ extends View
 #docstring
 # Main Scene
 
+# Remove all Debug calls
+# Set display/window/vsync/vsync_mode to Enabled
+# Set application/run/max_fps to 60
+
 #inner classes
 #signals
 #enums
@@ -24,6 +28,16 @@ var _views_scenes = [
 #built-in virtual _ready method
 func _ready() -> void:
 	prints(name, "ready")
+
+	for node in [
+		$CanvasLayer/Menu/VBoxContainer/Label,
+		$CanvasLayer/Menu/VBoxContainer/Game,
+		$CanvasLayer/Menu/VBoxContainer/Settings,
+		$CanvasLayer/Menu/VBoxContainer/Exit
+	]:
+		node.add_theme_font_size_override(
+			"font_size", Globals.FONTS.DEFAULT_FONT_SIZE
+		)
 
 	randomize()
 

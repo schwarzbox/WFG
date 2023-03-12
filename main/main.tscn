@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cef5fh656fy0x"]
+[gd_scene load_steps=4 format=3 uid="uid://cef5fh656fy0x"]
 
 [ext_resource type="PackedScene" uid="uid://kn4un6yv7630" path="res://scenes/base/view/view.tscn" id="1"]
 [ext_resource type="Script" path="res://main/main.gd" id="2"]
+[ext_resource type="LabelSettings" uid="uid://d2ne7768x728e" path="res://main/title_settings.tres" id="3_eu10d"]
 
 [node name="Main" instance=ExtResource("1")]
 script = ExtResource("2")
@@ -16,8 +17,10 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="CanvasLayer/Menu/VBoxContainer" index="0"]
 layout_mode = 2
-text = "GAME"
+text = "Game"
+label_settings = ExtResource("3_eu10d")
 horizontal_alignment = 1
+uppercase = true
 
 [node name="Game" type="Button" parent="CanvasLayer/Menu/VBoxContainer" index="1"]
 layout_mode = 2
