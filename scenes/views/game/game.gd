@@ -5,17 +5,28 @@ var player: Node2D = null
 
 var _views: Array = []
 var _views_scenes: Dictionary = {
-	"Level": preload("res://scenes/views/levels/level/level.tscn")
+	" - 1 - ": preload("res://scenes/views/game/levels/level/level.tscn")
 }
 
 func _ready() -> void:
 	prints(name, "ready")
+
+	for node in [
+		$CanvasLayer/Menu/VBoxContainer/Label,
+		$CanvasLayer/Menu/VBoxContainer/Back
+	]:
+		node.add_theme_font_size_override(
+			"font_size", Globals.FONTS.DEFAULT_FONT_SIZE
+		)
 
 	var keys = _views_scenes.keys()
 	for i in range(keys.size()):
 		var button: Button = Button.new()
 		button.text = keys[i]
 		button.connect("pressed", Callable(self, "_on_view_started").bind(i))
+		button.add_theme_font_size_override(
+			"font_size", Globals.FONTS.DEFAULT_FONT_SIZE
+		)
 
 		$CanvasLayer/Menu/VBoxContainer/GridContainer.add_child(button)
 
@@ -36,7 +47,7 @@ func _setup() -> void:
 	$AudioStreamPlayer.play()
 
 func _start(view: Node) -> void:
-	view.add_world_child(player)
+	view.add_models_child(player)
 	add_world_child(view)
 
 	if is_world_has_children():
@@ -45,7 +56,7 @@ func _start(view: Node) -> void:
 
 func _change(view: Node) -> void:
 	# save view state
-	view.remove_world_child(player)
+	view.remove_models_child(player)
 	remove_world_child(view)
 
 	var index: int = _views.find(view)
@@ -71,5 +82,5 @@ func _on_view_exited(view: Node) -> void:
 	view.queue_free()
 	_set_transition(_setup)
 
-func _on_exit_pressed() -> void:
+func _on_back_pressed() -> void:
 	emit_signal("view_exited", self)

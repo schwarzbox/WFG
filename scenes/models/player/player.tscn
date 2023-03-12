@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://be8mvvxelw7f2"]
 
-[ext_resource type="Script" path="res://scenes/models/player/player.gd" id="1"]
+[ext_resource type="Script" path="res://scenes/models/player/player.gd" id="1_2s625"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ya6yp"]
 size = Vector2(20, 20)
@@ -8,7 +8,7 @@ size = Vector2(20, 20)
 [sub_resource type="RectangleShape2D" id="2"]
 
 [node name="Player" type="Node2D"]
-script = ExtResource("1")
+script = ExtResource("1_2s625")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("PlaceholderTexture2D_ya6yp")

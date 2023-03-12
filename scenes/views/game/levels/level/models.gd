@@ -11,14 +11,13 @@ func _ready() -> void:
 		add_child(enemy)
 		enemy.connect("enemy_died", Callable(self, "_on_enemy_died"))
 
-	self._number_enemies = _number_enemies
+	_number_enemies = _number_enemies
 
 func set_number_enemies(value: int) -> void:
 	_number_enemies = value
 	emit_signal("number_enemies_changed", _number_enemies)
 
 func _on_enemy_died(child: Node2D) -> void:
-
 	call_deferred("remove_child", child)
 	# use self because of setter
 	_number_enemies -= 1
