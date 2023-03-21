@@ -13,3 +13,7 @@ func set_window_extended_info(node: Node) -> void:
 			}
 		)
 	)
+
+#func get_engine_hint() -> void:
+#	if Engine.is_editor_hint():
+#		pass
