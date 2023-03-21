@@ -19,6 +19,7 @@ layout_mode = 2
 layout_mode = 2
 text = "Levels"
 horizontal_alignment = 1
+vertical_alignment = 1
 uppercase = true
 
 [node name="GridContainer" type="GridContainer" parent="CanvasLayer/Menu/VBoxContainer" index="1"]

@@ -33,6 +33,10 @@ window/size/viewport_width=1600
 window/size/viewport_height=1200
 window/vsync/vsync_mode=0
 
+[gui]
+
+theme/custom_font="res://main/font_file.tres"
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"

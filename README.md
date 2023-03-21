@@ -1,6 +1,6 @@
 # WFG
 
-v0.1
+v0.23
 
 Template project for Godot engine
 

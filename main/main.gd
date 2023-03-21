@@ -9,6 +9,19 @@ extends View
 # Set display/window/vsync/vsync_mode to Enabled
 # Set application/run/max_fps to 60
 
+# Custom font
+# gui/theme/custom_font
+
+# Editor preset
+# interface/theme/preset
+
+# Stretch mode
+# display/window/stretch/mode
+
+# Hints
+# Autoload scenes as Global
+# Use AtlasTextures for TextureButtons
+
 #inner classes
 #signals
 #enums
@@ -42,7 +55,7 @@ func _ready() -> void:
 	randomize()
 
 	# warning-ignore:return_value_discarded
-	connect("tree_exiting",Callable(self,"_on_main_exited"))
+	connect("tree_exiting", self._on_main_exited)
 
 	_setup()
 #remaining built-in virtual methods
@@ -54,7 +67,7 @@ func _setup() -> void:
 	for view in _views_scenes:
 		var node: Node = view.instantiate()
 		# warning-ignore:return_value_discarded
-		node.connect("view_exited",Callable(self,"_on_view_exited"))
+		node.connect("view_exited", self._on_view_exited)
 		_views.append(node)
 
 	$CanvasLayer/Menu.show()

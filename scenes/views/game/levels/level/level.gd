@@ -3,6 +3,10 @@ extends View
 func _ready() -> void:
 	prints(name, "ready")
 
+	$CanvasLayer/Label.add_theme_font_size_override(
+		"font_size", Globals.FONTS.DEFAULT_FONT_SIZE
+	)
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		if event.pressed:
