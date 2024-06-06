@@ -1,9 +1,8 @@
 extends View
 
-const PLAYER_SCENE: PackedScene = preload("res://scenes/models/player/player.tscn")
 var player: Node2D = null
 
-var _views: Array = []
+var _views: Array[View] = []
 var _views_scenes: Dictionary = {
 	" - 1 - ": preload("res://scenes/views/game/levels/level/level.tscn")
 }
@@ -19,7 +18,7 @@ func _ready() -> void:
 			"font_size", Globals.FONTS.DEFAULT_FONT_SIZE
 		)
 
-	var keys = _views_scenes.keys()
+	var keys: Array = _views_scenes.keys()
 	for i in range(keys.size()):
 		var button: Button = Button.new()
 		button.text = keys[i]
@@ -33,7 +32,7 @@ func _ready() -> void:
 	_setup()
 
 func _setup() -> void:
-	player = PLAYER_SCENE.instantiate()
+	player = Globals.PLAYER_SCENE.instantiate()
 	_views.clear()
 
 	for view_scene in _views_scenes.values():
@@ -41,6 +40,7 @@ func _setup() -> void:
 		node.connect("view_restarted", self._on_view_restarted)
 		node.connect("view_changed", self._on_view_changed)
 		node.connect("view_exited", self._on_view_exited)
+
 		_views.append(node)
 
 	$CanvasLayer/Menu.show()
@@ -48,6 +48,8 @@ func _setup() -> void:
 
 func _start(view: Node) -> void:
 	view.add_models_child(player)
+	player.connect("bullet_added", view.add_models_child)
+
 	add_world_child(view)
 
 	if is_world_has_children():
@@ -76,11 +78,11 @@ func _on_view_restarted(view: Node) -> void:
 	call_deferred("_start", _views[index])
 
 func _on_view_changed(view: Node) -> void:
-	_set_transition(_change, view)
+	await _set_transition(_change, view)
 
 func _on_view_exited(view: Node) -> void:
 	view.queue_free()
-	_set_transition(_setup)
+	await _set_transition(_setup)
 
 func _on_back_pressed() -> void:
 	emit_signal("view_exited", self)

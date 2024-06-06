@@ -11,6 +11,7 @@ func _ready() -> void:
 		add_child(enemy)
 		enemy.connect("enemy_died", Callable(self, "_on_enemy_died"))
 
+	# call set_number_enemies
 	_number_enemies = _number_enemies
 
 func set_number_enemies(value: int) -> void:

@@ -3,9 +3,10 @@
 [ext_resource type="Script" path="res://scenes/models/enemy/enemy.gd" id="1"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_sbhpg"]
-size = Vector2(20, 20)
+size = Vector2(16, 16)
 
 [sub_resource type="RectangleShape2D" id="2"]
+size = Vector2(16, 16)
 
 [node name="Enemy" type="Node2D"]
 script = ExtResource("1")
@@ -14,7 +15,8 @@ script = ExtResource("1")
 texture = SubResource("PlaceholderTexture2D_sbhpg")
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_layer = 0
+collision_layer = 2
+collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("2")
