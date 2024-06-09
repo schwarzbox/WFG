@@ -1,10 +1,13 @@
 extends View
 
 var player: Node2D = null
+var level: int = 0
+
 
 var _views: Array[View] = []
 var _views_scenes: Dictionary = {
-	" - 1 - ": preload("res://scenes/views/game/levels/level/level.tscn")
+	" - 1 - ": Globals.LEVEL_SCENE,
+	" - 2 - ": Globals.LEVEL_SCENE
 }
 
 func _ready() -> void:
@@ -32,6 +35,7 @@ func _ready() -> void:
 	_setup()
 
 func _setup() -> void:
+	level = 0
 	player = Globals.PLAYER_SCENE.instantiate()
 	_views.clear()
 
@@ -47,8 +51,11 @@ func _setup() -> void:
 	$AudioStreamPlayer.play()
 
 func _start(view: Node) -> void:
+	level += 1
+	view.set_level(level)
 	view.add_models_child(player)
 	player.connect("bullet_added", view.add_models_child)
+	player.connect("score_changed", view._on_player_score_changed)
 
 	add_world_child(view)
 
@@ -59,11 +66,13 @@ func _start(view: Node) -> void:
 func _change(view: Node) -> void:
 	# save view state
 	view.remove_models_child(player)
+	# clear view
 	remove_world_child(view)
+	view.queue_free()
 
 	var index: int = _views.find(view)
 	if index < _views.size()-1:
-		call_deferred("_start", _views[index+1])
+		call_deferred("_start", _views[index + 1])
 	else:
 		view.queue_free()
 		call_deferred("_setup")

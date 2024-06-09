@@ -1,6 +1,7 @@
 extends Node2D
 
 signal bullet_added
+signal score_changed
 
 @export var type: Globals.Models = Globals.Models.PLAYER
 
@@ -15,8 +16,9 @@ var _angular_acceleration: float = 0
 
 # separate node?
 var _is_shoot: bool = false
+var _hp: int  = 16
 
-var _score: int = 0
+var _score: int = 0: set = set_score
 
 func _ready() -> void:
 	prints(name, "ready")
@@ -38,6 +40,10 @@ func _process(delta: float) -> void:
 	_vector_mouse_movement(delta)
 
 	_shoot()
+
+func set_score(value: int) -> void:
+	_score = value
+	emit_signal("score_changed", _score)
 
 func _simple_movement(delta: float) -> void:
 	if Input.is_action_pressed("ui_up"):
@@ -122,11 +128,16 @@ func _shoot():
 			_is_shoot = true
 			var bullet = Globals.BULLET_SCENE.instantiate()
 			bullet.start($Marker2D.global_position, _linear_velocity, rotation)
+			bullet.connect("bullet_removed", _on_bullet_removed)
 
 			emit_signal("bullet_added", bullet)
 
 			$Timer.start(Globals.BULLET_DELAY)
 
-func _on_area_2d_area_entered(_area: Area2D) -> void:
+func _on_bullet_removed() -> void:
 	_score += 1
-	print_debug(_score)
+
+func _on_area_2d_area_entered(_area: Area2D) -> void:
+	_hp -= 1
+	print_debug(_hp)
+
