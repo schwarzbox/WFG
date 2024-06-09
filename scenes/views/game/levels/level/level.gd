@@ -1,11 +1,14 @@
 extends View
 
+var _level: int = 0: set = set_level
+
 func _ready() -> void:
 	prints(name, "ready")
 
-	$CanvasLayer/Label.add_theme_font_size_override(
-		"font_size", Globals.FONTS.DEFAULT_FONT_SIZE
-	)
+	for node in $CanvasLayer/VBoxContainer.get_children():
+		node.add_theme_font_size_override(
+			"font_size", Globals.FONTS.DEFAULT_FONT_SIZE
+		)
 
 	# alarm
 	var alarm = (
@@ -39,6 +42,11 @@ func add_models_child(child: Node) -> void:
 func remove_models_child(child: Node) -> void:
 	$World/Models.remove_child(child)
 
+func set_level(level: int) -> void:
+	_level = level
+	$World/Models.set_number_enemies($World/Models.get_number_enemies() + _level)
+	$CanvasLayer/VBoxContainer/LevelLabel.text = "Level " + str(_level)
+
 func _warp_mouse(mouse_pos: Vector2):
 	var viewport: Viewport = get_viewport()
 	viewport.warp_mouse(mouse_pos + viewport.canvas_transform.origin)
@@ -46,11 +54,14 @@ func _warp_mouse(mouse_pos: Vector2):
 func _on_alarm_timeout():
 	print_debug("Alarm!")
 
+func _on_player_score_changed(value: int) -> void:
+	$CanvasLayer/VBoxContainer/ScoreLabel.text = "Score " + str(value)
+
 func _on_models_number_enemies_changed(value: int) -> void:
 	if not is_inside_tree():
 		await self.ready
 
-	$CanvasLayer/Label.text = "Enemies " + str(value)
+	$CanvasLayer/VBoxContainer/EnemyLabel.text = "Enemies " + str(value)
 
 	if value == 0:
 		emit_signal("view_changed", self)

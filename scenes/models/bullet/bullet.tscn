@@ -3,10 +3,10 @@
 [ext_resource type="Script" path="res://scenes/models/bullet/bullet.gd" id="1_qrskq"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_5iqk6"]
-size = Vector2(8, 8)
+size = Vector2(16, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg3ci"]
-size = Vector2(8, 8)
+size = Vector2(16, 8)
 
 [node name="Bullet" type="Node2D"]
 script = ExtResource("1_qrskq")
@@ -22,6 +22,6 @@ collision_mask = 2
 shape = SubResource("RectangleShape2D_tg3ci")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-rect = Rect2(-4, -4, 8, 8)
+rect = Rect2(-8, -4, 16, 8)
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
