@@ -1,7 +1,9 @@
 extends Node2D
 
 signal bullet_added
+signal hp_changed
 signal score_changed
+signal player_died
 
 @export var type: Globals.Models = Globals.Models.PLAYER
 
@@ -14,20 +16,20 @@ var _linear_acceleration: Vector2 = Vector2.ZERO
 var _angular_velocity: float = 0
 var _angular_acceleration: float = 0
 
-# separate node?
-var _is_shoot: bool = false
-var _hp: int  = 16
+var _hp: int  = 16: set = set_hp
+var _min_hp: int  = 0
+var _max_hp: int  = 16
 
 var _score: int = 0: set = set_score
+
+# separate node?
+var _is_shoot: bool = false
+
 
 func _ready() -> void:
 	prints(name, "ready")
 
 	$Timer.connect("timeout", func(): _is_shoot = false)
-
-	var screen_size: Vector2 = get_viewport().size
-
-	position = screen_size / 2
 
 	$AnimationPlayer.play("idle")
 
@@ -41,9 +43,18 @@ func _process(delta: float) -> void:
 
 	_shoot()
 
+func start(pos: Vector2) -> void:
+	_score = _score
+	_hp = _hp
+	position = pos
+
 func set_score(value: int) -> void:
 	_score = value
 	emit_signal("score_changed", _score)
+
+func set_hp(value: int) -> void:
+	_hp = value
+	emit_signal("hp_changed", _hp)
 
 func _simple_movement(delta: float) -> void:
 	if Input.is_action_pressed("ui_up"):
@@ -139,5 +150,5 @@ func _on_bullet_removed() -> void:
 
 func _on_area_2d_area_entered(_area: Area2D) -> void:
 	_hp -= 1
-	print_debug(_hp)
-
+	if _hp <= _min_hp:
+		emit_signal("player_died")

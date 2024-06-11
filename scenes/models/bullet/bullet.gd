@@ -2,8 +2,15 @@ extends Node2D
 
 signal bullet_removed
 
+@export var type: Globals.Models = Globals.Models.BULLET
+
 var _force: int = 1024
 var _linear_velocity: Vector2 = Vector2.ZERO
+
+func _ready() -> void:
+	prints(name, "ready")
+
+	$Sprite2D.modulate = Globals.GLOW_COLORS.HIGH
 
 
 func _process(delta: float) -> void:

@@ -3,7 +3,6 @@ extends View
 var player: Node2D = null
 var level: int = 0
 
-
 var _views: Array[View] = []
 var _views_scenes: Dictionary = {
 	" - 1 - ": Globals.LEVEL_SCENE,
@@ -36,37 +35,41 @@ func _ready() -> void:
 
 func _setup() -> void:
 	level = 0
-	player = Globals.PLAYER_SCENE.instantiate()
 	_views.clear()
-
 	for view_scene in _views_scenes.values():
 		var node: Node = view_scene.instantiate()
 		node.connect("view_restarted", self._on_view_restarted)
 		node.connect("view_changed", self._on_view_changed)
 		node.connect("view_exited", self._on_view_exited)
-
 		_views.append(node)
+
+	player = Globals.PLAYER_SCENE.instantiate()
 
 	$CanvasLayer/Menu.show()
 	$AudioStreamPlayer.play()
 
 func _start(view: Node) -> void:
+	# Setup view
 	level += 1
-	view.set_level(level)
 	view.add_models_child(player)
-	player.connect("bullet_added", view.add_models_child)
-	player.connect("score_changed", view._on_player_score_changed)
-
 	add_world_child(view)
+	view.start(level)
+
+	# Setup player
+	player.connect("bullet_added", view.add_models_child)
+	player.connect("hp_changed", view._on_player_hp_changed)
+	player.connect("player_died", view._on_player_died)
+	player.connect("score_changed", view._on_player_score_changed)
+	player.start(get_viewport().size / 2)
 
 	if is_world_has_children():
 		$CanvasLayer/Menu.hide()
 		$AudioStreamPlayer.stop()
 
 func _change(view: Node) -> void:
-	# save view state
+	# Save player
 	view.remove_models_child(player)
-	# clear view
+	# Clear view
 	remove_world_child(view)
 	view.queue_free()
 
