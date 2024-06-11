@@ -19,11 +19,11 @@ script = ExtResource("2_xa387")
 environment = SubResource("Environment_rh5hf")
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="." index="1"]
-color = Color(1, 1, 1, 0.996078)
+color = Color(1, 1, 0.956863, 1)
 blend_mode = 1
 
 [node name="TextureRect" type="TextureRect" parent="." index="2"]
-modulate = Color(0, 0.00784314, 0.12549, 1)
+modulate = Color(0.8, 0.8, 0.8, 1)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -40,19 +40,23 @@ layout_mode = 2
 text = "Level"
 vertical_alignment = 1
 
-[node name="EnemyLabel" type="Label" parent="CanvasLayer/VBoxContainer" index="1"]
+[node name="ScoreLabel" type="Label" parent="CanvasLayer/VBoxContainer" index="1"]
+layout_mode = 2
+text = "Score"
+vertical_alignment = 1
+
+[node name="EnemyLabel" type="Label" parent="CanvasLayer/VBoxContainer" index="2"]
 layout_mode = 2
 text = "Enemies"
 vertical_alignment = 1
 
-[node name="ScoreLabel" type="Label" parent="CanvasLayer/VBoxContainer" index="2"]
+[node name="PlayerLabel" type="Label" parent="CanvasLayer/VBoxContainer" index="3"]
 layout_mode = 2
-text = "Score"
+text = "HP"
 vertical_alignment = 1
 
 [node name="Models" type="Node2D" parent="World" index="0"]
 script = ExtResource("3_jsorf")
 _enemy_scene = ExtResource("4_3whkn")
-_number_enemies = 5
 
 [connection signal="number_enemies_changed" from="World/Models" to="." method="_on_models_number_enemies_changed"]

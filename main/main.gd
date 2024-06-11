@@ -6,8 +6,6 @@ extends View
 # Main Scene
 
 # armor component
-# add player hp counter and died player
-# how to search player?
 
 # save config object (score, level)
 # resources?

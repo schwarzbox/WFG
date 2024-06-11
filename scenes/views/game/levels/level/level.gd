@@ -1,6 +1,7 @@
 extends View
 
-var _level: int = 0: set = set_level
+var _level: int = 0
+var _enemies_per_level: int = 2
 
 func _ready() -> void:
 	prints(name, "ready")
@@ -42,10 +43,10 @@ func add_models_child(child: Node) -> void:
 func remove_models_child(child: Node) -> void:
 	$World/Models.remove_child(child)
 
-func set_level(level: int) -> void:
+func start(level: int) -> void:
 	_level = level
-	$World/Models.set_number_enemies($World/Models.get_number_enemies() + _level)
 	$CanvasLayer/VBoxContainer/LevelLabel.text = "Level " + str(_level)
+	$World/Models.generate_enemies(_level * _enemies_per_level)
 
 func _warp_mouse(mouse_pos: Vector2):
 	var viewport: Viewport = get_viewport()
@@ -57,6 +58,9 @@ func _on_alarm_timeout():
 func _on_player_score_changed(value: int) -> void:
 	$CanvasLayer/VBoxContainer/ScoreLabel.text = "Score " + str(value)
 
+func _on_player_hp_changed(value: int) -> void:
+	$CanvasLayer/VBoxContainer/PlayerLabel.text = "HP " + str(value)
+
 func _on_models_number_enemies_changed(value: int) -> void:
 	if not is_inside_tree():
 		await self.ready
@@ -65,3 +69,8 @@ func _on_models_number_enemies_changed(value: int) -> void:
 
 	if value == 0:
 		emit_signal("view_changed", self)
+
+func _on_player_died() -> void:
+	emit_signal("view_exited", self)
+
+
