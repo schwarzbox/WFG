@@ -111,15 +111,15 @@ func _vector_mouse_movement(delta: float) -> void:
 	_linear_velocity -= _linear_velocity * delta
 
 	if Input.is_action_pressed("ui_up"):
-		_linear_acceleration += Vector2(_force, 0).rotated(rotation)
+		_linear_acceleration += Vector2(1, 0).rotated(rotation)
 	if Input.is_action_pressed("ui_down"):
-		_linear_acceleration -= Vector2(_force / 2, 0).rotated(rotation)
-	#if Input.is_action_pressed("ui_right"):
-		#_linear_acceleration += Vector2( _force, 0)
-	#if Input.is_action_pressed("ui_left"):
-		#_linear_acceleration -= Vector2( _force, 0)
+		_linear_acceleration += Vector2(-1, 0).rotated(rotation)
+	if Input.is_action_pressed("ui_right"):
+		_linear_acceleration += Vector2(0, 1).rotated(rotation)
+	if Input.is_action_pressed("ui_left"):
+		_linear_acceleration += Vector2(0, -1).rotated(rotation)
 
-	_linear_velocity += _linear_acceleration * delta
+	_linear_velocity += _linear_acceleration.normalized() * _force * delta
 
 #	reset
 	_linear_acceleration = Vector2()
@@ -130,7 +130,7 @@ func _vector_mouse_movement(delta: float) -> void:
 	# rotate
 	var dir = get_global_mouse_position() - global_position
 
-	if dir.length() > 5:
+	if dir.length() > 16:
 		rotation = dir.angle()
 
 func _shoot():

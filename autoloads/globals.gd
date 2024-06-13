@@ -10,8 +10,12 @@ const GAME_SCENE: PackedScene = preload("res://scenes/views/game/game.tscn")
 const LEVEL_SCENE: PackedScene = preload("res://scenes/views/game/levels/level/level.tscn")
 const SETTINGS_SCENE: PackedScene = preload("res://scenes/views/settings/settings.tscn")
 
+const UI_BUTTON_SCENE: PackedScene = preload("res://scenes/nodes/views/ui_button/ui_button.tscn")
+
 const FONTS: Dictionary = {
-	DEFAULT_FONT_SIZE = 24,
+	SMALL_FONT_SIZE = 32,
+	MEDIUM_FONT_SIZE = 64,
+	LARGE_FONT_SIZE = 128,
 }
 
 enum Models {

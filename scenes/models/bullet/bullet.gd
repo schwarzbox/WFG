@@ -20,14 +20,14 @@ func _process(delta: float) -> void:
 	# move
 	position += _linear_velocity * delta
 
-	if _linear_velocity.length_squared() < 2:
+	# destroy
+	if _linear_velocity.length_squared() < 16:
 		queue_free()
 
 func start(pos: Vector2, other_vel: Vector2, dir: float) -> void:
 	position = pos + Vector2(randi_range(-4, 4), randi_range(-4, 4))
 	rotation = dir
 	_linear_velocity = (other_vel + Vector2(_force, 0)).rotated(rotation)
-
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	emit_signal("bullet_removed")

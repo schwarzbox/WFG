@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bqdg2idsev2if"]
+[gd_scene load_steps=8 format=3 uid="uid://bqdg2idsev2if"]
 
 [ext_resource type="PackedScene" uid="uid://kn4un6yv7630" path="res://scenes/base/view/view.tscn" id="1_llbr5"]
 [ext_resource type="Script" path="res://scenes/views/game/levels/level/level.gd" id="2_xa387"]
+[ext_resource type="PackedScene" uid="uid://d2wj2ohrw7olr" path="res://scenes/nodes/views/counter/counter.tscn" id="3_hlvps"]
 [ext_resource type="Script" path="res://scenes/views/game/levels/level/models.gd" id="3_jsorf"]
 [ext_resource type="PackedScene" uid="uid://vbjphhnejpr8" path="res://scenes/models/enemy/enemy.tscn" id="4_3whkn"]
 
@@ -35,25 +36,21 @@ texture = SubResource("CanvasTexture_c7c0i")
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="LevelLabel" type="Label" parent="CanvasLayer/VBoxContainer" index="0"]
+[node name="LevelCounter" parent="CanvasLayer/VBoxContainer" index="0" instance=ExtResource("3_hlvps")]
 layout_mode = 2
-text = "Level"
-vertical_alignment = 1
+_label = "Level"
 
-[node name="ScoreLabel" type="Label" parent="CanvasLayer/VBoxContainer" index="1"]
+[node name="ScoreCounter" parent="CanvasLayer/VBoxContainer" index="1" instance=ExtResource("3_hlvps")]
 layout_mode = 2
-text = "Score"
-vertical_alignment = 1
+_label = "Score"
 
-[node name="EnemyLabel" type="Label" parent="CanvasLayer/VBoxContainer" index="2"]
+[node name="EnemyCounter" parent="CanvasLayer/VBoxContainer" index="2" instance=ExtResource("3_hlvps")]
 layout_mode = 2
-text = "Enemies"
-vertical_alignment = 1
+_label = "Enemies"
 
-[node name="PlayerLabel" type="Label" parent="CanvasLayer/VBoxContainer" index="3"]
+[node name="PlayerCounter" parent="CanvasLayer/VBoxContainer" index="3" instance=ExtResource("3_hlvps")]
 layout_mode = 2
-text = "HP"
-vertical_alignment = 1
+_label = "HP"
 
 [node name="Models" type="Node2D" parent="World" index="0"]
 script = ExtResource("3_jsorf")

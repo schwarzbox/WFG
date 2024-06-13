@@ -5,14 +5,16 @@ extends View
 #docstring
 # Main Scene
 
+# diff enemies
+# move component
 # armor component
+# hit component
 
-# save config object (score, level)
-# resources?
-# label settings
-# button styles
+# shader example material.set_shader_parameter("is_selected", true)
+# particles
+# animated bodies
 
-# material.set_shader_parameter("is_selected", true)
+# save to config object/player (score, level)
 
 # Remove all Debug calls
 # Set display/window/vsync/vsync_mode to Enabled
@@ -59,13 +61,12 @@ func _ready() -> void:
 
 #region Default font size
 	for node in [
-		$CanvasLayer/Menu/VBoxContainer/Label,
 		$CanvasLayer/Menu/VBoxContainer/Game,
 		$CanvasLayer/Menu/VBoxContainer/Settings,
 		$CanvasLayer/Menu/VBoxContainer/Exit
 	]:
 		node.add_theme_font_size_override(
-			"font_size", Globals.FONTS.DEFAULT_FONT_SIZE
+			"font_size", Globals.FONTS.MEDIUM_FONT_SIZE
 		)
 #endregion
 

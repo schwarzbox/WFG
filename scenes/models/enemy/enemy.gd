@@ -4,11 +4,14 @@ signal enemy_died
 
 @export var type: Globals.Models = Globals.Models.ENEMY
 
+var size: Vector2 = Vector2.ZERO
+
 static var _count: int = 0
 
 func _ready() -> void:
 	prints(name, "ready")
 
+	size = $Sprite2D.texture.get_size()
 	$Sprite2D.modulate = Globals.GLOW_COLORS.HIGH
 
 	# increase static var
