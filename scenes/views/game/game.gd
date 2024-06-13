@@ -17,16 +17,16 @@ func _ready() -> void:
 		$CanvasLayer/Menu/VBoxContainer/Back
 	]:
 		node.add_theme_font_size_override(
-			"font_size", Globals.FONTS.DEFAULT_FONT_SIZE
+			"font_size", Globals.FONTS.MEDIUM_FONT_SIZE
 		)
 
 	var keys: Array = _views_scenes.keys()
 	for i in range(keys.size()):
-		var button: Button = Button.new()
+		var button: UIButton = Globals.UI_BUTTON_SCENE.instantiate()
 		button.text = keys[i]
 		button.connect("pressed", Callable(self, "_on_view_started").bind(i))
 		button.add_theme_font_size_override(
-			"font_size", Globals.FONTS.DEFAULT_FONT_SIZE
+			"font_size", Globals.FONTS.MEDIUM_FONT_SIZE
 		)
 
 		$CanvasLayer/Menu/VBoxContainer/GridContainer.add_child(button)

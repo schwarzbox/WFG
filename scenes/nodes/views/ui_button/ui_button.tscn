@@ -1,0 +1,18 @@
+[gd_scene load_steps=6 format=3 uid="uid://dxohchoj45dfl"]
+
+[ext_resource type="StyleBox" uid="uid://cgfraa2n3ued0" path="res://scenes/nodes/views/ui_button/normal_button_style.tres" id="1_f2ypq"]
+[ext_resource type="StyleBox" uid="uid://kexy31qggn0i" path="res://scenes/nodes/views/ui_button/hover_button_style.tres" id="2_gy0qs"]
+[ext_resource type="StyleBox" uid="uid://dkfkorchoxieb" path="res://scenes/nodes/views/ui_button/pressed_button_style.tres" id="3_b2toi"]
+[ext_resource type="StyleBox" uid="uid://rr2pkqn34cct" path="res://scenes/nodes/views/ui_button/focus_button_style.tres" id="4_adllu"]
+[ext_resource type="Script" path="res://scenes/nodes/views/ui_button/ui_button.gd" id="5_k7h2h"]
+
+[node name="UIButton" type="Button"]
+size_flags_vertical = 4
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = ExtResource("1_f2ypq")
+theme_override_styles/hover = ExtResource("2_gy0qs")
+theme_override_styles/pressed = ExtResource("3_b2toi")
+theme_override_styles/focus = ExtResource("4_adllu")
+text = "UI Button"
+script = ExtResource("5_k7h2h")
