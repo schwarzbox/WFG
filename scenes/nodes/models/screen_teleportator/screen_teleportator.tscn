@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cysx6a2c77kf6"]
+
+[ext_resource type="Script" path="res://scenes/nodes/models/screen_teleportator/screen_teleportator.gd" id="1_ccgk5"]
+
+[node name="ScreenTeleportator" type="VisibleOnScreenNotifier2D"]
+rect = Rect2(-2, -2, 4, 4)
+script = ExtResource("1_ccgk5")

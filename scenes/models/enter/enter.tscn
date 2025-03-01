@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1th44r0foere"]
+
+[ext_resource type="Script" path="res://scenes/models/enter/enter.gd" id="1_7pflj"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_7ccgk"]
+size = Vector2(32, 32)
+
+[node name="Enter" type="Node2D"]
+script = ExtResource("1_7pflj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 0, 1)
+texture = SubResource("PlaceholderTexture2D_7ccgk")

@@ -1,11 +1,16 @@
 extends Node2D
 
+class_name Player
+
 signal bullet_added
-signal hp_changed
 signal score_changed
+signal hp_changed
 signal player_died
+signal player_won
 
 @export var type: Globals.Models = Globals.Models.PLAYER
+
+var sprite_size: Vector2 = Vector2.ZERO
 
 var _force: int = 256
 var _torque: float = 2.5
@@ -31,9 +36,10 @@ func _ready() -> void:
 
 	$Timer.connect("timeout", func(): _is_shoot = false)
 
-	$AnimationPlayer.play("idle")
-
+	sprite_size = $Sprite2D.texture.get_size()
 	$Sprite2D.modulate = Globals.GLOW_COLORS.MIDDLE
+
+	$AnimationPlayer.play("idle")
 
 func _process(delta: float) -> void:
 	#_simple_movement(delta)
@@ -47,6 +53,9 @@ func start(pos: Vector2) -> void:
 	_score = _score
 	_hp = _hp
 	position = pos
+
+func win() -> void:
+	emit_signal("player_won")
 
 func set_score(value: int) -> void:
 	_score = value
@@ -152,3 +161,7 @@ func _on_area_2d_area_entered(_area: Area2D) -> void:
 	_hp -= 1
 	if _hp <= _min_hp:
 		emit_signal("player_died")
+
+
+func _on_screen_teleportator_screen_exited() -> void:
+	$ScreenTeleportator.run(self)

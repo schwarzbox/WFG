@@ -5,6 +5,10 @@ func _ready() -> void:
 
 const PLAYER_SCENE: PackedScene = preload("res://scenes/models/player/player.tscn")
 const BULLET_SCENE: PackedScene = preload("res://scenes/models/bullet/bullet.tscn")
+# @export var _enemy_scene: PackedScene
+const WALL_SCENE: PackedScene = preload("res://scenes/models/wall/wall.tscn")
+const ENTER_SCENE: PackedScene = preload("res://scenes/models/enter/enter.tscn")
+const EXIT_SCENE: PackedScene = preload("res://scenes/models/exit/exit.tscn")
 
 const GAME_SCENE: PackedScene = preload("res://scenes/views/game/game.tscn")
 const LEVEL_SCENE: PackedScene = preload("res://scenes/views/game/levels/level/level.tscn")

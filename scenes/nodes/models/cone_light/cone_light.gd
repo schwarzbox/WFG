@@ -9,5 +9,3 @@ func _ready() -> void:
 	tween.tween_property($PointLight2D, "scale:y", 1.2, 1)
 	tween.tween_interval(0.1 + interval)
 	tween.tween_property($PointLight2D, "scale:y", 1.0, 0.4)
-
-
