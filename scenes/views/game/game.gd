@@ -37,11 +37,8 @@ func _setup() -> void:
 	level = 0
 	_views.clear()
 	for view_scene in _views_scenes.values():
-		var node: Node = view_scene.instantiate()
-		node.connect("view_restarted", self._on_view_restarted)
-		node.connect("view_changed", self._on_view_changed)
-		node.connect("view_exited", self._on_view_exited)
-		_views.append(node)
+		var view: View = view_scene.instantiate()
+		_views.append(view)
 
 	player = Globals.PLAYER_SCENE.instantiate()
 
@@ -49,18 +46,12 @@ func _setup() -> void:
 	$AudioStreamPlayer.play()
 
 func _start(view: Node) -> void:
-	# Setup view
 	level += 1
-	view.add_models_child(player)
+	view.connect("view_restarted", self._on_view_restarted)
+	view.connect("view_changed", self._on_view_changed)
+	view.connect("view_exited", self._on_view_exited)
 	add_world_child(view)
-	view.start(level)
-
-	# Setup player
-	player.connect("bullet_added", view.add_models_child)
-	player.connect("hp_changed", view._on_player_hp_changed)
-	player.connect("player_died", view._on_player_died)
-	player.connect("score_changed", view._on_player_score_changed)
-	player.start(get_viewport().size / 2)
+	view.start(level, player)
 
 	if is_world_has_children():
 		$CanvasLayer/Menu.hide()

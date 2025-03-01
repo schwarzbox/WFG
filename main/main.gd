@@ -5,16 +5,6 @@ extends View
 #docstring
 # Main Scene
 
-# diff enemies
-# move component
-# armor component
-# hit component
-
-# shader example material.set_shader_parameter("is_selected", true)
-# particles
-# animated bodies
-
-# save to config object/player (score, level)
 
 # Remove all Debug calls
 # Set display/window/vsync/vsync_mode to Enabled

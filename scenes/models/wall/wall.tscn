@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5pwa2brvubns"]
+
+[ext_resource type="Script" path="res://scenes/models/wall/wall.gd" id="1_tkir6"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_1lpup"]
+size = Vector2(128, 32)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_rkipc"]
+polygon = PackedVector2Array(-64, -16, 64, -16, 64, 16, -64, 16)
+
+[node name="Wall" type="Node2D"]
+script = ExtResource("1_tkir6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("PlaceholderTexture2D_1lpup")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_rkipc")
+sdf_collision = false

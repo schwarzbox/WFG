@@ -26,5 +26,3 @@ func _exe() -> void:
 			_reference.call()
 
 	emit_signal("finished")
-
-

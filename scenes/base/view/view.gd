@@ -25,4 +25,3 @@ func remove_world_child(child: Node) -> void:
 
 func _set_transition(method: Callable, level: Node = null) -> void:
 	await Transition.fade(method, level)
-

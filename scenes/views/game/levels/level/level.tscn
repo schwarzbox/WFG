@@ -24,7 +24,6 @@ color = Color(1, 1, 0.956863, 1)
 blend_mode = 1
 
 [node name="TextureRect" type="TextureRect" parent="." index="2"]
-modulate = Color(0.8, 0.8, 0.8, 1)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -55,5 +54,7 @@ _label = "HP"
 [node name="Models" type="Node2D" parent="World" index="0"]
 script = ExtResource("3_jsorf")
 _enemy_scene = ExtResource("4_3whkn")
+
+[node name="EnemyTimer" type="Timer" parent="World/Models" index="0"]
 
 [connection signal="number_enemies_changed" from="World/Models" to="." method="_on_models_number_enemies_changed"]

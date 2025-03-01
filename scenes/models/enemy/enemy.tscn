@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://vbjphhnejpr8"]
+[gd_scene load_steps=5 format=3 uid="uid://vbjphhnejpr8"]
 
 [ext_resource type="Script" path="res://scenes/models/enemy/enemy.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://cysx6a2c77kf6" path="res://scenes/nodes/models/screen_teleportator/screen_teleportator.tscn" id="2_ects2"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_sbhpg"]
 size = Vector2(16, 16)
@@ -21,4 +22,7 @@ collision_mask = 5
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("2")
 
+[node name="ScreenTeleportator" parent="." instance=ExtResource("2_ects2")]
+
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="screen_exited" from="ScreenTeleportator" to="." method="_on_screen_teleportator_screen_exited"]
