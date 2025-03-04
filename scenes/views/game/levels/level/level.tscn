@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://bqdg2idsev2if"]
 
 [ext_resource type="PackedScene" uid="uid://kn4un6yv7630" path="res://scenes/base/view/view.tscn" id="1_llbr5"]
-[ext_resource type="Script" path="res://scenes/views/game/levels/level/level.gd" id="2_xa387"]
+[ext_resource type="Script" uid="uid://dnc47qi56ffma" path="res://scenes/views/game/levels/level/level.gd" id="2_xa387"]
 [ext_resource type="PackedScene" uid="uid://d2wj2ohrw7olr" path="res://scenes/nodes/views/counter/counter.tscn" id="3_hlvps"]
-[ext_resource type="Script" path="res://scenes/views/game/levels/level/models.gd" id="3_jsorf"]
+[ext_resource type="Script" uid="uid://bbvwek1dojmug" path="res://scenes/views/game/levels/level/models.gd" id="3_jsorf"]
 [ext_resource type="PackedScene" uid="uid://vbjphhnejpr8" path="res://scenes/models/enemy/enemy.tscn" id="4_3whkn"]
 
 [sub_resource type="Environment" id="Environment_rh5hf"]

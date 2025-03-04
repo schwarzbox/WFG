@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cctv8e2rhaaqw"]
 
-[ext_resource type="Script" path="res://scenes/nodes/models/cone_light/cone_light.gd" id="1_4uwuv"]
+[ext_resource type="Script" uid="uid://chlsm7gtas73n" path="res://scenes/nodes/models/cone_light/cone_light.gd" id="1_4uwuv"]
 [ext_resource type="Texture2D" uid="uid://ce1f5y0h6uj5" path="res://scenes/nodes/models/cone_light/cone.png" id="2_uoexi"]
 
 [node name="ConeLight" type="Node2D"]

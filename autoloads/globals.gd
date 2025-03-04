@@ -25,11 +25,16 @@ const FONTS: Dictionary = {
 enum Models {
 	PLAYER,
 	ENEMY,
-	BULLET
+	BULLET,
+	ENTER,
+	EXIT,
 }
 
 const ALARM_WAIT_TIME: int = 60
+
 const BULLET_DELAY: float = 0.2
+const REGENERATION_DELAY: float = 4.0
+
 
 const COLORS: Dictionary = {
 	WHITE = Color("#FFFFFF"),

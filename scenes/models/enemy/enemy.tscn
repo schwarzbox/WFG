@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://vbjphhnejpr8"]
 
-[ext_resource type="Script" path="res://scenes/models/enemy/enemy.gd" id="1"]
+[ext_resource type="Script" uid="uid://btp308yrdq5l0" path="res://scenes/models/enemy/enemy.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://cysx6a2c77kf6" path="res://scenes/nodes/models/screen_teleportator/screen_teleportator.tscn" id="2_ects2"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_sbhpg"]

@@ -19,6 +19,7 @@ var _angular_acceleration: float = 0
 
 static var _count: int = 0
 
+
 func _ready() -> void:
 	prints(name, "ready")
 
@@ -62,12 +63,11 @@ func start(pos: Vector2) -> void:
 	position = pos
 
 func _on_area_2d_area_entered(_area: Area2D) -> void:
-	emit_signal("enemy_died", self)
+	enemy_died.emit(self)
 
 	# decrease static var
 	_count -= 1
 	#print_debug(_count)
-
 
 func _on_screen_teleportator_screen_exited() -> void:
 	$ScreenTeleportator.run(self)

@@ -1,9 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://be8mvvxelw7f2"]
+[gd_scene load_steps=12 format=3 uid="uid://be8mvvxelw7f2"]
 
-[ext_resource type="Script" path="res://scenes/models/player/player.gd" id="1_2s625"]
+[ext_resource type="Script" uid="uid://c7hrnjln2wo6f" path="res://scenes/models/player/player.gd" id="1_2s625"]
 [ext_resource type="PackedScene" uid="uid://cimvxxl6pjyt0" path="res://scenes/nodes/models/radial_light/radial_light.tscn" id="2_7bbhh"]
+[ext_resource type="Shader" uid="uid://b6fd1vmrbfex0" path="res://shaders/bw.gdshader" id="2_q55qg"]
 [ext_resource type="PackedScene" uid="uid://cctv8e2rhaaqw" path="res://scenes/nodes/models/cone_light/cone_light.tscn" id="2_qf8fg"]
 [ext_resource type="PackedScene" uid="uid://cysx6a2c77kf6" path="res://scenes/nodes/models/screen_teleportator/screen_teleportator.tscn" id="4_eom80"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lao5w"]
+shader = ExtResource("2_q55qg")
+shader_parameter/is_selected = true
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ya6yp"]
 size = Vector2(32, 32)
@@ -44,14 +49,15 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hauaj"]
 _data = {
-"RESET": SubResource("Animation_21m7g"),
-"idle": SubResource("Animation_dd6o3")
+&"RESET": SubResource("Animation_21m7g"),
+&"idle": SubResource("Animation_dd6o3")
 }
 
 [node name="Player" type="Node2D"]
 script = ExtResource("1_2s625")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_lao5w")
 texture = SubResource("PlaceholderTexture2D_ya6yp")
 
 [node name="Marker2D" type="Marker2D" parent="."]
@@ -69,10 +75,12 @@ shape = SubResource("2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_hauaj")
+&"": SubResource("AnimationLibrary_hauaj")
 }
 
-[node name="Timer" type="Timer" parent="."]
+[node name="RegenerationTimer" type="Timer" parent="."]
+
+[node name="ShootTimer" type="Timer" parent="."]
 
 [node name="ScreenTeleportator" parent="." instance=ExtResource("4_eom80")]
 

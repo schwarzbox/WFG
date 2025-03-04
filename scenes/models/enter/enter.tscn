@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b1th44r0foere"]
 
-[ext_resource type="Script" path="res://scenes/models/enter/enter.gd" id="1_7pflj"]
+[ext_resource type="Script" uid="uid://qubwobf23qtt" path="res://scenes/models/enter/enter.gd" id="1_7pflj"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_7ccgk"]
 size = Vector2(32, 32)

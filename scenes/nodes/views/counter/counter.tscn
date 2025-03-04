@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://d2wj2ohrw7olr"]
 
-[ext_resource type="Script" path="res://scenes/nodes/views/counter/counter.gd" id="1_yyp1c"]
+[ext_resource type="Script" uid="uid://ci6h2w8kimhdn" path="res://scenes/nodes/views/counter/counter.gd" id="1_yyp1c"]
 [ext_resource type="LabelSettings" uid="uid://dlfypgb1ah5mq" path="res://shared/label_settings/small_label_settings.tres" id="2_ugkl8"]
 
 [node name="Counter" type="HBoxContainer"]
