@@ -21,9 +21,9 @@ var _linear_acceleration: Vector2 = Vector2.ZERO
 var _angular_velocity: float = 0
 var _angular_acceleration: float = 0
 
-var _hp: int  = 16: set = set_hp
+var _hp: int  = 8: set = set_hp
 var _min_hp: int  = 0
-var _max_hp: int  = 16
+var _max_hp: int  = 8
 
 var _score: int = 0: set = set_score
 
@@ -34,7 +34,16 @@ var _is_shoot: bool = false
 func _ready() -> void:
 	prints(name, "ready")
 
-	$Timer.connect("timeout", func(): _is_shoot = false)
+	$ShootTimer.wait_time = Globals.BULLET_DELAY
+	$ShootTimer.connect(
+		"timeout",
+		func() -> void:
+			_is_shoot = false
+			$Sprite2D.material.set_shader_parameter("is_selected", true)
+	)
+
+	$RegenerationTimer.wait_time = Globals.REGENERATION_DELAY
+	$RegenerationTimer.connect("timeout", _regenerate)
 
 	sprite_size = $Sprite2D.texture.get_size()
 	$Sprite2D.modulate = Globals.GLOW_COLORS.MIDDLE
@@ -55,15 +64,15 @@ func start(pos: Vector2) -> void:
 	position = pos
 
 func win() -> void:
-	emit_signal("player_won")
+	player_won.emit()
 
 func set_score(value: int) -> void:
 	_score = value
-	emit_signal("score_changed", _score)
+	score_changed.emit(_score)
 
 func set_hp(value: int) -> void:
 	_hp = value
-	emit_signal("hp_changed", _hp)
+	hp_changed.emit(_hp)
 
 func _simple_movement(delta: float) -> void:
 	if Input.is_action_pressed("ui_up"):
@@ -76,7 +85,7 @@ func _simple_movement(delta: float) -> void:
 		position.x -= delta * _force
 
 func _tween_movement() -> void:
-	var move = Vector2.ZERO
+	var move: Vector2 = Vector2.ZERO
 	move.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	move.y = Input.get_action_strength("ui_down")  - Input.get_action_strength("ui_up")
 
@@ -96,6 +105,7 @@ func _vector_key_movement(delta: float) -> void:
 	if Input.is_action_pressed("ui_up"):
 		_linear_acceleration += Vector2(_force, 0).rotated(rotation)
 	if Input.is_action_pressed("ui_down"):
+		@warning_ignore("integer_division")
 		_linear_acceleration -= Vector2(_force / 2, 0).rotated(rotation)
 	if Input.is_action_pressed("ui_right"):
 		_angular_acceleration += _torque
@@ -113,7 +123,6 @@ func _vector_key_movement(delta: float) -> void:
 	position += _linear_velocity * delta
 	# rotate
 	rotation += _angular_velocity * delta
-
 
 func _vector_mouse_movement(delta: float) -> void:
 	# dump
@@ -137,31 +146,47 @@ func _vector_mouse_movement(delta: float) -> void:
 	position += _linear_velocity * delta
 
 	# rotate
-	var dir = get_global_mouse_position() - global_position
+	var dir: Vector2 = get_global_mouse_position() - global_position
 
 	if dir.length() > 16:
 		rotation = dir.angle()
 
-func _shoot():
+func _shoot() -> void:
 	if Input.is_action_pressed("ui_left_mouse"):
 		if !_is_shoot:
 			_is_shoot = true
-			var bullet = Globals.BULLET_SCENE.instantiate()
-			bullet.start($Marker2D.global_position, _linear_velocity, rotation)
+			var bullet: Bullet = Globals.BULLET_SCENE.instantiate()
+
+			var bullet_position: Vector2 = $Marker2D.global_position
+			bullet.start(bullet_position, _linear_velocity, rotation)
 			bullet.connect("bullet_removed", _on_bullet_removed)
 
-			emit_signal("bullet_added", bullet)
+			bullet_added.emit(bullet)
 
-			$Timer.start(Globals.BULLET_DELAY)
+			$ShootTimer.start()
+
+			# convert to BW
+			$Sprite2D.material.set_shader_parameter("is_selected", false)
+
+func _regenerate() -> void:
+	if _hp < _max_hp:
+		_hp += 1
+	else:
+		$RegenerationTimer.stop()
+
+func _hit() -> void:
+	_hp -= 1
+	if _hp <= _min_hp:
+		player_died.emit()
+
+	if $RegenerationTimer.is_stopped():
+		$RegenerationTimer.start()
 
 func _on_bullet_removed() -> void:
 	_score += 1
 
 func _on_area_2d_area_entered(_area: Area2D) -> void:
-	_hp -= 1
-	if _hp <= _min_hp:
-		emit_signal("player_died")
-
+	_hit()
 
 func _on_screen_teleportator_screen_exited() -> void:
 	$ScreenTeleportator.run(self)

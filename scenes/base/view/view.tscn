@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://kn4un6yv7630"]
 
-[ext_resource type="Script" path="res://scenes/base/view/view.gd" id="1"]
+[ext_resource type="Script" uid="uid://ue31uy4klmul" path="res://scenes/base/view/view.gd" id="1"]
 
 [node name="View" type="Node"]
 process_mode = 3

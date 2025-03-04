@@ -1,10 +1,11 @@
-extends Node
+extends Node2D
 
 signal number_enemies_changed
 
 @export var _enemy_scene: PackedScene
 
 var _number_enemies: int = 0 : set = set_number_enemies
+
 
 func _ready() -> void:
 	prints(name, "ready")
@@ -17,7 +18,7 @@ func _process(_delta: float) -> void:
 
 func set_number_enemies(value: int) -> void:
 	_number_enemies = value
-	emit_signal("number_enemies_changed", _number_enemies)
+	number_enemies_changed.emit(_number_enemies)
 
 func create_enter(pos: Vector2) -> void:
 	var enter: Enter = Globals.ENTER_SCENE.instantiate()
@@ -29,10 +30,10 @@ func create_exit(pos: Vector2) -> void:
 	add_child(exit)
 	exit.start(pos)
 
-func create_wall(pos: Vector2) -> void:
+func create_wall(pos: Vector2, rot: float) -> void:
 	var wall: Wall = Globals.WALL_SCENE.instantiate()
 	add_child(wall)
-	wall.start(pos)
+	wall.start(pos, rot)
 
 func create_enemy() -> void:
 	var exit_position: Vector2 = get_node("Exit").position

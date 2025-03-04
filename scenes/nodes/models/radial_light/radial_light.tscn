@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cimvxxl6pjyt0"]
 
-[ext_resource type="Script" path="res://scenes/nodes/models/radial_light/radial_light.gd" id="1_2h38i"]
+[ext_resource type="Script" uid="uid://b2smvykod8124" path="res://scenes/nodes/models/radial_light/radial_light.gd" id="1_2h38i"]
 
 [sub_resource type="Gradient" id="Gradient_irw8j"]
 interpolation_mode = 2

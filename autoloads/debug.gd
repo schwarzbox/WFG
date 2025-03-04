@@ -1,5 +1,6 @@
 extends Node
 
+
 func set_window_extended_info(node: Node) -> void:
 	var title: String = ProjectSettings.get_setting("application/config/name")
 

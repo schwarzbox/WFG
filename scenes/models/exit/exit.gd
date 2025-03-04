@@ -2,6 +2,8 @@ extends Area2D
 
 class_name Exit
 
+@export var type: Globals.Models = Globals.Models.EXIT
+
 
 func start(pos: Vector2) -> void:
 	position = pos

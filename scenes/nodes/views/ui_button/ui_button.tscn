@@ -4,7 +4,7 @@
 [ext_resource type="StyleBox" uid="uid://kexy31qggn0i" path="res://scenes/nodes/views/ui_button/hover_button_style.tres" id="2_gy0qs"]
 [ext_resource type="StyleBox" uid="uid://dkfkorchoxieb" path="res://scenes/nodes/views/ui_button/pressed_button_style.tres" id="3_b2toi"]
 [ext_resource type="StyleBox" uid="uid://rr2pkqn34cct" path="res://scenes/nodes/views/ui_button/focus_button_style.tres" id="4_adllu"]
-[ext_resource type="Script" path="res://scenes/nodes/views/ui_button/ui_button.gd" id="5_k7h2h"]
+[ext_resource type="Script" uid="uid://dhapumr01kivg" path="res://scenes/nodes/views/ui_button/ui_button.gd" id="5_k7h2h"]
 
 [node name="UIButton" type="Button"]
 size_flags_vertical = 4

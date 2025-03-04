@@ -5,6 +5,17 @@ extends View
 #docstring
 # Main Scene
 
+#_number_enemies?
+# animated bodies
+
+# particles
+# hp bar
+
+# save to config object/player (score, level)
+
+# move component
+# armor component
+# hit component
 
 # Remove all Debug calls
 # Set display/window/vsync/vsync_mode to Enabled
@@ -37,8 +48,13 @@ extends View
 #exported variables
 #public variables
 #private variables
+#region Views
 var _views: Array[View] = []
-var _views_scenes: Array[PackedScene] = [Globals.GAME_SCENE, Globals.SETTINGS_SCENE]
+var _views_scenes: Array[PackedScene] = [
+	Globals.GAME_SCENE,
+	Globals.SETTINGS_SCENE
+]
+#endregion
 #public onready variables
 #private onready variables
 
@@ -49,8 +65,7 @@ func _ready() -> void:
 
 	_center_window_on_screen()
 
-#region Default font size
-	for node in [
+	for node: Control in [
 		$CanvasLayer/Menu/VBoxContainer/Game,
 		$CanvasLayer/Menu/VBoxContainer/Settings,
 		$CanvasLayer/Menu/VBoxContainer/Exit
@@ -58,18 +73,28 @@ func _ready() -> void:
 		node.add_theme_font_size_override(
 			"font_size", Globals.FONTS.MEDIUM_FONT_SIZE
 		)
-#endregion
 
-	# prepare to generate random values
-	# Note: This function is called automatically when the project is run.
-	# Remove?
-	randomize()
+	# Since Godot 4.0, the random seed is automatically set to a random value
+	# when the project starts. This means you don't need to call randomize()
+	# in _ready() anymore to ensure that results are random across project runs.
+	# However, you can still use randomize() if you want to use a specific
+	# seed number, or generate it using a different method.
+	#randomize()
+	# Deterministic results across runs
+	#seed(12345)
 
-	# warning-ignore:return_value_discarded
-	connect("tree_exiting", self._on_main_exited)
+	# Alternative RandomNumberGenerator
+	var random: RandomNumberGenerator = RandomNumberGenerator.new()
+	# different RandomNumberGenerator instances can use different seeds.
+	random.randomize()
+
+	connect("tree_exiting", _on_main_exited)
 
 	_setup()
 #remaining built-in virtual methods
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_SCENE_INSTANTIATED:
+		prints("_notification", what)
 #public methods
 #private methods
 func _center_window_on_screen() -> void:
@@ -82,36 +107,31 @@ func _center_window_on_screen() -> void:
 	var window_position: Vector2i = (display_size / 2) - (window_size /2)
 	window.position = window_position
 
-func _notification(what: int) -> void:
-	if what == NOTIFICATION_SCENE_INSTANTIATED:
-		prints("_notification", what)
-
 func _setup() -> void:
 	_views.clear()
 
 	for view: PackedScene in _views_scenes:
-		var node: Node = view.instantiate()
-		# warning-ignore:return_value_discarded
-		node.connect("view_exited", self._on_view_exited)
+		var node: View = view.instantiate()
+		node.connect("view_exited", _on_view_exited)
 		_views.append(node)
 
 	$CanvasLayer/Menu.show()
 
-func _start(view: Node) -> void:
+func _start(view: View) -> void:
 	add_world_child(view)
 
 	if is_world_has_children():
 		$CanvasLayer/Menu.hide()
 #private signal receiver methods
 func _on_game_pressed() -> void:
-	await _set_transition(_start, _views[0])
+	_set_transition(_start, _views[0])
 
 func _on_settings_pressed() -> void:
-	await _set_transition(_start, _views[1])
+	_set_transition(_start, _views[1])
 
-func _on_view_exited(view: Node) -> void:
+func _on_view_exited(view: View) -> void:
 	view.queue_free()
-	await _set_transition(_setup)
+	_set_transition(_setup)
 
 func _on_exit_pressed() -> void:
 	get_tree().quit()

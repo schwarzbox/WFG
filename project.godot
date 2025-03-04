@@ -12,7 +12,7 @@ config_version=5
 
 config/name="WFG"
 run/main_scene="res://main/main.tscn"
-config/features=PackedStringArray("4.3")
+config/features=PackedStringArray("4.4")
 run/max_fps=60
 config/icon="res://icon.png"
 
@@ -24,8 +24,11 @@ Debug="*res://autoloads/debug.gd"
 
 [debug]
 
+gdscript/warnings/untyped_declaration=1
+gdscript/warnings/inferred_declaration=1
 gdscript/warnings/unsafe_cast=true
 gdscript/warnings/unsafe_call_argument=true
+gdscript/warnings/deprecated_keyword=2
 gdscript/warnings/unused_class_variable=true
 
 [display]
