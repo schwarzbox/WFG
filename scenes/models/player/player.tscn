@@ -1,20 +1,23 @@
-[gd_scene load_steps=12 format=3 uid="uid://be8mvvxelw7f2"]
+[gd_scene load_steps=16 format=3 uid="uid://be8mvvxelw7f2"]
 
 [ext_resource type="Script" uid="uid://c7hrnjln2wo6f" path="res://scenes/models/player/player.gd" id="1_2s625"]
 [ext_resource type="PackedScene" uid="uid://cimvxxl6pjyt0" path="res://scenes/nodes/models/radial_light/radial_light.tscn" id="2_7bbhh"]
 [ext_resource type="Shader" uid="uid://b6fd1vmrbfex0" path="res://shaders/bw.gdshader" id="2_q55qg"]
 [ext_resource type="PackedScene" uid="uid://cctv8e2rhaaqw" path="res://scenes/nodes/models/cone_light/cone_light.tscn" id="2_qf8fg"]
+[ext_resource type="PackedScene" uid="uid://dpx4yemm3vxwk" path="res://scenes/nodes/models/armor/armor.tscn" id="3_7sb68"]
 [ext_resource type="PackedScene" uid="uid://cysx6a2c77kf6" path="res://scenes/nodes/models/screen_teleportator/screen_teleportator.tscn" id="4_eom80"]
+[ext_resource type="PackedScene" uid="uid://c08pn84jaovpi" path="res://scenes/nodes/models/gun/gun.tscn" id="6_eunhc"]
+[ext_resource type="PackedScene" uid="uid://bpina8fwmbdyc" path="res://scenes/nodes/particles/explode_particles.tscn" id="7_mfhbk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t0ejt"]
+size = Vector2(48, 32)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lao5w"]
 shader = ExtResource("2_q55qg")
 shader_parameter/is_selected = true
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ya6yp"]
-size = Vector2(32, 32)
-
-[sub_resource type="RectangleShape2D" id="2"]
-size = Vector2(32, 32)
+size = Vector2(48, 32)
 
 [sub_resource type="Animation" id="Animation_21m7g"]
 length = 0.001
@@ -53,36 +56,63 @@ _data = {
 &"idle": SubResource("Animation_dd6o3")
 }
 
-[node name="Player" type="Node2D"]
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_7sb68"]
+size = Vector2(16, 16)
+
+[node name="Player" type="AnimatableBody2D"]
+collision_mask = 10
 script = ExtResource("1_2s625")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_t0ejt")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_lao5w")
 texture = SubResource("PlaceholderTexture2D_ya6yp")
 
-[node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(16, 2.08165e-12)
+[node name="Armor" parent="." instance=ExtResource("3_7sb68")]
+_hp = 10
+_max_hp = 10
+_has_regeneration = true
+_regeneration_delay = 32.0
+
+[node name="Gun" parent="." instance=ExtResource("6_eunhc")]
+
+[node name="ConeLight" parent="Gun" instance=ExtResource("2_qf8fg")]
 
 [node name="RadialLight" parent="." instance=ExtResource("2_7bbhh")]
-
-[node name="ConeLight" parent="." instance=ExtResource("2_qf8fg")]
-
-[node name="Area2D" type="Area2D" parent="."]
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_hauaj")
 }
 
-[node name="RegenerationTimer" type="Timer" parent="."]
+[node name="HitParticles" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 64
+texture = SubResource("PlaceholderTexture2D_7sb68")
+lifetime = 0.4
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 0.5
+emission_shape = 3
+emission_rect_extents = Vector2(48, 32)
+direction = Vector2(-1, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 64.0
+initial_velocity_max = 196.0
+angle_max = 360.0
+scale_amount_min = 0.2
 
-[node name="ShootTimer" type="Timer" parent="."]
+[node name="ExplodeParticles" parent="." instance=ExtResource("7_mfhbk")]
+amount = 1024
+lifetime = 1.4
+emission_shape = 3
+emission_rect_extents = Vector2(24, 16)
+orbit_velocity_min = -0.5
+orbit_velocity_max = 0.5
 
 [node name="ScreenTeleportator" parent="." instance=ExtResource("4_eom80")]
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="screen_exited" from="ScreenTeleportator" to="." method="_on_screen_teleportator_screen_exited"]

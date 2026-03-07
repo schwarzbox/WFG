@@ -1,7 +1,38 @@
-[gd_scene load_steps=3 format=3 uid="uid://cxxnk58o46qjq"]
+[gd_scene load_steps=6 format=3 uid="uid://cxxnk58o46qjq"]
 
 [ext_resource type="PackedScene" uid="uid://kn4un6yv7630" path="res://scenes/base/view/view.tscn" id="1"]
 [ext_resource type="Script" uid="uid://cllwvctg744gx" path="res://scenes/views/settings/settings.gd" id="2"]
+[ext_resource type="LabelSettings" uid="uid://bfmg4ke5qx0j7" path="res://shared/label_settings/medium_label_settings.tres" id="3_ivfep"]
+[ext_resource type="PackedScene" uid="uid://dxohchoj45dfl" path="res://scenes/nodes/views/ui_button/ui_button.tscn" id="3_oxf0j"]
+[ext_resource type="PackedScene" uid="uid://cb2uwdhqqnlny" path="res://scenes/nodes/views/ui_label/ui_label.tscn" id="3_x2el6"]
 
 [node name="Settings" instance=ExtResource("1")]
 script = ExtResource("2")
+
+[node name="MainContainer" type="CenterContainer" parent="CanvasLayer" index="0"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainContainer" index="0"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="UILabel" parent="CanvasLayer/MainContainer/VBoxContainer" index="0" instance=ExtResource("3_x2el6")]
+layout_mode = 2
+text = "Settings"
+label_settings = ExtResource("3_ivfep")
+
+[node name="Mute" parent="CanvasLayer/MainContainer/VBoxContainer" index="1" instance=ExtResource("3_oxf0j")]
+layout_mode = 2
+text = "Mute"
+
+[node name="Back" parent="CanvasLayer/MainContainer/VBoxContainer" index="2" instance=ExtResource("3_oxf0j")]
+layout_mode = 2
+text = "Main Menu
+"
+
+[connection signal="pressed" from="CanvasLayer/MainContainer/VBoxContainer/Mute" to="." method="_on_mute_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]

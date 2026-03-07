@@ -1,92 +1,186 @@
 extends View
 
-var player: Node2D = null
-var level: int = 0
+signal changed
 
-var _views: Array[View] = []
-var _views_scenes: Dictionary = {
-	" - 1 - ": Globals.LEVEL_SCENE,
-	" - 2 - ": Globals.LEVEL_SCENE
-}
+var _player: Player = null
+
+var _level_views: Array[View] = []
+var _level_scenes: Dictionary = {}
+var _save_load_view: View = null
 
 
 func _ready() -> void:
 	prints(name, "ready")
 
+	#populate levels
+	for i: int in range(Globals.LEVEL_COUNT):
+		_level_scenes[" - %s - " % (i + 1)] = Globals.LEVEL_SCENE
+
+	$CanvasLayer/MainContainer/VBoxContainer/UILabel.label_settings = Globals.MEDIUM_LABEL_SETTINGS
+	$CanvasLayer/MainContainer/VBoxContainer.add_theme_constant_override(
+		"separation", Globals.UI_CONTAINER_SEPARATION
+	)
+
 	for node: Control in [
-		$CanvasLayer/Menu/VBoxContainer/Label,
-		$CanvasLayer/Menu/VBoxContainer/Back
+			$CanvasLayer/MainContainer/VBoxContainer/Save,
+			$CanvasLayer/MainContainer/VBoxContainer/Back,
 	]:
-		node.add_theme_font_size_override(
-			"font_size", Globals.FONTS.MEDIUM_FONT_SIZE
+		(
+			node
+			. add_theme_font_size_override(
+				"font_size",
+				Globals.FONTS.MEDIUM_FONT_SIZE,
+			)
 		)
 
-	var keys: Array = _views_scenes.keys()
+	var keys: Array = _level_scenes.keys()
 	for i: int in range(keys.size()):
 		var button: UIButton = Globals.UI_BUTTON_SCENE.instantiate()
 		button.text = keys[i]
-		button.connect("pressed", Callable(self, "_on_view_started").bind(i))
-		button.add_theme_font_size_override(
-			"font_size", Globals.FONTS.MEDIUM_FONT_SIZE
+		button.disabled = true
+		button.connect("pressed", _on_level_pressed)
+		(
+			button
+			. add_theme_font_size_override(
+				"font_size",
+				Globals.FONTS.MEDIUM_FONT_SIZE,
+			)
 		)
+		$CanvasLayer/MainContainer/VBoxContainer/GridContainer.add_child(button)
 
-		$CanvasLayer/Menu/VBoxContainer/GridContainer.add_child(button)
+
+#entry point
+func start(objects: Array[Node] = []) -> void:
+	if objects:
+		for object: Node in objects:
+			if is_instance_of(object, Player):
+				_player = object
+	else:
+		_player = Globals.PLAYER_SCENE.instantiate()
 
 	_setup()
 
+
 func _setup() -> void:
-	level = 0
-	_views.clear()
-	for view_scene: PackedScene in _views_scenes.values():
-		var view: View = view_scene.instantiate()
-		_views.append(view)
+	_level_views.clear()
+	for level_scene: PackedScene in _level_scenes.values():
+		var view: View = level_scene.instantiate()
+		view.connect("restarted", _on_level_view_restarted)
+		view.connect("changed", _on_level_view_changed)
+		view.connect("finished", _on_level_view_finished)
+		view.connect("closed", _on_level_view_closed)
+		_level_views.append(view)
 
-	player = Globals.PLAYER_SCENE.instantiate()
+	_save_load_view = Globals.SAVE_LOAD_SCENE.instantiate()
+	_save_load_view.connect("file_saved", _on_save_load_view_file_saved)
+	_save_load_view.connect("closed", _on_save_load_view_closed)
 
-	$CanvasLayer/Menu.show()
-	$AudioStreamPlayer.play()
+	#enable only next level
+	for node: Node in $CanvasLayer/MainContainer/VBoxContainer/GridContainer.get_children():
+		node.disabled = true
 
-func _start(view: View) -> void:
-	level += 1
-	view.connect("view_restarted", _on_view_restarted)
-	view.connect("view_changed", _on_view_changed)
-	view.connect("view_exited", _on_view_exited)
+	var level: int = _player.get_level()
+	$CanvasLayer/MainContainer/VBoxContainer/GridContainer.get_child(level - 1).disabled = false
+
+	Music.main_audio_stream_paused(false)
+
+	$CanvasLayer.show()
+
+
+#view helpers
+func _start_level() -> void:
+	var level: int = _player.get_level()
+	var view: View = _level_views[level - 1]
 	add_world_child(view)
-	view.start(level, player)
+	view.start(_player)
+
+	Music.main_audio_stream_paused(true)
 
 	if is_world_has_children():
-		$CanvasLayer/Menu.hide()
-		$AudioStreamPlayer.stop()
+		$CanvasLayer.hide()
 
-func _change(view: View) -> void:
-	# Save player
-	view.remove_models_child(player)
-	# Clear view
+
+func _start_save_load() -> void:
+	add_world_child(_save_load_view)
+	var to_save: Array[Node] = [_player]
+	_save_load_view.save_file(to_save)
+
+	if is_world_has_children():
+		$CanvasLayer.hide()
+
+
+#level view
+func _on_level_view_changed(view: View) -> void:
+	var level: int = _player.get_level()
+	if level >= Globals.LEVEL_COUNT:
+		Music.main_audio_stream_paused(false)
+
+		view.queue_free()
+		#show statistic view
+		changed.emit(self)
+	else:
+		#update _player _level
+		_player.set_level(level + 1)
+		#autosave
+		var to_save: Array[Node] = [_player]
+		_save_load_view.save_last_file(to_save)
+
+		#protect player from being deleted
+		view.remove_models_child(_player)
+		#clear view
+		remove_world_child(view)
+		view.queue_free()
+
+		#TODO: show upgrades
+		_setup()
+
+
+func _on_level_view_finished(view: View) -> void:
+	view.queue_free()
+
+	start()
+
+
+func _on_level_view_restarted(view: View) -> void:
+	#remove player due set_player implementation
+	view.remove_models_child(_player)
+	view.restart(_player)
+
+
+func _on_level_view_closed(view: View) -> void:
+	#protect player from being deleted
+	view.remove_models_child(_player)
+	#clear view
 	remove_world_child(view)
 	view.queue_free()
 
-	var index: int = _views.find(view)
-	if index < _views.size()-1:
-		call_deferred("_start", _views[index + 1])
-	else:
-		view.queue_free()
-		call_deferred("_setup")
-
-func _on_view_started(index: int) -> void:
-	call_deferred("_start", _views[index])
-
-func _on_view_restarted(view: View) -> void:
-	view.queue_free()
-	var index: int = _views.find(view)
 	_setup()
-	call_deferred("_start", _views[index])
 
-func _on_view_changed(view: View) -> void:
-	_set_transition(_change, view)
 
-func _on_view_exited(view: View) -> void:
+#save_load view
+func _on_save_load_view_file_saved(view: View) -> void:
 	view.queue_free()
-	_set_transition(_setup)
+
+	_setup()
+
+
+func _on_save_load_view_closed(view: View) -> void:
+	view.queue_free()
+
+	_setup()
+
+
+#buttons
+func _on_level_pressed() -> void:
+	_set_transition(_start_level)
+	_set_audio_transition()
+
+
+func _on_save_pressed() -> void:
+	_set_transition(_start_save_load)
+
 
 func _on_back_pressed() -> void:
-	view_exited.emit(self)
+	#prevent to open statictics input field
+	#_player.reset_state()
+	_set_transition(closed.emit.bind(self))

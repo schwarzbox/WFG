@@ -1,3 +1,6 @@
+class_name UIButton
 extends Button
 
-class_name UIButton
+
+func _on_button_down() -> void:
+	$ClickAudio.play()

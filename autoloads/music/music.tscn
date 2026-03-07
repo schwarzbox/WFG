@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://no3f5qkw8ovb"]
+
+[ext_resource type="AudioStream" uid="uid://bcm8v84n8bls5" path="res://autoloads/music/genres-8-bit-computer-cyberpunk.mp3" id="1_bnay0"]
+[ext_resource type="Script" uid="uid://c87l42rjg20h2" path="res://autoloads/music/music.gd" id="1_ntjc8"]
+[ext_resource type="AudioStream" uid="uid://d0do1ynu3msv6" path="res://autoloads/music/genres-electronica-8-bit cyberpunk.mp3" id="3_oiu1s"]
+[ext_resource type="AudioStream" uid="uid://6pfg2jdo7isu" path="res://autoloads/music/sci fi 8 bit cyberpunk (10d6768b26d94797baafc02c4dd979f5).mp3" id="4_bv2dx"]
+
+[node name="Music" type="Node"]
+script = ExtResource("1_ntjc8")
+
+[node name="MainAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_bnay0")
+volume_db = -4.0
+
+[node name="LevelAudioStreamPlayer1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_oiu1s")
+volume_db = -4.0
+
+[node name="LevelAudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_bv2dx")
+volume_db = -4.0

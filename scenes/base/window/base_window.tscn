@@ -1,0 +1,49 @@
+[gd_scene load_steps=3 format=3 uid="uid://gua33j0stdlv"]
+
+[ext_resource type="Script" uid="uid://bfuc0ner573xn" path="res://scenes/base/window/base_window.gd" id="1_srrcd"]
+[ext_resource type="PackedScene" uid="uid://dxohchoj45dfl" path="res://scenes/nodes/views/ui_button/ui_button.tscn" id="2_ickf1"]
+
+[node name="BaseWindow" type="Window"]
+disable_3d = true
+oversampling_override = 1.0
+size = Vector2i(768, 196)
+unresizable = true
+borderless = true
+always_on_top = true
+popup_window = true
+minimize_disabled = true
+maximize_disabled = true
+script = ExtResource("1_srrcd")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0627451, 0.0627451, 0.0627451, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="Cancel" parent="CenterContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_ickf1")]
+layout_mode = 2
+text = "Cancel"
+
+[node name="OK" parent="CenterContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_ickf1")]
+layout_mode = 2
+text = "OK"

@@ -1,14 +1,45 @@
+class_name Exit
 extends Area2D
 
-class_name Exit
-
 @export var type: Globals.Models = Globals.Models.EXIT
+
+var sprite_size: Vector2 = Vector2.ZERO
+
+var _open: bool = false
+
+
+func _process(_delta: float) -> void:
+	var enemies: Array = get_tree().get_nodes_in_group("enemy")
+	if !enemies:
+		if !_open:
+			_set_open(true)
+	else:
+		if _open:
+			_set_open(false)
 
 
 func start(pos: Vector2) -> void:
 	position = pos
 
-func _on_area_entered(area: Area2D) -> void:
-	var player: Player = area.get_parent()
-	if is_instance_valid(player):
-		player.win()
+	#set visible for RadialLight conditionally
+	_set_open(false)
+
+
+func _set_open(value: bool) -> void:
+	_open = value
+	$CollisionShape2D.set_deferred("disabled", !_open)
+	if _open:
+		modulate.a = 0.0
+		var tween: Tween = create_tween()
+		tween.tween_property(self, "modulate:a", 1.0, Globals.EXIT_OPEN_DELAY)
+		$Sprite2D.modulate = Globals.GLOW_COLORS.LOW
+		$RadialLight.show()
+	else:
+		$Sprite2D.modulate = Globals.COLORS.BLACK
+		$RadialLight.hide()
+
+
+func _on_body_entered(body: Player) -> void:
+	$Sprite2D.modulate = Globals.GLOW_COLORS.HIGH
+	if is_instance_valid(body):
+		body.win(self)

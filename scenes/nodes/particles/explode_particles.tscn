@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://bpina8fwmbdyc"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_6tr86"]
+size = Vector2(8, 8)
+
+[sub_resource type="Curve" id="Curve_k35o5"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5041322, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.49755156), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_k35o5"]
+offsets = PackedFloat32Array(0.7930232, 0.9883721)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="ExplodeParticles" type="CPUParticles2D"]
+amount = 256
+texture = SubResource("PlaceholderTexture2D_6tr86")
+lifetime = 0.8
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 16.0
+direction = Vector2(-1, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 32.0
+initial_velocity_max = 256.0
+tangential_accel_min = -90.0
+tangential_accel_max = 90.0
+angle_min = -90.0
+angle_max = 90.0
+scale_amount_min = 0.4
+scale_amount_curve = SubResource("Curve_k35o5")
+color_ramp = SubResource("Gradient_k35o5")

@@ -1,28 +1,34 @@
-[gd_scene load_steps=5 format=3 uid="uid://vbjphhnejpr8"]
+[gd_scene load_steps=7 format=3 uid="uid://vbjphhnejpr8"]
 
 [ext_resource type="Script" uid="uid://btp308yrdq5l0" path="res://scenes/models/enemy/enemy.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://dpx4yemm3vxwk" path="res://scenes/nodes/models/armor/armor.tscn" id="2_6tr86"]
 [ext_resource type="PackedScene" uid="uid://cysx6a2c77kf6" path="res://scenes/nodes/models/screen_teleportator/screen_teleportator.tscn" id="2_ects2"]
+[ext_resource type="PackedScene" uid="uid://bpina8fwmbdyc" path="res://scenes/nodes/particles/explode_particles.tscn" id="3_u5232"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gcxbd"]
+size = Vector2(36, 24)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_sbhpg"]
-size = Vector2(16, 16)
+size = Vector2(36, 24)
 
-[sub_resource type="RectangleShape2D" id="2"]
-size = Vector2(16, 16)
-
-[node name="Enemy" type="Node2D"]
+[node name="Enemy" type="AnimatableBody2D"]
+collision_layer = 2
+collision_mask = 8
 script = ExtResource("1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_gcxbd")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("PlaceholderTexture2D_sbhpg")
 
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 5
+[node name="Armor" parent="." instance=ExtResource("2_6tr86")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("2")
+[node name="ExplodeParticles" parent="." instance=ExtResource("3_u5232")]
+emitting = false
+emission_shape = 3
+emission_rect_extents = Vector2(16, 12)
 
 [node name="ScreenTeleportator" parent="." instance=ExtResource("2_ects2")]
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="screen_exited" from="ScreenTeleportator" to="." method="_on_screen_teleportator_screen_exited"]

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cb2uwdhqqnlny"]
+
+[ext_resource type="LabelSettings" uid="uid://d2ne7768x728e" path="res://shared/label_settings/large_label_settings.tres" id="1_dwra5"]
+[ext_resource type="Script" uid="uid://vclu5qkh4cj4" path="res://scenes/nodes/views/ui_label/ui_label.gd" id="2_gfp6j"]
+
+[node name="UILabel" type="Label"]
+offset_right = 549.0
+offset_bottom = 129.0
+text = "UILabel"
+label_settings = ExtResource("1_dwra5")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+script = ExtResource("2_gfp6j")

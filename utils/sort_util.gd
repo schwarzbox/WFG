@@ -1,9 +1,8 @@
 class_name SortUtil
+extends RefCounted
 
-extends Resource
 
-
-static func _sort_by_position(a: Node2D, b: Node2D):
+static func sort_by_position(a: Node2D, b: Node2D) -> bool:
 	if a.position > b.position:
 		return true
 	return false

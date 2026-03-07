@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://whqthtb8tpty"]
+
+[ext_resource type="Script" uid="uid://c2cnlncng67sw" path="res://scenes/nodes/views/bar/bar.gd" id="1_frhoq"]
+[ext_resource type="LabelSettings" uid="uid://dlfypgb1ah5mq" path="res://shared/label_settings/small_label_settings.tres" id="1_rdnsg"]
+[ext_resource type="PackedScene" uid="uid://cb2uwdhqqnlny" path="res://scenes/nodes/views/ui_label/ui_label.tscn" id="2_mantt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_frhoq"]
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mantt"]
+bg_color = Color(0.992157, 0.87451, 0.0980392, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_bottom = 6
+
+[node name="HealthBar" type="HBoxContainer"]
+offset_right = 197.0
+offset_bottom = 42.0
+theme_override_constants/separation = 0
+script = ExtResource("1_frhoq")
+
+[node name="UILabel" parent="." instance=ExtResource("2_mantt")]
+layout_mode = 2
+text = "Bar"
+label_settings = ExtResource("1_rdnsg")
+
+[node name="Value" type="ProgressBar" parent="."]
+custom_minimum_size = Vector2(256, 42)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_frhoq")
+theme_override_styles/fill = SubResource("StyleBoxFlat_mantt")
+step = 1.0
+show_percentage = false

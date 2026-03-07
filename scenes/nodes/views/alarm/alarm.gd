@@ -1,10 +1,12 @@
-extends CenterContainer
-
 class_name Alarm
+extends CenterContainer
 
 signal timeout
 
-enum TimeFormat { SECONDS, MINUTES }
+enum TimeFormat {
+	SECONDS,
+	MINUTES,
+}
 
 var _time_formats: Dictionary = {
 	TimeFormat.SECONDS: "{seconds}",
@@ -33,9 +35,10 @@ func _init(
 	_anchors_preset = anchor
 	_time_format = time_format
 
-	var label: Label = Label.new()
+	var label: UILabel = UILabel.new()
 	label.text = _get_time_string()
 	label.name = "Label"
+	label.uppercase = true
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	label.add_theme_font_size_override("font_size", font_size)
@@ -47,17 +50,21 @@ func _init(
 	timer.connect("timeout", _on_timer_timeout)
 	add_child(timer)
 
+
 func _ready() -> void:
-	# Start timer explicitly
+	#start timer explicitly
 	anchors_preset = _anchors_preset
+
 
 func get_time_left() -> int:
 	return $Timer.get_time_left()
 
+
 func start(wait_time: int) -> void:
-	# Run with wait_time for the initial round
+	resume()
+	#run with wait_time for the initial round
 	$Timer.start(wait_time)
-	# Reset time for the second round
+	#reset time for the second round
 	$Timer.wait_time = _wait_time
 	_on_timer_countdown()
 	if _tween:
@@ -65,19 +72,28 @@ func start(wait_time: int) -> void:
 	_tween = create_tween().set_loops()
 	_tween.tween_callback(_on_timer_countdown).set_delay(1)
 
+
 func pause() -> void:
 	$Timer.set_paused(true)
 
+
 func resume() -> void:
-	if $Timer.is_paused():
-		$Timer.set_paused(false)
-	else:
-		start(_wait_time)
+	$Timer.set_paused(false)
+	#if $Timer.is_paused():
+		#$Timer.set_paused(false)
+	#else:
+		#start(_wait_time)
+
+
+func stop() -> void:
+	$Timer.stop()
+
 
 func _get_time_string(minutes: int = 0, seconds: int = 0) -> String:
 	return _time_formats[_time_format].format(
-		{minutes = "%0*d" % [2, minutes], seconds = "%0*d" % [2, seconds]}
+		{ minutes = "%0*d" % [2, minutes], seconds = "%0*d" % [2, seconds] }
 	)
+
 
 func _on_timer_countdown() -> void:
 	var time_left: int = $Timer.time_left
@@ -90,6 +106,7 @@ func _on_timer_countdown() -> void:
 		else:
 			$Label.modulate = _default_color
 	$Label.text = _get_time_string(minutes, seconds)
+
 
 func _on_timer_timeout() -> void:
 	$Label.modulate = _default_color

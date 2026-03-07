@@ -1,0 +1,74 @@
+[gd_scene load_steps=9 format=3 uid="uid://c2x5h5ot50uui"]
+
+[ext_resource type="PackedScene" uid="uid://kn4un6yv7630" path="res://scenes/base/view/view.tscn" id="1_b1bk6"]
+[ext_resource type="Script" uid="uid://bsfjnwbh6w2wl" path="res://scenes/views/save_load/save_load.gd" id="1_gndvv"]
+[ext_resource type="LabelSettings" uid="uid://bfmg4ke5qx0j7" path="res://shared/label_settings/medium_label_settings.tres" id="2_gndvv"]
+[ext_resource type="PackedScene" uid="uid://cb2uwdhqqnlny" path="res://scenes/nodes/views/ui_label/ui_label.tscn" id="3_fqyh5"]
+[ext_resource type="PackedScene" uid="uid://dxohchoj45dfl" path="res://scenes/nodes/views/ui_button/ui_button.tscn" id="3_uh4au"]
+[ext_resource type="PackedScene" uid="uid://63skdfg5s3u5" path="res://scenes/nodes/views/input_window/input_window.tscn" id="5_1k8h5"]
+[ext_resource type="PackedScene" uid="uid://b6kk7ppr2vpmk" path="res://scenes/nodes/views/dialog_window/dialog_window.tscn" id="6_l64lu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1k8h5"]
+
+[node name="SaveLoad" instance=ExtResource("1_b1bk6")]
+script = ExtResource("1_gndvv")
+
+[node name="MainContainer" type="CenterContainer" parent="CanvasLayer" index="0"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainContainer" index="0"]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="UILabel" parent="CanvasLayer/MainContainer/VBoxContainer" index="0" instance=ExtResource("3_fqyh5")]
+layout_mode = 2
+text = "Save / Load"
+label_settings = ExtResource("2_gndvv")
+
+[node name="SaveList" type="ItemList" parent="CanvasLayer/MainContainer/VBoxContainer" index="1"]
+custom_minimum_size = Vector2(768, 512)
+layout_mode = 2
+theme_override_constants/v_separation = 8
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1k8h5")
+allow_reselect = true
+allow_search = false
+auto_width = true
+wraparound_items = false
+item_count = 1
+same_column_width = true
+fixed_column_width = 768
+item_0/text = "New Save File"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MainContainer/VBoxContainer" index="2"]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="Cancel" parent="CanvasLayer/MainContainer/VBoxContainer/HBoxContainer" index="0" instance=ExtResource("3_uh4au")]
+layout_mode = 2
+text = "Cancel"
+
+[node name="Delete" parent="CanvasLayer/MainContainer/VBoxContainer/HBoxContainer" index="1" instance=ExtResource("3_uh4au")]
+layout_mode = 2
+text = "Delete"
+
+[node name="SaveLoad" parent="CanvasLayer/MainContainer/VBoxContainer/HBoxContainer" index="2" instance=ExtResource("3_uh4au")]
+layout_mode = 2
+text = "Save/Load"
+
+[node name="InputWindow" parent="CanvasLayer" index="1" instance=ExtResource("5_1k8h5")]
+visible = false
+
+[node name="DialogWindow" parent="CanvasLayer" index="2" instance=ExtResource("6_l64lu")]
+visible = false
+
+[connection signal="item_selected" from="CanvasLayer/MainContainer/VBoxContainer/SaveList" to="." method="_on_save_list_item_selected"]
+[connection signal="pressed" from="CanvasLayer/MainContainer/VBoxContainer/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainContainer/VBoxContainer/HBoxContainer/Delete" to="." method="_on_delete_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainContainer/VBoxContainer/HBoxContainer/SaveLoad" to="." method="_on_save_load_pressed"]
