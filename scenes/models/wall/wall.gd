@@ -1,7 +1,7 @@
 class_name Wall
 extends StaticBody2D
 
-@export var type: Globals.Models = Globals.Models.WALL
+@export var model_type: Globals.ModelType = Globals.ModelType.WALL
 
 var sprite_size: Vector2 = Vector2.ZERO
 var sprite_rect: Rect2 = Rect2()

@@ -21,7 +21,7 @@ func _ready() -> void:
 	]:
 		node.label_settings = Globals.MEDIUM_LABEL_SETTINGS
 
-	for node: Control in [
+	for node: Container in [
 			$CanvasLayer/MainContainer/VBoxContainer,
 			$CanvasLayer/MainContainer/VBoxContainer/Tables,
 			$CanvasLayer/MainContainer/VBoxContainer/Tables/TimeTable,
@@ -33,13 +33,13 @@ func _ready() -> void:
 		)
 
 	$CanvasLayer/MainContainer/VBoxContainer/Back.add_theme_font_size_override(
-		"font_size", Globals.FONTS.MEDIUM_FONT_SIZE
+		"font_size", Globals.FONT_SIZES["MEDIUM"]
 	)
 
 	_time_table = $CanvasLayer/MainContainer/VBoxContainer/Tables/TimeTable
-	_setup_title(_time_table, Globals.SMALL_LABEL_SETTINGS)
+	_setup_title(_time_table, Globals.LABEL_SETTINGS.SMALL)
 	_score_table = $CanvasLayer/MainContainer/VBoxContainer/Tables/ScoreTable
-	_setup_title(_score_table, Globals.SMALL_LABEL_SETTINGS)
+	_setup_title(_score_table, Globals.LABEL_SETTINGS.SMALL)
 	for _i: int in range(ROW_COUNT):
 		_add_row(_time_table)
 		_add_row(_score_table)
@@ -65,7 +65,7 @@ func _setup() -> void:
 		#show input window
 		$CanvasLayer/InputWindow.popup_centered()
 		$CanvasLayer/InputWindow.set_line_edit_grab_focus()
-		$CanvasLayer/InputWindow.disable_ok_button(true)
+		$CanvasLayer/InputWindow.set_disabled_ok_button(true)
 
 		$CanvasLayer/InputWindow/CenterContainer/VBoxContainer/LastEntry/Row/Time.text = _game_time_converter(game_time)
 		$CanvasLayer/InputWindow/CenterContainer/VBoxContainer/LastEntry/Row/Score.text = _game_score_converter(game_score)

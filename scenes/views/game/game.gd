@@ -7,6 +7,7 @@ var _player: Player = null
 var _level_views: Array[View] = []
 var _level_scenes: Dictionary = {}
 var _save_load_view: View = null
+var _upgrades_view: View = null
 
 
 func _ready() -> void:
@@ -16,12 +17,19 @@ func _ready() -> void:
 	for i: int in range(Globals.LEVEL_COUNT):
 		_level_scenes[" - %s - " % (i + 1)] = Globals.LEVEL_SCENE
 
-	$CanvasLayer/MainContainer/VBoxContainer/UILabel.label_settings = Globals.MEDIUM_LABEL_SETTINGS
+	$CanvasLayer/MainContainer/VBoxContainer/UILabel.label_settings = Globals.LABEL_SETTINGS.MEDIUM
 	$CanvasLayer/MainContainer/VBoxContainer.add_theme_constant_override(
 		"separation", Globals.UI_CONTAINER_SEPARATION
 	)
+	$CanvasLayer/MainContainer/VBoxContainer/GridContainer.add_theme_constant_override(
+		"h_separation", Globals.UI_CONTAINER_SEPARATION
+	)
+	$CanvasLayer/MainContainer/VBoxContainer/GridContainer.add_theme_constant_override(
+		"v_separation", Globals.UI_CONTAINER_SEPARATION
+	)
 
-	for node: Control in [
+	for node: UIButton in [
+			$CanvasLayer/MainContainer/VBoxContainer/Upgrades,
 			$CanvasLayer/MainContainer/VBoxContainer/Save,
 			$CanvasLayer/MainContainer/VBoxContainer/Back,
 	]:
@@ -29,7 +37,7 @@ func _ready() -> void:
 			node
 			. add_theme_font_size_override(
 				"font_size",
-				Globals.FONTS.MEDIUM_FONT_SIZE,
+				Globals.FONT_SIZES["MEDIUM"],
 			)
 		)
 
@@ -43,7 +51,7 @@ func _ready() -> void:
 			button
 			. add_theme_font_size_override(
 				"font_size",
-				Globals.FONTS.MEDIUM_FONT_SIZE,
+				Globals.FONT_SIZES["MEDIUM"],
 			)
 		)
 		$CanvasLayer/MainContainer/VBoxContainer/GridContainer.add_child(button)
@@ -74,6 +82,9 @@ func _setup() -> void:
 	_save_load_view = Globals.SAVE_LOAD_SCENE.instantiate()
 	_save_load_view.connect("file_saved", _on_save_load_view_file_saved)
 	_save_load_view.connect("closed", _on_save_load_view_closed)
+
+	_upgrades_view = Globals.UPGRADES_SCENE.instantiate()
+	_upgrades_view.connect("closed", _on_upgrades_view_closed)
 
 	#enable only next level
 	for node: Node in $CanvasLayer/MainContainer/VBoxContainer/GridContainer.get_children():
@@ -109,12 +120,20 @@ func _start_save_load() -> void:
 		$CanvasLayer.hide()
 
 
+func _start_upgrades() -> void:
+	add_world_child(_upgrades_view)
+	_upgrades_view.start(_player)
+
+	if is_world_has_children():
+		$CanvasLayer.hide()
+
+
 #level view
 func _on_level_view_changed(view: View) -> void:
+	Music.main_audio_stream_paused(false)
+
 	var level: int = _player.get_level()
 	if level >= Globals.LEVEL_COUNT:
-		Music.main_audio_stream_paused(false)
-
 		view.queue_free()
 		#show statistic view
 		changed.emit(self)
@@ -131,8 +150,9 @@ func _on_level_view_changed(view: View) -> void:
 		remove_world_child(view)
 		view.queue_free()
 
-		#TODO: show upgrades
-		_setup()
+		#TODO: show upgrades?
+		_start_upgrades()
+		#_setup()
 
 
 func _on_level_view_finished(view: View) -> void:
@@ -170,10 +190,21 @@ func _on_save_load_view_closed(view: View) -> void:
 	_setup()
 
 
+#upgrade view
+func _on_upgrades_view_closed(view: View) -> void:
+	view.queue_free()
+
+	_setup()
+
+
 #buttons
 func _on_level_pressed() -> void:
 	_set_transition(_start_level)
 	_set_audio_transition()
+
+
+func _on_upgrades_pressed() -> void:
+	_set_transition(_start_upgrades)
 
 
 func _on_save_pressed() -> void:
@@ -182,5 +213,5 @@ func _on_save_pressed() -> void:
 
 func _on_back_pressed() -> void:
 	#prevent to open statictics input field
-	#_player.reset_state()
+	_player.reset_state()
 	_set_transition(closed.emit.bind(self))

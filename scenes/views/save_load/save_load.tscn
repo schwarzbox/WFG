@@ -33,7 +33,9 @@ label_settings = ExtResource("2_gndvv")
 [node name="SaveList" type="ItemList" parent="CanvasLayer/MainContainer/VBoxContainer" index="1"]
 custom_minimum_size = Vector2(768, 512)
 layout_mode = 2
+theme_override_constants/h_separation = 8
 theme_override_constants/v_separation = 8
+theme_override_constants/line_separation = 4
 theme_override_font_sizes/font_size = 32
 theme_override_styles/focus = SubResource("StyleBoxEmpty_1k8h5")
 allow_reselect = true

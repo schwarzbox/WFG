@@ -5,7 +5,7 @@ func _ready() -> void:
 	super()
 	$CenterContainer/VBoxContainer/LineEdit.custom_minimum_size.x = Globals.UI_BASE_WINDOW_SIZE.x
 	$CenterContainer/VBoxContainer/LineEdit.max_length = Globals.UI_LINE_EDIT_MAX_LENGTH
-	$CenterContainer/VBoxContainer/LineEdit.add_theme_font_size_override("font_size", Globals.FONTS.MEDIUM_FONT_SIZE)
+	$CenterContainer/VBoxContainer/LineEdit.add_theme_font_size_override("font_size", Globals.FONT_SIZES["MEDIUM"])
 	$CenterContainer/VBoxContainer/LineEdit.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
 
 	print(size)
@@ -29,9 +29,9 @@ func _on_line_edit_text_changed(new_text: String) -> void:
 	$CenterContainer/VBoxContainer/LineEdit.caret_column = caret_column
 
 	if new_text:
-		disable_ok_button(false)
+		set_disabled_ok_button(false)
 	else:
-		disable_ok_button(true)
+		set_disabled_ok_button(true)
 
 
 func _about_to_close() -> void:

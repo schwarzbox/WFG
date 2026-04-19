@@ -1,0 +1,175 @@
+[gd_scene format=3 uid="uid://cbnfadiogf05v"]
+
+[ext_resource type="PackedScene" uid="uid://kn4un6yv7630" path="res://scenes/base/view/view.tscn" id="1_5e7wp"]
+[ext_resource type="Script" uid="uid://c1o5ep46n3vl4" path="res://scenes/views/game/upgrades/upgrades.gd" id="2_wsgnr"]
+[ext_resource type="PackedScene" uid="uid://cb2uwdhqqnlny" path="res://scenes/nodes/views/ui_label/ui_label.tscn" id="3_s8xjp"]
+[ext_resource type="LabelSettings" uid="uid://bfmg4ke5qx0j7" path="res://shared/label_settings/medium_label_settings.tres" id="4_s8xjp"]
+[ext_resource type="PackedScene" uid="uid://dxohchoj45dfl" path="res://scenes/nodes/views/ui_button/ui_button.tscn" id="5_7842n"]
+[ext_resource type="LabelSettings" uid="uid://dlfypgb1ah5mq" path="res://shared/label_settings/small_label_settings.tres" id="5_o7u12"]
+[ext_resource type="PackedScene" uid="uid://disygw5bmyrvo" path="res://scenes/nodes/views/ui_item/ui_item.tscn" id="6_oqi3v"]
+
+[node name="Upgrades" unique_id=2001454398 instance=ExtResource("1_5e7wp")]
+script = ExtResource("2_wsgnr")
+
+[node name="MainContainer" type="CenterContainer" parent="CanvasLayer" index="0" unique_id=2108858330]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainContainer" index="0" unique_id=482997809]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="UILabel" parent="CanvasLayer/MainContainer/VBoxContainer" index="0" unique_id=998985172 instance=ExtResource("3_s8xjp")]
+layout_mode = 2
+text = "Upgrades"
+label_settings = ExtResource("4_s8xjp")
+
+[node name="Credit" type="HBoxContainer" parent="CanvasLayer/MainContainer/VBoxContainer" index="1" unique_id=265070074]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="UILabel" parent="CanvasLayer/MainContainer/VBoxContainer/Credit" index="0" unique_id=721847726 instance=ExtResource("3_s8xjp")]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "$"
+label_settings = ExtResource("4_s8xjp")
+horizontal_alignment = 2
+
+[node name="Credits" parent="CanvasLayer/MainContainer/VBoxContainer/Credit" index="1" unique_id=1424329771 instance=ExtResource("3_s8xjp")]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+label_settings = ExtResource("4_s8xjp")
+horizontal_alignment = 0
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/MainContainer/VBoxContainer" index="2" unique_id=1257371142]
+layout_mode = 2
+theme_override_constants/h_separation = 32
+theme_override_constants/v_separation = 32
+columns = 2
+
+[node name="ShotType" type="VBoxContainer" parent="CanvasLayer/MainContainer/VBoxContainer/GridContainer" index="0" unique_id=1495181037]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="UILabel" parent="CanvasLayer/MainContainer/VBoxContainer/GridContainer/ShotType" index="0" unique_id=130291259 instance=ExtResource("3_s8xjp")]
+layout_mode = 2
+text = "Shot"
+label_settings = ExtResource("5_o7u12")
+
+[node name="ShotTypes" type="HBoxContainer" parent="CanvasLayer/MainContainer/VBoxContainer/GridContainer/ShotType" index="1" unique_id=2000419107]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="Single" parent="CanvasLayer/MainContainer/VBoxContainer/GridContainer/ShotType/ShotTypes" index="0" unique_id=364912114 instance=ExtResource("6_oqi3v")]
+layout_mode = 2
+
+[node name="Double" parent="CanvasLayer/MainContainer/VBoxContainer/GridContainer/ShotType/ShotTypes" index="1" unique_id=667796435 instance=ExtResource("6_oqi3v")]
+layout_mode = 2
+
+[node name="Triple" parent="CanvasLayer/MainContainer/VBoxContainer/GridContainer/ShotType/ShotTypes" index="2" unique_id=54461034 instance=ExtResource("6_oqi3v")]
+layout_mode = 2
+
+[node name="ForceType" type="VBoxContainer" parent="CanvasLayer/MainContainer/VBoxContainer/GridContainer" index="1" unique_id=1253408615]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="UILabel" parent="CanvasLayer/MainContainer/VBoxContainer/GridContainer/ForceType" index="0" unique_id=971931439 instance=ExtResource("3_s8xjp")]
+layout_mode = 2
+text = "Force"
+label_settings = ExtResource("5_o7u12")
+
+[node name="ForceTypes" type="HBoxContainer" parent="CanvasLayer/MainContainer/VBoxContainer/GridContainer/ForceType" index="1" unique_id=1083841722]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="Slow" parent="CanvasLayer/MainContainer/VBoxContainer/GridContainer/ForceType/ForceTypes" index="0" unique_id=897703827 instance=ExtResource("6_oqi3v")]
+layout_mode = 2
+
+[node name="Medium" parent="CanvasLayer/MainContainer/VBoxContainer/GridContainer/ForceType/ForceTypes" index="1" unique_id=757724956 instance=ExtResource("6_oqi3v")]
+layout_mode = 2
+
+[node name="Fast" parent="CanvasLayer/MainContainer/VBoxContainer/GridContainer/ForceType/ForceTypes" index="2" unique_id=1657432634 instance=ExtResource("6_oqi3v")]
+layout_mode = 2
+
+[node name="ShotDelayType" type="VBoxContainer" parent="CanvasLayer/MainContainer/VBoxContainer/GridContainer" index="2" unique_id=433246996]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="UILabel" parent="CanvasLayer/MainContainer/VBoxContainer/GridContainer/ShotDelayType" index="0" unique_id=1792856596 instance=ExtResource("3_s8xjp")]
+layout_mode = 2
+text = "Shot Delay"
+label_settings = ExtResource("5_o7u12")
+
+[node name="ShotDelayTypes" type="HBoxContainer" parent="CanvasLayer/MainContainer/VBoxContainer/GridContainer/ShotDelayType" index="1" unique_id=2098413615]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="Slow" parent="CanvasLayer/MainContainer/VBoxContainer/GridContainer/ShotDelayType/ShotDelayTypes" index="0" unique_id=711255304 instance=ExtResource("6_oqi3v")]
+layout_mode = 2
+
+[node name="Medium" parent="CanvasLayer/MainContainer/VBoxContainer/GridContainer/ShotDelayType/ShotDelayTypes" index="1" unique_id=1498379319 instance=ExtResource("6_oqi3v")]
+layout_mode = 2
+
+[node name="Fast" parent="CanvasLayer/MainContainer/VBoxContainer/GridContainer/ShotDelayType/ShotDelayTypes" index="2" unique_id=1918792519 instance=ExtResource("6_oqi3v")]
+layout_mode = 2
+
+[node name="ScatterShotDelayType" type="VBoxContainer" parent="CanvasLayer/MainContainer/VBoxContainer/GridContainer" index="3" unique_id=260421823]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="UILabel" parent="CanvasLayer/MainContainer/VBoxContainer/GridContainer/ScatterShotDelayType" index="0" unique_id=785519967 instance=ExtResource("3_s8xjp")]
+layout_mode = 2
+text = "Scatter Shot Delay"
+label_settings = ExtResource("5_o7u12")
+
+[node name="ScatterShotDelayTypes" type="HBoxContainer" parent="CanvasLayer/MainContainer/VBoxContainer/GridContainer/ScatterShotDelayType" index="1" unique_id=1278094684]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="Slow" parent="CanvasLayer/MainContainer/VBoxContainer/GridContainer/ScatterShotDelayType/ScatterShotDelayTypes" index="0" unique_id=2085218262 instance=ExtResource("6_oqi3v")]
+layout_mode = 2
+
+[node name="Medium" parent="CanvasLayer/MainContainer/VBoxContainer/GridContainer/ScatterShotDelayType/ScatterShotDelayTypes" index="1" unique_id=1806652056 instance=ExtResource("6_oqi3v")]
+layout_mode = 2
+
+[node name="Fast" parent="CanvasLayer/MainContainer/VBoxContainer/GridContainer/ScatterShotDelayType/ScatterShotDelayTypes" index="2" unique_id=974569567 instance=ExtResource("6_oqi3v")]
+layout_mode = 2
+
+[node name="Back" parent="CanvasLayer/MainContainer/VBoxContainer" index="3" unique_id=1076494181 instance=ExtResource("5_7842n")]
+layout_mode = 2
+text = "Back"
+
+[connection signal="equiped" from="CanvasLayer/MainContainer/VBoxContainer/GridContainer/ShotType/ShotTypes/Single" to="." method="_on_single_shot_equiped"]
+[connection signal="toggled" from="CanvasLayer/MainContainer/VBoxContainer/GridContainer/ShotType/ShotTypes/Single" to="." method="_on_single_shot_toggled"]
+[connection signal="equiped" from="CanvasLayer/MainContainer/VBoxContainer/GridContainer/ShotType/ShotTypes/Double" to="." method="_on_double_shot_equiped"]
+[connection signal="toggled" from="CanvasLayer/MainContainer/VBoxContainer/GridContainer/ShotType/ShotTypes/Double" to="." method="_on_double_shot_toggled"]
+[connection signal="equiped" from="CanvasLayer/MainContainer/VBoxContainer/GridContainer/ShotType/ShotTypes/Triple" to="." method="_on_triple_shot_equiped"]
+[connection signal="toggled" from="CanvasLayer/MainContainer/VBoxContainer/GridContainer/ShotType/ShotTypes/Triple" to="." method="_on_triple_shot_toggled"]
+[connection signal="equiped" from="CanvasLayer/MainContainer/VBoxContainer/GridContainer/ForceType/ForceTypes/Slow" to="." method="_on_slow_force_equiped"]
+[connection signal="toggled" from="CanvasLayer/MainContainer/VBoxContainer/GridContainer/ForceType/ForceTypes/Slow" to="." method="_on_slow_force_toggled"]
+[connection signal="equiped" from="CanvasLayer/MainContainer/VBoxContainer/GridContainer/ForceType/ForceTypes/Medium" to="." method="_on_medium_force_equiped"]
+[connection signal="toggled" from="CanvasLayer/MainContainer/VBoxContainer/GridContainer/ForceType/ForceTypes/Medium" to="." method="_on_medium_force_toggled"]
+[connection signal="equiped" from="CanvasLayer/MainContainer/VBoxContainer/GridContainer/ForceType/ForceTypes/Fast" to="." method="_on_fast_force_equiped"]
+[connection signal="toggled" from="CanvasLayer/MainContainer/VBoxContainer/GridContainer/ForceType/ForceTypes/Fast" to="." method="_on_fast_force_toggled"]
+[connection signal="equiped" from="CanvasLayer/MainContainer/VBoxContainer/GridContainer/ShotDelayType/ShotDelayTypes/Slow" to="." method="_on_slow_shot_delay_equiped"]
+[connection signal="toggled" from="CanvasLayer/MainContainer/VBoxContainer/GridContainer/ShotDelayType/ShotDelayTypes/Slow" to="." method="_on_slow_shot_delay_toggled"]
+[connection signal="equiped" from="CanvasLayer/MainContainer/VBoxContainer/GridContainer/ShotDelayType/ShotDelayTypes/Medium" to="." method="_on_medium_shot_delay_equiped"]
+[connection signal="toggled" from="CanvasLayer/MainContainer/VBoxContainer/GridContainer/ShotDelayType/ShotDelayTypes/Medium" to="." method="_on_medium_shot_delay_toggled"]
+[connection signal="equiped" from="CanvasLayer/MainContainer/VBoxContainer/GridContainer/ShotDelayType/ShotDelayTypes/Fast" to="." method="_on_fast_shot_delay_equiped"]
+[connection signal="toggled" from="CanvasLayer/MainContainer/VBoxContainer/GridContainer/ShotDelayType/ShotDelayTypes/Fast" to="." method="_on_fast_shot_delay_toggled"]
+[connection signal="equiped" from="CanvasLayer/MainContainer/VBoxContainer/GridContainer/ScatterShotDelayType/ScatterShotDelayTypes/Slow" to="." method="_on_slow_scatter_shot_delay_equiped"]
+[connection signal="toggled" from="CanvasLayer/MainContainer/VBoxContainer/GridContainer/ScatterShotDelayType/ScatterShotDelayTypes/Slow" to="." method="_on_slow_scatter_shot_delay_toggled"]
+[connection signal="equiped" from="CanvasLayer/MainContainer/VBoxContainer/GridContainer/ScatterShotDelayType/ScatterShotDelayTypes/Medium" to="." method="_on_medium_scatter_shot_delay_equiped"]
+[connection signal="toggled" from="CanvasLayer/MainContainer/VBoxContainer/GridContainer/ScatterShotDelayType/ScatterShotDelayTypes/Medium" to="." method="_on_medium_scatter_shot_delay_toggled"]
+[connection signal="equiped" from="CanvasLayer/MainContainer/VBoxContainer/GridContainer/ScatterShotDelayType/ScatterShotDelayTypes/Fast" to="." method="_on_fast_scatter_shot_delay_equiped"]
+[connection signal="toggled" from="CanvasLayer/MainContainer/VBoxContainer/GridContainer/ScatterShotDelayType/ScatterShotDelayTypes/Fast" to="." method="_on_fast_scatter_shot_delay_toggled"]
+[connection signal="pressed" from="CanvasLayer/MainContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]

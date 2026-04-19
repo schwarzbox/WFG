@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://disygw5bmyrvo"]
+
+[ext_resource type="Script" uid="uid://bugb36xq3sh25" path="res://scenes/nodes/views/ui_item/ui_item.gd" id="1_bcrs5"]
+[ext_resource type="PackedScene" uid="uid://dxohchoj45dfl" path="res://scenes/nodes/views/ui_button/ui_button.tscn" id="1_r7sxd"]
+[ext_resource type="PackedScene" uid="uid://cb2uwdhqqnlny" path="res://scenes/nodes/views/ui_label/ui_label.tscn" id="2_41rqm"]
+[ext_resource type="LabelSettings" uid="uid://dlfypgb1ah5mq" path="res://shared/label_settings/small_label_settings.tres" id="3_41rqm"]
+[ext_resource type="StyleBox" uid="uid://de54rm0hfpmdx" path="res://shared/button_styles/pressed_highlight_style_box_flat.tres" id="5_jusad"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_bcrs5"]
+size = Vector2(128, 128)
+
+[node name="UIItem" type="VBoxContainer" unique_id=1877066950]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 32
+script = ExtResource("1_bcrs5")
+
+[node name="UILabel" parent="." unique_id=417330638 instance=ExtResource("2_41rqm")]
+layout_mode = 2
+text = "UIItem"
+label_settings = ExtResource("3_41rqm")
+
+[node name="UIButton" parent="." unique_id=65637862 instance=ExtResource("1_r7sxd")]
+layout_mode = 2
+theme_override_styles/pressed = ExtResource("5_jusad")
+toggle_mode = true
+text = "1"
+icon = SubResource("PlaceholderTexture2D_bcrs5")
+icon_alignment = 1
+vertical_icon_alignment = 0
+
+[node name="EquipButton" parent="." unique_id=1551647921 instance=ExtResource("1_r7sxd")]
+layout_mode = 2
+theme_override_styles/pressed = ExtResource("5_jusad")
+toggle_mode = true
+text = "Equip"
+
+[connection signal="mouse_entered" from="UIButton" to="." method="_on_ui_button_mouse_entered"]
+[connection signal="mouse_exited" from="UIButton" to="." method="_on_ui_button_mouse_exited"]
+[connection signal="toggled" from="UIButton" to="." method="_on_ui_button_toggled"]
+[connection signal="toggled" from="EquipButton" to="." method="_on_equip_button_toggled"]

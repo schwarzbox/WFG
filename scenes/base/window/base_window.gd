@@ -24,7 +24,7 @@ func _ready() -> void:
 
 	$ColorRect.color = Globals.UI_BASE_WINDOW_BG_COLOR
 
-	for node: Control in [
+	for node: Container in [
 			$CenterContainer/VBoxContainer,
 			$CenterContainer/VBoxContainer/HBoxContainer,
 	]:
@@ -55,11 +55,11 @@ func hide_ok_button() -> void:
 	$CenterContainer/VBoxContainer/HBoxContainer/OK.hide()
 
 
-func disable_cancel_button(value: bool) -> void:
+func set_disabled_cancel_button(value: bool) -> void:
 	$CenterContainer/VBoxContainer/HBoxContainer/Cancel.disabled = value
 
 
-func disable_ok_button(value: bool) -> void:
+func set_disabled_ok_button(value: bool) -> void:
 	$CenterContainer/VBoxContainer/HBoxContainer/OK.disabled = value
 
 

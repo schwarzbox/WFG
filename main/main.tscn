@@ -1,47 +1,47 @@
-[gd_scene load_steps=5 format=3 uid="uid://bqo0tw73j0nmd"]
+[gd_scene format=3 uid="uid://bqo0tw73j0nmd"]
 
 [ext_resource type="PackedScene" uid="uid://kn4un6yv7630" path="res://scenes/base/view/view.tscn" id="1"]
 [ext_resource type="Script" uid="uid://cq2fdibyi4rxs" path="res://main/main.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://cb2uwdhqqnlny" path="res://scenes/nodes/views/ui_label/ui_label.tscn" id="3_3wy1v"]
 [ext_resource type="PackedScene" uid="uid://dxohchoj45dfl" path="res://scenes/nodes/views/ui_button/ui_button.tscn" id="4_lukwd"]
 
-[node name="Main" instance=ExtResource("1")]
+[node name="Main" unique_id=1244640870 instance=ExtResource("1")]
 script = ExtResource("2")
 
-[node name="MainContainer" type="CenterContainer" parent="CanvasLayer" index="0"]
+[node name="MainContainer" type="CenterContainer" parent="CanvasLayer" index="0" unique_id=404772089]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainContainer" index="0"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainContainer" index="0" unique_id=60146588]
 layout_mode = 2
 theme_override_constants/separation = 32
 
-[node name="UILabel" parent="CanvasLayer/MainContainer/VBoxContainer" index="0" instance=ExtResource("3_3wy1v")]
+[node name="UILabel" parent="CanvasLayer/MainContainer/VBoxContainer" index="0" unique_id=1435797971 instance=ExtResource("3_3wy1v")]
 layout_mode = 2
 text = "WFG"
 
-[node name="Game" parent="CanvasLayer/MainContainer/VBoxContainer" index="1" instance=ExtResource("4_lukwd")]
+[node name="Game" parent="CanvasLayer/MainContainer/VBoxContainer" index="1" unique_id=1078957248 instance=ExtResource("4_lukwd")]
 layout_mode = 2
 text = "Game"
 
-[node name="Continue" parent="CanvasLayer/MainContainer/VBoxContainer" index="2" instance=ExtResource("4_lukwd")]
+[node name="Continue" parent="CanvasLayer/MainContainer/VBoxContainer" index="2" unique_id=851059836 instance=ExtResource("4_lukwd")]
 layout_mode = 2
 text = "Continue"
 
-[node name="Load" parent="CanvasLayer/MainContainer/VBoxContainer" index="3" instance=ExtResource("4_lukwd")]
+[node name="Load" parent="CanvasLayer/MainContainer/VBoxContainer" index="3" unique_id=250447307 instance=ExtResource("4_lukwd")]
 layout_mode = 2
 text = "Load"
 
-[node name="Statistics" parent="CanvasLayer/MainContainer/VBoxContainer" index="4" instance=ExtResource("4_lukwd")]
+[node name="Statistics" parent="CanvasLayer/MainContainer/VBoxContainer" index="4" unique_id=1821218260 instance=ExtResource("4_lukwd")]
 layout_mode = 2
 text = "Statistic"
 
-[node name="Settings" parent="CanvasLayer/MainContainer/VBoxContainer" index="5" instance=ExtResource("4_lukwd")]
+[node name="Settings" parent="CanvasLayer/MainContainer/VBoxContainer" index="5" unique_id=39310482 instance=ExtResource("4_lukwd")]
 layout_mode = 2
 text = "Settings"
 
-[node name="Exit" parent="CanvasLayer/MainContainer/VBoxContainer" index="6" instance=ExtResource("4_lukwd")]
+[node name="Exit" parent="CanvasLayer/MainContainer/VBoxContainer" index="6" unique_id=799678658 instance=ExtResource("4_lukwd")]
 layout_mode = 2
 text = "Exit
 "

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://be8mvvxelw7f2"]
+[gd_scene format=3 uid="uid://be8mvvxelw7f2"]
 
 [ext_resource type="Script" uid="uid://c7hrnjln2wo6f" path="res://scenes/models/player/player.gd" id="1_2s625"]
 [ext_resource type="PackedScene" uid="uid://cimvxxl6pjyt0" path="res://scenes/nodes/models/radial_light/radial_light.tscn" id="2_7bbhh"]
@@ -36,6 +36,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_dd6o3"]
 resource_name = "idle"
+length = 0.001
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -59,35 +60,33 @@ _data = {
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_7sb68"]
 size = Vector2(16, 16)
 
-[node name="Player" type="AnimatableBody2D"]
+[node name="Player" type="AnimatableBody2D" unique_id=1026843435]
 collision_mask = 10
 script = ExtResource("1_2s625")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=883186670]
 shape = SubResource("RectangleShape2D_t0ejt")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=999837088]
 material = SubResource("ShaderMaterial_lao5w")
 texture = SubResource("PlaceholderTexture2D_ya6yp")
 
-[node name="Armor" parent="." instance=ExtResource("3_7sb68")]
+[node name="Armor" parent="." unique_id=2074235164 instance=ExtResource("3_7sb68")]
 _hp = 10
 _max_hp = 10
 _has_regeneration = true
 _regeneration_delay = 32.0
 
-[node name="Gun" parent="." instance=ExtResource("6_eunhc")]
+[node name="Gun" parent="." unique_id=372436375 instance=ExtResource("6_eunhc")]
 
-[node name="ConeLight" parent="Gun" instance=ExtResource("2_qf8fg")]
+[node name="ConeLight" parent="Gun" unique_id=1000217671 instance=ExtResource("2_qf8fg")]
 
-[node name="RadialLight" parent="." instance=ExtResource("2_7bbhh")]
+[node name="RadialLight" parent="." unique_id=428610538 instance=ExtResource("2_7bbhh")]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_hauaj")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=75847609]
+libraries/ = SubResource("AnimationLibrary_hauaj")
 
-[node name="HitParticles" type="CPUParticles2D" parent="."]
+[node name="HitParticles" type="CPUParticles2D" parent="." unique_id=1834801632]
 emitting = false
 amount = 64
 texture = SubResource("PlaceholderTexture2D_7sb68")
@@ -105,7 +104,7 @@ initial_velocity_max = 196.0
 angle_max = 360.0
 scale_amount_min = 0.2
 
-[node name="ExplodeParticles" parent="." instance=ExtResource("7_mfhbk")]
+[node name="ExplodeParticles" parent="." unique_id=1957147478 instance=ExtResource("7_mfhbk")]
 amount = 1024
 lifetime = 1.4
 emission_shape = 3
@@ -113,6 +112,6 @@ emission_rect_extents = Vector2(24, 16)
 orbit_velocity_min = -0.5
 orbit_velocity_max = 0.5
 
-[node name="ScreenTeleportator" parent="." instance=ExtResource("4_eom80")]
+[node name="ScreenTeleportator" parent="." unique_id=1732779284 instance=ExtResource("4_eom80")]
 
 [connection signal="screen_exited" from="ScreenTeleportator" to="." method="_on_screen_teleportator_screen_exited"]

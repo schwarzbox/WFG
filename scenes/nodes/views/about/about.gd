@@ -29,29 +29,29 @@ func _ready() -> void:
 	$VBoxContainer/TextureRect.stretch_mode = (
 		TextureRect.StretchMode.STRETCH_KEEP_CENTERED
 	)
-	for label: RichTextLabel in [
+	for node: RichTextLabel in [
 			$VBoxContainer/Title, $VBoxContainer/Version, $VBoxContainer/Copyright
 	]:
-		label.bbcode_enabled = true
-		label.fit_content = true
-		label.scroll_active = false
-		label.autowrap_mode = TextServer.AutowrapMode.AUTOWRAP_OFF
-		label.context_menu_enabled = false
-		label.shortcut_keys_enabled = true
-		label.horizontal_alignment = (
+		node.bbcode_enabled = true
+		node.fit_content = true
+		node.scroll_active = false
+		node.autowrap_mode = TextServer.AutowrapMode.AUTOWRAP_OFF
+		node.context_menu_enabled = false
+		node.shortcut_keys_enabled = true
+		node.horizontal_alignment = (
 			HorizontalAlignment.HORIZONTAL_ALIGNMENT_CENTER
 		)
-		label.vertical_alignment = VerticalAlignment.VERTICAL_ALIGNMENT_CENTER
-		label.meta_underlined = true
-		label.selection_enabled = true
-		label.drag_and_drop_selection_enabled = false
-		label.add_theme_color_override("selection_color", SELECTION_COLOR)
-		label.add_theme_constant_override(
+		node.vertical_alignment = VerticalAlignment.VERTICAL_ALIGNMENT_CENTER
+		node.meta_underlined = true
+		node.selection_enabled = true
+		node.drag_and_drop_selection_enabled = false
+		node.add_theme_color_override("selection_color", SELECTION_COLOR)
+		node.add_theme_constant_override(
 			"paragraph_separation", PARAGRAPH_SEPARATION
 		)
-		label.add_theme_font_override("normal_font", FontFile.new())
-		label.add_theme_font_size_override("normal_font_size", LABEL_FONT_SIZE)
-		label.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
+		node.add_theme_font_override("normal_font", FontFile.new())
+		node.add_theme_font_size_override("normal_font_size", LABEL_FONT_SIZE)
+		node.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
 
 	$VBoxContainer/Title.add_theme_font_override("bold_font", FontFile.new())
 	$VBoxContainer/Title.add_theme_font_size_override(

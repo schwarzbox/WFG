@@ -29,14 +29,14 @@ func _ready() -> void:
 			$CanvasLayer/GameOverContainer/UILabel,
 
 	]:
-		node.label_settings = Globals.LARGE_LABEL_SETTINGS
-	$CanvasLayer/PauseContainer/VBoxContainer/UILabel.label_settings = Globals.MEDIUM_LABEL_SETTINGS
+		node.label_settings = Globals.LABEL_SETTINGS.LARGE
+	$CanvasLayer/PauseContainer/VBoxContainer/UILabel.label_settings = Globals.LABEL_SETTINGS.MEDIUM
 
 	$CanvasLayer/PauseContainer/VBoxContainer.add_theme_constant_override(
 		"separation", Globals.UI_CONTAINER_SEPARATION
 	)
 
-	for node: Control in [
+	for node: UIButton in [
 			$CanvasLayer/PauseContainer/VBoxContainer/Resume,
 			$CanvasLayer/PauseContainer/VBoxContainer/Restart,
 			$CanvasLayer/PauseContainer/VBoxContainer/Back,
@@ -45,7 +45,7 @@ func _ready() -> void:
 			node
 			. add_theme_font_size_override(
 				"font_size",
-				Globals.FONTS.MEDIUM_FONT_SIZE,
+				Globals.FONT_SIZES["MEDIUM"],
 			)
 		)
 
@@ -54,8 +54,8 @@ func _ready() -> void:
 		Alarm
 		. new(
 			Globals.ALARM_WAIT_TIME,
-			Globals.FONTS.MEDIUM_FONT_SIZE,
-			Globals.COLORS.ORANGE,
+			Globals.FONT_SIZES["MEDIUM"],
+			Globals.COLORS["ORANGE"],
 		)
 	)
 	_alarm.connect("timeout", _on_alarm_timeout)
@@ -212,7 +212,7 @@ func _show_pause() -> void:
 	_set_audio_transition_fade_out(Callable(), Globals.UI_DELAY)
 
 	#save game time
-	_player.pause(true)
+	_player.pause_state(true)
 
 	#stop alarm
 	_alarm.pause()
@@ -239,7 +239,7 @@ func _hide_pause() -> void:
 	_set_audio_transition_fade_in(Callable(), Globals.UI_DELAY)
 
 	#resume game time
-	_player.pause(false)
+	_player.pause_state(false)
 
 	#resume alarm
 	_alarm.resume()
@@ -336,6 +336,8 @@ func _on_player_won() -> void:
 		final_text = "Win!"
 	else:
 		final_text = "Next Level!"
+
+	_player.set_credits(Globals.LEVEL_CREDITS)
 
 	_show_game_over(final_text, changed)
 

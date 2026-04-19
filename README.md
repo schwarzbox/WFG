@@ -1,6 +1,6 @@
 # WFG
 
-v0.26
+v0.28
 
 Godot Engine template
 
@@ -8,8 +8,6 @@ Godot Engine template
 curl -L -O https://github.com/schwarzbox/WFG/archive/main.zip
 ```
 
-Design/Art/Code: [Aliaksandr Veledzimovich](https://twitter.com/veledzimovich)
-
-Music: [Mubert](https://mubert.com)
-
-Engine: [Godot](https://godotengine.org/) [License](https://godotengine.org/license)
+Design/Art/Code: [Aliaksandr Veledzimovich](https://twitter.com/veledzimovich)<br>
+Music: [Mubert](https://mubert.com)<br>
+Engine: [Godot](https://godotengine.org/) [License](https://godotengine.org/license)<br>

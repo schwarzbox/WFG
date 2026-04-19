@@ -8,13 +8,17 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="WFG"
 config/description="Godot Engine Template"
 config/version="0.0"
 run/main_scene="res://main/main.tscn"
-config/features=PackedStringArray("4.5")
+config/features=PackedStringArray("4.6")
 run/max_fps=60
 boot_splash/show_image=false
 config/icon="res://icon.png"
@@ -43,7 +47,7 @@ gdscript/warnings/unused_class_variable=true
 [display]
 
 window/size/viewport_width=1024
-window/size/viewport_height=768
+window/size/viewport_height=1024
 window/stretch/scale_mode="integer"
 
 [editor_plugins]
@@ -54,8 +58,8 @@ enabled=PackedStringArray("res://addons/diff-margin/plugin.cfg", "res://addons/s
 
 folder_colors={
 "res://autoloads/": "gray",
-"res://scenes/models/": "teal",
-"res://scenes/nodes/": "blue",
+"res://scenes/models/": "blue",
+"res://scenes/nodes/": "green",
 "res://scenes/views/": "yellow",
 "res://utils/": "gray"
 }

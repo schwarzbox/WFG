@@ -7,7 +7,7 @@ static var _count: int = 0:
 	get = get_count,
 	set = set_count
 
-@export var type: Globals.Models = Globals.Models.ENEMY
+@export var model_type: Globals.ModelType = Globals.ModelType.ENEMY
 
 var sprite_size: Vector2 = Vector2.ZERO
 
@@ -39,7 +39,7 @@ func _ready() -> void:
 	$Armor.connect("destroyed", _on_armor_destroyed)
 
 	sprite_size = $Sprite2D.texture.get_size()
-	$Sprite2D.modulate = Globals.GLOW_COLORS.HIGH
+	$Sprite2D.modulate = Globals.GLOW_COLORS["HIGH"]
 
 	$ExplodeParticles.emitting = false
 	$ExplodeParticles.lifetime = Globals.ENEMY_SCALE_DELAY

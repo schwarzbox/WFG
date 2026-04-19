@@ -9,7 +9,7 @@ static var _count: int = 0:
 	get = get_count,
 	set = set_count
 
-@export var type: Globals.Models = Globals.Models.BULLET
+@export var model_type: Globals.ModelType = Globals.ModelType.BULLET
 
 var sprite_size: Vector2 = Vector2.ZERO
 
@@ -19,6 +19,9 @@ var _linear_velocity: Vector2 = Vector2.ZERO:
 var _linear_acceleration: Vector2 = Vector2.ZERO
 
 var _damage: int = 1
+
+var _min_force_squared: float = Globals.BULLET_MIN_FORCE_SQUARES[Globals.BulletForceType.SLOW]:
+	set = set_min_force_squared
 
 
 static func get_count() -> int:
@@ -38,7 +41,7 @@ func _ready() -> void:
 	$Armor.connect("self_destroyed", _on_armor_self_destroyed)
 
 	sprite_size = $Sprite2D.texture.get_size()
-	$Sprite2D.modulate = Globals.GLOW_COLORS.HIGH
+	$Sprite2D.modulate = Globals.GLOW_COLORS["HIGH"]
 
 	#set particles
 	$TrailParticles.emitting = true
@@ -89,7 +92,7 @@ func _process(delta: float) -> void:
 				rotation = _linear_velocity.angle()
 
 	#destroy
-	if _linear_velocity.length_squared() < Globals.BULLET_MIN_FORCE_SQUARED:
+	if _linear_velocity.length_squared() < _min_force_squared:
 		# without delay
 		blasted.emit(global_position)
 		$ExplodeParticles.spread = 180.0
@@ -117,6 +120,10 @@ func set_linear_velocity(vel: Vector2) -> void:
 func apply_force(pos: Vector2, multiplier: float = 1.0) -> void:
 	rotation = get_global_position().angle_to_point(pos)
 	_linear_acceleration += Vector2(_force * multiplier, 0).rotated(rotation)
+
+
+func set_min_force_squared(value: float) -> void:
+	_min_force_squared = value
 
 
 func _on_armor_destroyed() -> void:

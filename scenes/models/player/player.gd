@@ -11,7 +11,7 @@ signal won
 signal score_changed
 signal hp_changed
 
-@export var type: Globals.Models = Globals.Models.PLAYER
+@export var model_type: Globals.ModelType = Globals.ModelType.PLAYER
 
 var sprite_size: Vector2 = Vector2.ZERO
 
@@ -42,6 +42,57 @@ var _win_tween: Tween
 
 var _damage: int = 1
 
+#credits
+var _credits: int = Globals.PLAYER_CREDITS:
+	get = get_credits,
+	set = set_credits
+
+#upgrades
+var _shot_type_upgrades: Dictionary[Globals.GunShotType, bool] = {
+	Globals.GunShotType.SINGLE: true,
+	Globals.GunShotType.DOUBLE: false,
+	Globals.GunShotType.TRIPLE: false,
+} :
+	get = get_shot_type_upgrades,
+	set = set_shot_type_upgrades
+
+var _shot_type: Globals.GunShotType = Globals.GunShotType.SINGLE:
+	get = get_shot_type,
+	set = set_shot_type
+
+var _force_type_upgrades: Dictionary[Globals.BulletForceType, bool] = {
+	Globals.BulletForceType.SLOW: true,
+	Globals.BulletForceType.MEDIUM: false,
+	Globals.BulletForceType.FAST: false,
+} :
+	get = get_force_type_upgrades,
+	set = set_force_type_upgrades
+
+var _force_type: Globals.BulletForceType = Globals.BulletForceType.SLOW:
+	get = get_force_type,
+	set = set_force_type
+
+var _shot_delay_type_upgrades: Dictionary[Globals.GunShotDelayType, bool] = {
+	Globals.GunShotDelayType.SLOW: true,
+	Globals.GunShotDelayType.MEDIUM: false,
+	Globals.GunShotDelayType.FAST: false,
+} :
+	get = get_shot_delay_type_upgrades
+var _shot_delay_type: Globals.GunShotDelayType = Globals.GunShotDelayType.SLOW:
+	get = get_shot_delay_type,
+	set = set_shot_delay_type
+
+var _scatter_shot_delay_type_upgrades: Dictionary[Globals.GunScatterShotDelayType, bool] = {
+	Globals.GunScatterShotDelayType.SLOW: true,
+	Globals.GunScatterShotDelayType.MEDIUM: false,
+	Globals.GunScatterShotDelayType.FAST: false,
+} :
+	get = get_scatter_shot_delay_type_upgrades
+var _scatter_shot_delay_type: Globals.GunScatterShotDelayType = Globals.GunScatterShotDelayType.SLOW:
+	get = get_scatter_shot_delay_type,
+	set = set_scatter_shot_delay_type
+
+#state
 var _state: Dictionary = {}
 
 
@@ -55,7 +106,7 @@ func _ready() -> void:
 	$Gun.connect("scatter_shot_aiming", _on_gun_scatter_shot_aiming)
 
 	sprite_size = $Sprite2D.texture.get_size()
-	$Sprite2D.modulate = Globals.GLOW_COLORS.MIDDLE
+	$Sprite2D.modulate = Globals.GLOW_COLORS["MIDDLE"]
 
 	$HitParticles.emitting = false
 	$HitParticles.lifetime = Globals.PLAYER_HIT_DELAY
@@ -109,11 +160,17 @@ func start(pos: Vector2) -> void:
 	#restore gun
 	$Gun.start()
 	#restore alpha
-	modulate = Globals.COLORS.WHITE
+	modulate = Globals.COLORS["WHITE"]
 	#restore radial light
-	$RadialLight.set_light_color(Globals.COLORS.WHITE)
+	$RadialLight.set_light_color(Globals.COLORS["WHITE"])
 	#restore win
 	set_win(false)
+
+	#upgrades
+	$Gun.set_shot_dispersions(Globals.GUN_SHOT_DISPERSIONS[_shot_type])
+	$Gun.set_bullet_min_force_squared(Globals.BULLET_MIN_FORCE_SQUARES[_force_type])
+	$Gun.set_shot_delay(Globals.GUN_SHOT_DELAYS[_shot_delay_type])
+	$Gun.set_scatter_shot_delay(Globals.GUN_SCATTER_SHOT_DELAYS[_scatter_shot_delay_type])
 
 
 func hit(damage: int) -> void:
@@ -158,6 +215,84 @@ func set_score(value: int) -> void:
 	score_changed.emit(_score)
 
 
+#region Credits
+func get_credits() -> int:
+	return _credits
+
+
+func set_credits(value: int) -> void:
+	_credits = value
+#endregion
+
+
+#region Upgrades
+func get_shot_type_upgrades() -> Dictionary[Globals.GunShotType, bool]:
+	return _shot_type_upgrades
+
+
+func set_shot_type_upgrades(value: Dictionary[Globals.GunShotType, bool]) -> void:
+	_shot_type_upgrades = value
+
+
+func get_shot_type() -> Globals.GunShotType:
+	return _shot_type
+
+
+func set_shot_type(value: Globals.GunShotType) -> void:
+	_shot_type = value
+
+
+func get_force_type_upgrades() -> Dictionary[Globals.BulletForceType, bool]:
+	return _force_type_upgrades
+
+
+func set_force_type_upgrades(value: Dictionary[Globals.BulletForceType, bool]) -> void:
+	_force_type_upgrades = value
+
+
+func get_force_type() -> Globals.BulletForceType:
+	return _force_type
+
+
+func set_force_type(value: Globals.BulletForceType) -> void:
+	_force_type = value
+
+
+func get_shot_delay_type_upgrades() -> Dictionary[Globals.GunShotDelayType, bool]:
+	return _shot_delay_type_upgrades
+
+
+func set_shot_delay_type_upgrades(value: Dictionary[Globals.GunShotDelayType, bool]) -> void:
+	_shot_delay_type_upgrades = value
+
+
+func get_shot_delay_type() -> Globals.GunShotDelayType:
+	return _shot_delay_type
+
+
+func set_shot_delay_type(value: Globals.GunShotDelayType) -> void:
+	_shot_delay_type = value
+
+
+func get_scatter_shot_delay_type_upgrades() -> Dictionary[Globals.GunScatterShotDelayType, bool]:
+	return _scatter_shot_delay_type_upgrades
+
+
+func set_scatter_shot_delay_type_upgrades(value: Dictionary[Globals.GunScatterShotDelayType, bool]) -> void:
+	_scatter_shot_delay_type_upgrades = value
+
+
+func get_scatter_shot_delay_type() -> Globals.GunScatterShotDelayType:
+	return _scatter_shot_delay_type
+
+
+func set_scatter_shot_delay_type(value: Globals.GunScatterShotDelayType) -> void:
+	_scatter_shot_delay_type = value
+
+#endregion
+
+
+#region State
 func save_state() -> void:
 	_state["player_hp"] = get_hp()
 	_state["player_score"] = get_score()
@@ -176,15 +311,19 @@ func load_state() -> void:
 	Globals.STATISTICS_UTIL.set_game_time(Globals.STATISTICS_UTIL.get_init_time())
 	Globals.STATISTICS_UTIL.set_game_score(Globals.STATISTICS_UTIL.get_init_score())
 
+
 func reset_state() -> void:
+	_state.clear()
 	Globals.STATISTICS_UTIL.reset_game_score()
 	Globals.STATISTICS_UTIL.reset_game_time()
 
-func pause(value: bool) -> void:
+
+func pause_state(value: bool) -> void:
 	if value:
 		Globals.STATISTICS_UTIL.save_game_time()
 	else:
 		Globals.STATISTICS_UTIL.save_start_time()
+#endregion
 
 
 func win(body: Exit) -> void:
@@ -223,7 +362,18 @@ func serialize() -> Dictionary:
 		"level": get_level(),
 		"hp": get_hp(),
 		"game_time": Globals.STATISTICS_UTIL.get_game_time(),
-		"game_score": Globals.STATISTICS_UTIL.get_game_score()
+		"game_score": Globals.STATISTICS_UTIL.get_game_score(),
+		#upgrades
+		"shot_type_upgrades": get_shot_type_upgrades(),
+		"shot_type": get_shot_type(),
+		"force_type_upgrades": get_force_type_upgrades(),
+		"force_type": get_force_type(),
+		"shot_delay_type_upgrades": get_shot_delay_type_upgrades(),
+		"shot_delay_type": get_shot_delay_type(),
+		"scatter_shot_delay_type_upgrades": get_scatter_shot_delay_type_upgrades(),
+		"scatter_shot_delay_type": get_scatter_shot_delay_type(),
+		#credits
+		"credits": get_credits()
 	}
 
 
@@ -232,6 +382,16 @@ func deserialize(data: Dictionary) -> void:
 	var hp: int = data["hp"]
 	var game_time: int = data["game_time"]
 	var game_score: int = data["game_score"]
+	var shot_type_upgrades: Dictionary[Globals.GunShotType, bool] = data["shot_type_upgrades"]
+	var shot_type: Globals.GunShotType = data["shot_type"]
+	var force_type_upgrades: Dictionary[Globals.BulletForceType, bool] = data["force_type_upgrades"]
+	var force_type: Globals.BulletForceType = data["force_type"]
+	var shot_delay_type_upgrades: Dictionary[Globals.GunShotDelayType, bool] = data["shot_delay_type_upgrades"]
+	var shot_delay_type: Globals.GunShotDelayType = data["shot_delay_type"]
+	var scatter_shot_delay_type_upgrades: Dictionary[Globals.GunScatterShotDelayType, bool] = data["scatter_shot_delay_type_upgrades"]
+	var scatter_shot_delay_type: Globals.GunScatterShotDelayType = data["scatter_shot_delay_type"]
+	var credits: int = data["credits"]
+
 	set_level(level)
 	set_hp(hp)
 	set_score(game_score)
@@ -239,6 +399,15 @@ func deserialize(data: Dictionary) -> void:
 	Globals.STATISTICS_UTIL.set_game_time(game_time)
 	#restore game score
 	Globals.STATISTICS_UTIL.set_game_score(game_score)
+	set_shot_type_upgrades(shot_type_upgrades)
+	set_shot_type(shot_type)
+	set_force_type_upgrades(force_type_upgrades)
+	set_force_type(force_type)
+	set_shot_delay_type_upgrades(shot_delay_type_upgrades)
+	set_shot_delay_type(shot_delay_type)
+	set_scatter_shot_delay_type_upgrades(scatter_shot_delay_type_upgrades)
+	set_scatter_shot_delay_type(scatter_shot_delay_type)
+	set_credits(credits)
 
 #endregion
 
@@ -370,10 +539,10 @@ func _on_gun_scatter_shot_fired(bullet: Bullet) -> void:
 
 
 func _on_alarm_countdown() -> void:
-	if $RadialLight.get_light_color() == Globals.COLORS.WHITE:
-		$RadialLight.set_light_color(Globals.COLORS.BLACK)
+	if $RadialLight.get_light_color() == Globals.COLORS["WHITE"]:
+		$RadialLight.set_light_color(Globals.COLORS["BLACK"])
 	else:
-		$RadialLight.set_light_color(Globals.COLORS.WHITE)
+		$RadialLight.set_light_color(Globals.COLORS["WHITE"])
 
 
 func _on_armor_hp_changed(value: int) -> void:
@@ -391,11 +560,11 @@ func _on_armor_hp_changed(value: int) -> void:
 		else:
 			_kill_tween(_alarm_tween)
 			#restore radial light
-			$RadialLight.set_light_color(Globals.COLORS.WHITE)
+			$RadialLight.set_light_color(Globals.COLORS["WHITE"])
 	else:
 		_kill_tween(_alarm_tween)
 		#restore radial light
-		$RadialLight.set_light_color(Globals.COLORS.WHITE)
+		$RadialLight.set_light_color(Globals.COLORS["WHITE"])
 
 
 func _on_armor_destroyed() -> void:
@@ -406,7 +575,7 @@ func _on_armor_destroyed() -> void:
 	#hide light
 	$ConeLight.hide()
 	#restore radial light
-	$RadialLight.set_light_color(Globals.COLORS.WHITE)
+	$RadialLight.set_light_color(Globals.COLORS["WHITE"])
 	#kill tweens
 	for tween: Tween in [_alarm_tween, _win_tween]:
 		_kill_tween(tween)

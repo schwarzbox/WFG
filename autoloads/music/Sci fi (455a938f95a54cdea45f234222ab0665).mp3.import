@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://io2jat8fh3sd"
+path="res://.godot/imported/Sci fi (455a938f95a54cdea45f234222ab0665).mp3-650af963e6bd97b3eec109efb5a71155.mp3str"
+
+[deps]
+
+source_file="res://autoloads/music/Sci fi (455a938f95a54cdea45f234222ab0665).mp3"
+dest_files=["res://.godot/imported/Sci fi (455a938f95a54cdea45f234222ab0665).mp3-650af963e6bd97b3eec109efb5a71155.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -8,7 +8,7 @@ extends HBoxContainer
 
 
 func _ready() -> void:
-	$UILabel.label_settings = Globals.SMALL_LABEL_SETTINGS
+	$UILabel.label_settings = Globals.LABEL_SETTINGS.SMALL
 
 
 func set_label(value: String) -> void:

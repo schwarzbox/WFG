@@ -4,7 +4,7 @@ extends View
 func _ready() -> void:
 	prints(name, "ready")
 
-	$CanvasLayer/MainContainer/VBoxContainer/UILabel.label_settings = Globals.MEDIUM_LABEL_SETTINGS
+	$CanvasLayer/MainContainer/VBoxContainer/UILabel.label_settings = Globals.LABEL_SETTINGS.MEDIUM
 	$CanvasLayer/MainContainer/VBoxContainer.add_theme_constant_override(
 		"separation", Globals.UI_CONTAINER_SEPARATION
 	)
@@ -16,6 +16,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			closed.emit(self)
 
 
+#entry point
 func start() -> void:
 	pass
 

@@ -6,19 +6,19 @@ extends View
 #docstringw
 # Main Scene
 
-# show separate upgrades screen (save upgrades)
-# add help menu with controls
+# Add Camera move
 
 # add addon in WFG simple_gdscript_formatter diff-margin
-
-# move main to views? create main as view manager stages
-
 # check .gitignore
 # read about .gitattributes
-# Check Engine.get_license_text
 # rename media/screenshot or screenshots .gdignore
 
-# update old projects with new template
+
+# update export templates 4.6
+
+# Check Engine.get_license_text
+
+# partially update old projects with new template (main structure)
 
 # add my license to love game builds
 # check github releases description tags and pages
@@ -26,6 +26,9 @@ extends View
 # check game descriptions itch.io 3 games
 # check photon itch.io edit help
 # update MIT license template and update all my licenses
+
+# maybe settings with tabs? add help menu with controls
+# move main to views? create main as view manager stages
 
 # data classes
 # fluent interface return self from methods when init class
@@ -127,12 +130,12 @@ func _ready() -> void:
 	Utils.center_window_on_screen(get_window())
 	#set run/window_placement/rect
 
-	$CanvasLayer/MainContainer/VBoxContainer/UILabel.label_settings = Globals.LARGE_LABEL_SETTINGS
+	$CanvasLayer/MainContainer/VBoxContainer/UILabel.label_settings = Globals.LABEL_SETTINGS.LARGE
 	$CanvasLayer/MainContainer/VBoxContainer.add_theme_constant_override(
 		"separation", Globals.UI_CONTAINER_SEPARATION
 	)
 
-	for node: Control in [
+	for node: UIButton in [
 			$CanvasLayer/MainContainer/VBoxContainer/Game,
 			$CanvasLayer/MainContainer/VBoxContainer/Continue,
 			$CanvasLayer/MainContainer/VBoxContainer/Load,
@@ -144,7 +147,7 @@ func _ready() -> void:
 			node
 			. add_theme_font_size_override(
 				"font_size",
-				Globals.FONTS.MEDIUM_FONT_SIZE,
+				Globals.FONT_SIZES["MEDIUM"],
 			)
 		)
 

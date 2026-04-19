@@ -1,7 +1,7 @@
 class_name Exit
 extends Area2D
 
-@export var type: Globals.Models = Globals.Models.EXIT
+@export var model_type: Globals.ModelType = Globals.ModelType.EXIT
 
 var sprite_size: Vector2 = Vector2.ZERO
 
@@ -32,14 +32,14 @@ func _set_open(value: bool) -> void:
 		modulate.a = 0.0
 		var tween: Tween = create_tween()
 		tween.tween_property(self, "modulate:a", 1.0, Globals.EXIT_OPEN_DELAY)
-		$Sprite2D.modulate = Globals.GLOW_COLORS.LOW
+		$Sprite2D.modulate = Globals.GLOW_COLORS["LOW"]
 		$RadialLight.show()
 	else:
-		$Sprite2D.modulate = Globals.COLORS.BLACK
+		$Sprite2D.modulate = Globals.COLORS["BLACK"]
 		$RadialLight.hide()
 
 
 func _on_body_entered(body: Player) -> void:
-	$Sprite2D.modulate = Globals.GLOW_COLORS.HIGH
+	$Sprite2D.modulate = Globals.GLOW_COLORS["HIGH"]
 	if is_instance_valid(body):
 		body.win(self)
