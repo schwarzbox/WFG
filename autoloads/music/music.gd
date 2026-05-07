@@ -11,6 +11,10 @@ var _level_audio_stream_player: AudioStreamPlayer
 func _ready() -> void:
 	prints(name, "ready")
 
+	$MainAudioStreamPlayer.bus = Globals.AUDIO_BUSES[Globals.AudioBus.MUSIC]
+	for _audio_stream_player: AudioStreamPlayer in _level_audio_stream_players:
+		_audio_stream_player.bus = Globals.AUDIO_BUSES[Globals.AudioBus.MUSIC]
+
 	#set process_mode to PROCESS_MODE_ALWAYS to ignore get_tree().paused effects
 	process_mode = Node.PROCESS_MODE_ALWAYS
 

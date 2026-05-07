@@ -17,7 +17,7 @@ func _ready() -> void:
 	for i: int in range(Globals.LEVEL_COUNT):
 		_level_scenes[" - %s - " % (i + 1)] = Globals.LEVEL_SCENE
 
-	$CanvasLayer/MainContainer/VBoxContainer/UILabel.label_settings = Globals.LABEL_SETTINGS.MEDIUM
+	$CanvasLayer/MainContainer/VBoxContainer/UILabel.label_settings = Globals.LABEL_SETTINGS["MEDIUM"]
 	$CanvasLayer/MainContainer/VBoxContainer.add_theme_constant_override(
 		"separation", Globals.UI_CONTAINER_SEPARATION
 	)

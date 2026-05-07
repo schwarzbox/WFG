@@ -1,16 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://63skdfg5s3u5"]
+[gd_scene format=3 uid="uid://63skdfg5s3u5"]
 
 [ext_resource type="PackedScene" uid="uid://gua33j0stdlv" path="res://scenes/base/window/base_window.tscn" id="1_3ssik"]
 [ext_resource type="Script" uid="uid://cekdk2jk7teio" path="res://scenes/nodes/views/input_window/input_window.gd" id="2_o625g"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5ejnq"]
 
-[node name="InputWindow" instance=ExtResource("1_3ssik")]
+[node name="InputWindow" unique_id=1059051064 instance=ExtResource("1_3ssik")]
 script = ExtResource("2_o625g")
 
-[node name="LineEdit" type="LineEdit" parent="CenterContainer/VBoxContainer" index="0"]
+[node name="LineEdit" type="LineEdit" parent="CenterContainer/VBoxContainer" index="0" unique_id=1846384895]
 custom_minimum_size = Vector2(768, 0)
 layout_mode = 2
+theme_override_constants/caret_width = 8
 theme_override_font_sizes/font_size = 64
 theme_override_styles/focus = SubResource("StyleBoxEmpty_5ejnq")
 alignment = 1
@@ -18,11 +19,10 @@ max_length = 16
 context_menu_enabled = false
 emoji_menu_enabled = false
 backspace_deletes_composite_character_enabled = true
+middle_mouse_paste_enabled = false
 virtual_keyboard_enabled = false
 virtual_keyboard_show_on_focus = false
-middle_mouse_paste_enabled = false
 caret_blink = true
-caret_force_displayed = true
 caret_mid_grapheme = true
 
 [connection signal="close_requested" from="." to="." method="_on_close_requested"]

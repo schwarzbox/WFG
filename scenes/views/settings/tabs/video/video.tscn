@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://2wsa25exvobp"]
+
+[ext_resource type="PackedScene" uid="uid://kn4un6yv7630" path="res://scenes/base/view/view.tscn" id="1_idfh5"]
+[ext_resource type="Script" uid="uid://bfejc4pft3gx6" path="res://scenes/views/settings/tabs/video/video.gd" id="2_t50uo"]
+[ext_resource type="PackedScene" uid="uid://cb2uwdhqqnlny" path="res://scenes/nodes/views/ui_label/ui_label.tscn" id="3_u1a7y"]
+[ext_resource type="LabelSettings" uid="uid://bfmg4ke5qx0j7" path="res://shared/label_settings/medium_label_settings.tres" id="4_40brh"]
+[ext_resource type="PackedScene" uid="uid://cfqgx4vo7famo" path="res://scenes/nodes/views/ui_input/ui_input.tscn" id="5_40brh"]
+[ext_resource type="PackedScene" uid="uid://d02bu6bvkr8h8" path="res://scenes/nodes/views/ui_switch/ui_switch.tscn" id="6_ivx7d"]
+[ext_resource type="PackedScene" uid="uid://dxohchoj45dfl" path="res://scenes/nodes/views/ui_button/ui_button.tscn" id="6_lpxvp"]
+
+[node name="Video" unique_id=1611961815 instance=ExtResource("1_idfh5")]
+script = ExtResource("2_t50uo")
+
+[node name="MainContainer" type="CenterContainer" parent="CanvasLayer" index="0" unique_id=619633451]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainContainer" index="0" unique_id=1266694344]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="UILabel" parent="CanvasLayer/MainContainer/VBoxContainer" index="0" unique_id=1174200897 instance=ExtResource("3_u1a7y")]
+layout_mode = 2
+text = "Video"
+label_settings = ExtResource("4_40brh")
+
+[node name="FPS" parent="CanvasLayer/MainContainer/VBoxContainer" index="1" unique_id=222034445 instance=ExtResource("5_40brh")]
+layout_mode = 2
+
+[node name="VSYNC" parent="CanvasLayer/MainContainer/VBoxContainer" index="2" unique_id=1302430740 instance=ExtResource("6_ivx7d")]
+layout_mode = 2
+
+[node name="Back" parent="CanvasLayer/MainContainer/VBoxContainer" index="3" unique_id=707126334 instance=ExtResource("6_lpxvp")]
+layout_mode = 2
+text = "Back"
+
+[connection signal="line_edit_text_changed" from="CanvasLayer/MainContainer/VBoxContainer/FPS" to="." method="_on_fps_line_edit_text_changed"]
+[connection signal="button_toggled" from="CanvasLayer/MainContainer/VBoxContainer/VSYNC" to="." method="_on_resizable_button_toggled"]
+[connection signal="pressed" from="CanvasLayer/MainContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]

@@ -507,11 +507,11 @@ func _vector_mouse_movement(delta: float) -> void:
 
 
 func _shoot(delta: float) -> void:
-	if Input.is_action_pressed("ui_left_mouse"):
+	if Input.is_action_pressed("ui_first_action"):
 		$Gun.shot(_linear_velocity, rotation)
-	elif Input.is_action_pressed("ui_right_mouse"):
+	elif Input.is_action_pressed("ui_second_action"):
 		$Gun.scatter_shot(_linear_velocity, rotation, delta)
-	elif Input.is_action_just_released("ui_right_mouse"):
+	elif Input.is_action_just_released("ui_second_action"):
 		Cursor.hide_progress_bar(0.4)
 
 

@@ -1,18 +1,15 @@
 class_name UIItem
 extends VBoxContainer
 
-signal toggled(toggled_on: bool)
-signal equiped(toggled_on: bool)
+signal select_button_toggled(toggled_on: bool)
+signal apply_button_toggled(toggled_on: bool)
 
 const _pressed_highlight_style_box: StyleBox = preload("res://shared/button_styles/pressed_highlight_style_box_flat.tres")
 
-var _label_text: String = "UIItem":
-	set = set_label_text
-
-var _idle_text: String = "":
-	set = set_idle_text
-var _toggled_text: String = "":
-	set = set_toggled_text
+var _select_button_normal_text: String = "":
+	set = set_select_button_normal_text
+var _select_button_pressed_text: String = "":
+	set = set_select_button_pressed_text
 
 
 func _ready() -> void:
@@ -20,113 +17,120 @@ func _ready() -> void:
 		"separation", 32
 	)
 
-	$UILabel.label_settings = Globals.LABEL_SETTINGS.SMALL
+	$UILabel.label_settings = Globals.LABEL_SETTINGS["SMALL"]
 
-	$UIButton.add_theme_color_override(
+	$SelectButton.add_theme_color_override(
 		"font_color",
 		Globals.COLORS["GRAY"],
 	)
-	$UIButton.add_theme_color_override(
+	$SelectButton.add_theme_color_override(
 		"font_pressed_color",
 		Globals.COLORS["YELLOW"],
 	)
-	$UIButton.add_theme_color_override(
+	$SelectButton.add_theme_color_override(
 		"font_hover_color",
 		Globals.COLORS["YELLOW"],
 	)
-	$UIButton.add_theme_color_override(
+	$SelectButton.add_theme_color_override(
 		"font_hover_pressed_color",
 		Globals.COLORS["YELLOW"],
 	)
-	$UIButton.add_theme_font_size_override(
+	$SelectButton.add_theme_font_size_override(
 		"font_size",
 		Globals.FONT_SIZES["SMALL"],
 	)
-	$UIButton.add_theme_stylebox_override("pressed", _pressed_highlight_style_box)
+	$SelectButton.add_theme_stylebox_override("pressed", _pressed_highlight_style_box)
 
-	$EquipButton.add_theme_stylebox_override("pressed", _pressed_highlight_style_box)
-	$EquipButton.set_disabled(true)
+	$ApplyButton.add_theme_font_size_override(
+		"font_size",
+		Globals.FONT_SIZES["SMALL"],
+	)
+	$ApplyButton.add_theme_stylebox_override("pressed", _pressed_highlight_style_box)
+	$ApplyButton.set_disabled(true)
 
 
 func set_label_text(value: String) -> void:
-	_label_text = value
-	$UILabel.text = _label_text
+	$UILabel.text = value
 
 
-func set_idle_text(value: String) -> void:
-	_idle_text = "{value}$".format({ "value": value })
-	$UIButton.text = _idle_text
+func set_select_button_normal_text(value: String) -> void:
+	_select_button_normal_text = "{value}$".format({ "value": value })
+	$SelectButton.text = _select_button_normal_text
 
 
-func set_toggled_text(value: String) -> void:
-	_toggled_text = "{value}$".format({ "value": value })
+func set_select_button_pressed_text(value: String) -> void:
+	_select_button_pressed_text = "{value}$".format({ "value": value })
 
 
-func set_button_group_equip_button(value: ButtonGroup) -> void:
-	$EquipButton.button_group = value
-
-
-func set_disabled_ui_button(value: bool) -> void:
-	if $UIButton.button_pressed:
+func set_select_button_disabled(value: bool) -> void:
+	if $SelectButton.button_pressed:
 		return
 
-	$UIButton.set_disabled(value)
+	$SelectButton.set_disabled(value)
 
 
-func set_pressed_no_signal_ui_button(toggled_on: bool) -> void:
-	$UIButton.set_pressed_no_signal(toggled_on)
+func set_select_button_pressed_no_signal(toggled_on: bool) -> void:
+	$SelectButton.set_pressed_no_signal(toggled_on)
 
 	if toggled_on:
-		_toggled_on()
+		_selected()
 	else:
-		_toggled_off()
+		_deselected()
 
 
-func set_pressed_no_signal_equip_button(toggled_on: bool) -> void:
-	$EquipButton.set_pressed_no_signal(toggled_on)
+func set_apply_button_text(value: String) -> void:
+	$ApplyButton.text = value
 
 
-func _toggled_on() -> void:
-	$UIButton.text = _toggled_text
-	$EquipButton.set_disabled(false)
+func set_apply_button_group(value: ButtonGroup) -> void:
+	$ApplyButton.button_group = value
 
 
-func _toggled_off() -> void:
-	$UIButton.text = _idle_text
-	$EquipButton.set_disabled(true)
+func set_apply_button_pressed_no_signal(toggled_on: bool) -> void:
+	$ApplyButton.set_pressed_no_signal(toggled_on)
 
 
-func _on_ui_button_toggled(toggled_on: bool) -> void:
+func _selected() -> void:
+	$SelectButton.text = _select_button_pressed_text
+	$ApplyButton.set_disabled(false)
+
+
+func _deselected() -> void:
+	$SelectButton.text = _select_button_normal_text
+	$ApplyButton.set_disabled(true)
+
+
+func _on_select_button_toggled(toggled_on: bool) -> void:
 	if toggled_on:
-		_toggled_on()
-		toggled.emit(toggled_on)
+		_selected()
+		select_button_toggled.emit(toggled_on)
 	else:
-		_toggled_off()
-		toggled.emit(toggled_on)
+		_deselected()
+		select_button_toggled.emit(toggled_on)
 
-		if $EquipButton.button_pressed:
-			$EquipButton.button_pressed = false
-
-
-func _on_equip_button_toggled(toggled_on: bool) -> void:
-	equiped.emit(toggled_on)
+		if $ApplyButton.button_pressed:
+			$ApplyButton.button_pressed = false
 
 
-func _on_ui_button_mouse_entered() -> void:
-	if $UIButton.is_disabled():
+func _on_select_button_mouse_entered() -> void:
+	if $SelectButton.is_disabled():
 		return
 
-	if $UIButton.button_pressed:
-		$UIButton.text = "+{value}".format({ "value": _toggled_text })
+	if $SelectButton.button_pressed:
+		$SelectButton.text = "+{value}".format({ "value": _select_button_pressed_text })
 	else:
-		$UIButton.text = "-{value}".format({ "value": _idle_text })
+		$SelectButton.text = "-{value}".format({ "value": _select_button_normal_text })
 
 
-func _on_ui_button_mouse_exited() -> void:
-	if $UIButton.is_disabled():
+func _on_select_button_mouse_exited() -> void:
+	if $SelectButton.is_disabled():
 		return
 
-	if $UIButton.button_pressed:
-		$UIButton.text = _toggled_text
+	if $SelectButton.button_pressed:
+		$SelectButton.text = _select_button_pressed_text
 	else:
-		$UIButton.text = _idle_text
+		$SelectButton.text = _select_button_normal_text
+
+
+func _on_apply_button_toggled(toggled_on: bool) -> void:
+	apply_button_toggled.emit(toggled_on)

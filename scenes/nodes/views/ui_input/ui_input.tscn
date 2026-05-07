@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://cfqgx4vo7famo"]
+
+[ext_resource type="PackedScene" uid="uid://cb2uwdhqqnlny" path="res://scenes/nodes/views/ui_label/ui_label.tscn" id="1_3sntw"]
+[ext_resource type="Script" uid="uid://yicgeysrtasa" path="res://scenes/nodes/views/ui_input/ui_input.gd" id="1_ohmav"]
+[ext_resource type="LabelSettings" uid="uid://bfmg4ke5qx0j7" path="res://shared/label_settings/medium_label_settings.tres" id="2_ohmav"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3sntw"]
+
+[node name="UIInput" type="HBoxContainer" unique_id=222034445]
+offset_right = 577.0
+offset_bottom = 94.0
+script = ExtResource("1_ohmav")
+
+[node name="UILabel" parent="." unique_id=1174200897 instance=ExtResource("1_3sntw")]
+custom_minimum_size = Vector2(512, 0)
+layout_mode = 2
+text = "UI Input"
+label_settings = ExtResource("2_ohmav")
+horizontal_alignment = 0
+
+[node name="LineEdit" type="LineEdit" parent="." unique_id=417343128]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/caret_width = 8
+theme_override_font_sizes/font_size = 64
+theme_override_styles/focus = SubResource("StyleBoxEmpty_3sntw")
+alignment = 1
+max_length = 16
+context_menu_enabled = false
+emoji_menu_enabled = false
+backspace_deletes_composite_character_enabled = true
+middle_mouse_paste_enabled = false
+virtual_keyboard_enabled = false
+virtual_keyboard_show_on_focus = false
+caret_blink = true
+caret_mid_grapheme = true
+
+[connection signal="focus_exited" from="LineEdit" to="." method="_on_line_edit_focus_exited"]
+[connection signal="gui_input" from="LineEdit" to="." method="_on_line_edit_gui_input"]
+[connection signal="text_changed" from="LineEdit" to="." method="_on_line_edit_text_changed"]

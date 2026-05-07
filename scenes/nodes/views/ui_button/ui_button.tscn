@@ -26,5 +26,6 @@ script = ExtResource("5_k7h2h")
 [node name="ClickAudio" type="AudioStreamPlayer2D" parent="." unique_id=1279245311]
 stream = ExtResource("6_7dkwg")
 volume_db = 2.0
+bus = &"SFX"
 
 [connection signal="button_down" from="." to="." method="_on_button_down"]

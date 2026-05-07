@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://c08pn84jaovpi"]
+[gd_scene format=3 uid="uid://c08pn84jaovpi"]
 
 [ext_resource type="Script" uid="uid://btvok8ayuqjys" path="res://scenes/nodes/models/gun/gun.gd" id="1_8f7fx"]
 [ext_resource type="Shader" uid="uid://b6fd1vmrbfex0" path="res://shaders/bw.gdshader" id="2_m4mww"]
+[ext_resource type="AudioStream" uid="uid://c37deegf5dasi" path="res://scenes/nodes/models/gun/shoot.wav" id="3_bq3ul"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bq3ul"]
 shader = ExtResource("2_m4mww")
@@ -10,19 +11,23 @@ shader_parameter/is_selected = true
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_t0ejt"]
 size = Vector2(48, 16)
 
-[node name="Gun" type="Node2D"]
+[node name="Gun" type="Node2D" unique_id=1232628838]
 script = ExtResource("1_8f7fx")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1407224599]
 material = SubResource("ShaderMaterial_bq3ul")
 position = Vector2(16, 0)
 texture = SubResource("PlaceholderTexture2D_t0ejt")
 
-[node name="Marker2D" type="Marker2D" parent="."]
+[node name="Marker2D" type="Marker2D" parent="." unique_id=2119411591]
 position = Vector2(32, 0)
 
-[node name="ShotTimer" type="Timer" parent="."]
+[node name="ShotAudio" type="AudioStreamPlayer2D" parent="." unique_id=1611663191]
+stream = ExtResource("3_bq3ul")
+bus = &"SFX"
+
+[node name="ShotTimer" type="Timer" parent="." unique_id=342648567]
 one_shot = true
 
-[node name="ScatterShotTimer" type="Timer" parent="."]
+[node name="ScatterShotTimer" type="Timer" parent="." unique_id=1611950701]
 one_shot = true

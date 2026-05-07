@@ -3,7 +3,7 @@ extends BaseWindow
 
 func _ready() -> void:
 	super()
-	$CenterContainer/VBoxContainer/UILabel.label_settings = Globals.LABEL_SETTINGS.MEDIUM
+	$CenterContainer/VBoxContainer/UILabel.label_settings = Globals.LABEL_SETTINGS["MEDIUM"]
 	$CenterContainer/VBoxContainer/UILabel.custom_minimum_size.x = Globals.UI_BASE_WINDOW_SIZE.x
 
 

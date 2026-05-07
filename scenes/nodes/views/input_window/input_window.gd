@@ -7,16 +7,21 @@ func _ready() -> void:
 	$CenterContainer/VBoxContainer/LineEdit.max_length = Globals.UI_LINE_EDIT_MAX_LENGTH
 	$CenterContainer/VBoxContainer/LineEdit.add_theme_font_size_override("font_size", Globals.FONT_SIZES["MEDIUM"])
 	$CenterContainer/VBoxContainer/LineEdit.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
-
-	print(size)
+	$CenterContainer/VBoxContainer/LineEdit.add_theme_constant_override("caret_width", Globals.UI_LINE_EDIT_CARET_WIDTH)
 
 
 func get_line_edit_text() -> String:
 	return $CenterContainer/VBoxContainer/LineEdit.text
 
 
+func set_line_edit_text(value: String) -> void:
+	var caret_column: int = $CenterContainer/VBoxContainer/LineEdit.caret_column
+	$CenterContainer/VBoxContainer/LineEdit.text = value.to_upper()
+	$CenterContainer/VBoxContainer/LineEdit.caret_column = caret_column
+
+
 func set_line_edit_grab_focus() -> void:
-	$CenterContainer/VBoxContainer/LineEdit.grab_focus()
+	$CenterContainer/VBoxContainer/LineEdit.call_deferred("grab_focus")
 
 
 func set_line_edit_placeholder_text(value: String) -> void:
@@ -24,14 +29,12 @@ func set_line_edit_placeholder_text(value: String) -> void:
 
 
 func _on_line_edit_text_changed(new_text: String) -> void:
-	var caret_column: int = $CenterContainer/VBoxContainer/LineEdit.caret_column
-	$CenterContainer/VBoxContainer/LineEdit.text = new_text.to_upper()
-	$CenterContainer/VBoxContainer/LineEdit.caret_column = caret_column
+	set_line_edit_text(new_text)
 
 	if new_text:
-		set_disabled_ok_button(false)
+		set_ok_button_disabled(false)
 	else:
-		set_disabled_ok_button(true)
+		set_ok_button_disabled(true)
 
 
 func _about_to_close() -> void:

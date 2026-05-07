@@ -10,7 +10,7 @@ var _tween: Tween
 
 
 func _ready() -> void:
-	$UILabel.label_settings = Globals.LABEL_SETTINGS.SMALL
+	$UILabel.label_settings = Globals.LABEL_SETTINGS["SMALL"]
 	$Value.step = 10.0
 	$Value.max_value = 100.0
 

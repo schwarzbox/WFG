@@ -47,19 +47,19 @@ func set_ok_button_text(value: String) -> void:
 	$CenterContainer/VBoxContainer/HBoxContainer/OK.text = value
 
 
-func hide_cancel_button() -> void:
+func cancel_button_hide() -> void:
 	$CenterContainer/VBoxContainer/HBoxContainer/Cancel.hide()
 
 
-func hide_ok_button() -> void:
+func ok_button_hide() -> void:
 	$CenterContainer/VBoxContainer/HBoxContainer/OK.hide()
 
 
-func set_disabled_cancel_button(value: bool) -> void:
+func set_cancel_button_disabled(value: bool) -> void:
 	$CenterContainer/VBoxContainer/HBoxContainer/Cancel.disabled = value
 
 
-func set_disabled_ok_button(value: bool) -> void:
+func set_ok_button_disabled(value: bool) -> void:
 	$CenterContainer/VBoxContainer/HBoxContainer/OK.disabled = value
 
 

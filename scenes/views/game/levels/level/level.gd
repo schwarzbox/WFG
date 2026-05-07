@@ -29,8 +29,8 @@ func _ready() -> void:
 			$CanvasLayer/GameOverContainer/UILabel,
 
 	]:
-		node.label_settings = Globals.LABEL_SETTINGS.LARGE
-	$CanvasLayer/PauseContainer/VBoxContainer/UILabel.label_settings = Globals.LABEL_SETTINGS.MEDIUM
+		node.label_settings = Globals.LABEL_SETTINGS["LARGE"]
+	$CanvasLayer/PauseContainer/VBoxContainer/UILabel.label_settings = Globals.LABEL_SETTINGS["MEDIUM"]
 
 	$CanvasLayer/PauseContainer/VBoxContainer.add_theme_constant_override(
 		"separation", Globals.UI_CONTAINER_SEPARATION

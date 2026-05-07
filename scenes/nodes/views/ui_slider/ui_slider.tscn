@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://qie4srhubir0"]
+
+[ext_resource type="PackedScene" uid="uid://cb2uwdhqqnlny" path="res://scenes/nodes/views/ui_label/ui_label.tscn" id="1_lwxwq"]
+[ext_resource type="Script" uid="uid://7cga7x3ckx7u" path="res://scenes/nodes/views/ui_slider/ui_slider.gd" id="1_vubgi"]
+[ext_resource type="LabelSettings" uid="uid://bfmg4ke5qx0j7" path="res://shared/label_settings/medium_label_settings.tres" id="3_3uifk"]
+[ext_resource type="LabelSettings" uid="uid://dlfypgb1ah5mq" path="res://shared/label_settings/small_label_settings.tres" id="4_0kte0"]
+
+[sub_resource type="Gradient" id="Gradient_3uifk"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.8745098, 0.8745098, 0.8745098, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0kte0"]
+gradient = SubResource("Gradient_3uifk")
+width = 16
+
+[sub_resource type="Gradient" id="Gradient_0kte0"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jhu88"]
+gradient = SubResource("Gradient_0kte0")
+width = 16
+
+[sub_resource type="Gradient" id="Gradient_js35b"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.64705884, 0.64705884, 0.64705884, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_55343"]
+gradient = SubResource("Gradient_js35b")
+width = 16
+
+[sub_resource type="Gradient" id="Gradient_6jkuv"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.5568628, 0.5568628, 0.5568628, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_iiyje"]
+gradient = SubResource("Gradient_6jkuv")
+width = 16
+height = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3uifk"]
+bg_color = Color(0.18039216, 0.18039216, 0.18039216, 1)
+border_width_top = 32
+border_width_bottom = 32
+border_color = Color(0.18039216, 0.18039216, 0.18039216, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0kte0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jhu88"]
+
+[node name="UISlider" type="HBoxContainer" unique_id=269321215]
+offset_right = 800.0
+offset_bottom = 65.0
+theme_override_constants/separation = 32
+alignment = 1
+script = ExtResource("1_vubgi")
+
+[node name="UILabel" parent="." unique_id=1174200897 instance=ExtResource("1_lwxwq")]
+custom_minimum_size = Vector2(512, 0)
+layout_mode = 2
+text = "UI Slider"
+label_settings = ExtResource("3_3uifk")
+horizontal_alignment = 0
+
+[node name="Slider" type="HSlider" parent="." unique_id=974858588]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_icons/grabber = SubResource("GradientTexture2D_0kte0")
+theme_override_icons/grabber_highlight = SubResource("GradientTexture2D_jhu88")
+theme_override_icons/grabber_disabled = SubResource("GradientTexture2D_55343")
+theme_override_icons/tick = SubResource("GradientTexture2D_iiyje")
+theme_override_styles/slider = SubResource("StyleBoxFlat_3uifk")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_0kte0")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_jhu88")
+tick_count = 10
+ticks_on_borders = true
+ticks_position = 3
+
+[node name="ValueLabel" parent="." unique_id=483303245 instance=ExtResource("1_lwxwq")]
+custom_minimum_size = Vector2(96, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Value"
+label_settings = ExtResource("4_0kte0")
+
+[connection signal="value_changed" from="Slider" to="." method="_on_slider_value_changed"]

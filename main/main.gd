@@ -6,29 +6,25 @@ extends View
 #docstringw
 # Main Scene
 
-# Add Camera move
+# move button and label styles to ui_button and ui_label
 
-# add addon in WFG simple_gdscript_formatter diff-margin
-# check .gitignore
-# read about .gitattributes
-# rename media/screenshot or screenshots .gdignore
+# move StatisticsUtil to globals? check first launch
+# update export templates 4.6 before 9 of may
 
-
-# update export templates 4.6
+# move main to views? create main as view manager stages
 
 # Check Engine.get_license_text
 
-# partially update old projects with new template (main structure)
-
+# rename screenshot or screenshots check .gdignore
 # add my license to love game builds
 # check github releases description tags and pages
+# update MIT license template and update all my licenses
+
+# partially update old projects with new template (main structure)
+
 # itch.io add engine info for 3 games
 # check game descriptions itch.io 3 games
 # check photon itch.io edit help
-# update MIT license template and update all my licenses
-
-# maybe settings with tabs? add help menu with controls
-# move main to views? create main as view manager stages
 
 # data classes
 # fluent interface return self from methods when init class
@@ -82,14 +78,14 @@ extends View
 # Editor Theme preset
 # interface/theme/preset
 
-# Track Alway Track Call Stacks in Release
+# Track Always Track Call Stacks in Release
 # debug/settings/gdscript/always_track_call_stacks
 
 # Remove Debug
 # TODO: Remove Debug
 # res://autoloads/debug.gd
 
-# Include LICENSE in the builds
+# Manually include LICENSE in the builds
 
 # Hints
 # Autoload scenes as Global
@@ -130,7 +126,7 @@ func _ready() -> void:
 	Utils.center_window_on_screen(get_window())
 	#set run/window_placement/rect
 
-	$CanvasLayer/MainContainer/VBoxContainer/UILabel.label_settings = Globals.LABEL_SETTINGS.LARGE
+	$CanvasLayer/MainContainer/VBoxContainer/UILabel.label_settings = Globals.LABEL_SETTINGS["LARGE"]
 	$CanvasLayer/MainContainer/VBoxContainer.add_theme_constant_override(
 		"separation", Globals.UI_CONTAINER_SEPARATION
 	)

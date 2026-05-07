@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://d02bu6bvkr8h8"]
+
+[ext_resource type="Script" uid="uid://con14klcjafng" path="res://scenes/nodes/views/ui_switch/ui_switch.gd" id="1_3eosq"]
+[ext_resource type="PackedScene" uid="uid://cb2uwdhqqnlny" path="res://scenes/nodes/views/ui_label/ui_label.tscn" id="1_4movs"]
+[ext_resource type="PackedScene" uid="uid://dxohchoj45dfl" path="res://scenes/nodes/views/ui_button/ui_button.tscn" id="2_e7ovp"]
+[ext_resource type="LabelSettings" uid="uid://bfmg4ke5qx0j7" path="res://shared/label_settings/medium_label_settings.tres" id="2_m8y3k"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_iwaei"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_yrvxh"]
+
+[node name="UISwitch" type="HBoxContainer" unique_id=1302430740]
+offset_right = 768.0
+offset_bottom = 65.0
+theme_override_constants/separation = 32
+script = ExtResource("1_3eosq")
+
+[node name="UILabel" parent="." unique_id=304703153 instance=ExtResource("1_4movs")]
+custom_minimum_size = Vector2(512, 0)
+layout_mode = 2
+text = "UI Switch"
+label_settings = ExtResource("2_m8y3k")
+horizontal_alignment = 0
+
+[node name="OnButton" parent="." unique_id=707126334 instance=ExtResource("2_e7ovp")]
+custom_minimum_size = Vector2(96, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+button_group = SubResource("ButtonGroup_iwaei")
+text = "On"
+
+[node name="OffButton" parent="." unique_id=363317892 instance=ExtResource("2_e7ovp")]
+custom_minimum_size = Vector2(96, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+button_group = SubResource("ButtonGroup_yrvxh")
+text = "Off"
+
+[connection signal="toggled" from="OnButton" to="." method="_on_on_button_toggled"]
+[connection signal="toggled" from="OffButton" to="." method="_on_off_button_toggled"]

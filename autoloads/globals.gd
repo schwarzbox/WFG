@@ -1,5 +1,17 @@
 extends Node
 
+enum AudioBus {
+	MASTER,
+	MUSIC,
+	SFX,
+}
+
+enum SettingsSection {
+	AUDIO,
+	VIDEO,
+	CONTROLS,
+}
+
 enum ModelType {
 	PLAYER,
 	ENEMY,
@@ -35,6 +47,20 @@ enum BulletForceType {
 	FAST,
 }
 
+const FIXED_FPS: int = 60
+
+const AUDIO_BUSES: Dictionary = {
+	AudioBus.MASTER: &"Master",
+	AudioBus.MUSIC: &"Music",
+	AudioBus.SFX: &"SFX",
+}
+
+const SETTINGS_SECTIONS: Dictionary = {
+	SettingsSection.AUDIO: &"audio",
+	SettingsSection.VIDEO: &"video",
+	SettingsSection.CONTROLS: &"controls"
+}
+
 const INIT_TRANSITION_DELAY: float = 2.0
 const INIT_AUDIO_TRANSITION_DELAY: float = 2.0
 const TRANSITION_DELAY: float = 1.0
@@ -47,9 +73,8 @@ const UI_BASE_WINDOW_MARGIN: Vector2 = Vector2(64, 64)
 #related to UI_LINE_EDIT_MAX_LENGTH, FONT_SIZES["MEDIUM"] and medium_label_settings
 const UI_BASE_WINDOW_SIZE: Vector2 = Vector2(768, 128)
 const UI_LINE_EDIT_MAX_LENGTH: int = 16
+const UI_LINE_EDIT_CARET_WIDTH: int = 8
 const UI_CONTAINER_SEPARATION: int = 32
-
-const FIXED_FPS: int = 60
 
 const PLAYER_SCENE: PackedScene = preload(
 	"res://scenes/models/player/player.tscn"
@@ -68,6 +93,9 @@ const GAME_SCENE: PackedScene = preload("res://scenes/views/game/game.tscn")
 const LEVEL_SCENE: PackedScene = preload("res://scenes/views/game/levels/level/level.tscn")
 const UPGRADES_SCENE: PackedScene = preload("res://scenes/views/game/upgrades/upgrades.tscn")
 const SETTINGS_SCENE: PackedScene = preload("res://scenes/views/settings/settings.tscn")
+const AUDIO_SCENE: PackedScene = preload("res://scenes/views/settings/tabs/audio/audio.tscn")
+const VIDEO_SCENE: PackedScene = preload("res://scenes/views/settings/tabs/video/video.tscn")
+const CONTROLS_SCENE: PackedScene = preload("res://scenes/views/settings/tabs/controls/controls.tscn")
 const STATISTICS_SCENE: PackedScene = preload("res://scenes/views/statistics/statistics.tscn")
 
 const UI_BUTTON_SCENE: PackedScene = preload("res://scenes/nodes/views/ui_button/ui_button.tscn")
@@ -159,6 +187,7 @@ const LABEL_SETTINGS: Dictionary[String, LabelSettings] = {
 const COLORS: Dictionary = {
 	"WHITE": Color("#FFFFFF"),
 	"BLACK": Color("#000000"),
+	"DARK": Color("#2E2E2E"),
 	"GRAY": Color("#DFDFDF"),
 	"GREEN": Color("#00A1A1"),
 	"YELLOW": Color("#FDDF19"),

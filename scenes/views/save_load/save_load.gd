@@ -23,7 +23,7 @@ var _to_save: Array[Node] = []
 
 
 func _ready() -> void:
-	$CanvasLayer/MainContainer/VBoxContainer/UILabel.label_settings = Globals.LABEL_SETTINGS.MEDIUM
+	$CanvasLayer/MainContainer/VBoxContainer/UILabel.label_settings = Globals.LABEL_SETTINGS["MEDIUM"]
 	for node: Container in [
 			$CanvasLayer/MainContainer/VBoxContainer,
 			$CanvasLayer/MainContainer/VBoxContainer/HBoxContainer,
@@ -223,7 +223,7 @@ func _on_save_list_item_selected(idx: int) -> void:
 	if idx == 0 && _file_mode == FileDialog.FILE_MODE_SAVE_FILE:
 		$CanvasLayer/InputWindow.popup_centered()
 		$CanvasLayer/InputWindow.set_line_edit_grab_focus()
-		$CanvasLayer/InputWindow.set_disabled_ok_button(true)
+		$CanvasLayer/InputWindow.set_ok_button_disabled(true)
 
 		#block cancel
 		$CanvasLayer/MainContainer/VBoxContainer/HBoxContainer/Cancel.disabled = true

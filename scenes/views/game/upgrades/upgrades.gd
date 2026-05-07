@@ -40,7 +40,7 @@ func _ready() -> void:
 	SHOT_DELAY_TYPE_BUTTON_GROUP.allow_unpress = true
 	SCATTER_SHOT_DELAY_TYPE_BUTTON_GROUP.allow_unpress = true
 
-	$CanvasLayer/MainContainer/VBoxContainer/UILabel.label_settings = Globals.LABEL_SETTINGS.MEDIUM
+	$CanvasLayer/MainContainer/VBoxContainer/UILabel.label_settings = Globals.LABEL_SETTINGS["MEDIUM"]
 
 	for node: UILabel in [
 			$CanvasLayer/MainContainer/VBoxContainer/GridContainer/ShotType/UILabel,
@@ -48,7 +48,7 @@ func _ready() -> void:
 			$CanvasLayer/MainContainer/VBoxContainer/GridContainer/ShotDelayType/UILabel,
 			$CanvasLayer/MainContainer/VBoxContainer/GridContainer/ScatterShotDelayType/UILabel,
 	]:
-		node.label_settings = Globals.LABEL_SETTINGS.SMALL
+		node.label_settings = Globals.LABEL_SETTINGS["SMALL"]
 
 	for node: Container in [
 			$CanvasLayer/MainContainer/VBoxContainer,
@@ -72,6 +72,58 @@ func _ready() -> void:
 		"v_separation", 64
 	)
 
+	for shot_type: Globals.GunShotType in _shot_type_mapping:
+		var shot_type_item: UIItem = _shot_type_mapping[shot_type]
+		shot_type_item.set_apply_button_group(SHOT_TYPE_BUTTON_GROUP)
+		shot_type_item.set_label_text(shot_type_item.name)
+		shot_type_item.set_apply_button_text("Equip")
+
+		var prices: Dictionary = Globals.GUN_SHOT_TYPE_PRICES[shot_type]
+		shot_type_item.set_select_button_normal_text(str(prices["buy"]))
+		shot_type_item.set_select_button_pressed_text(str(prices["sell"]))
+
+		shot_type_item.connect("select_button_toggled", _on_shot_select_button_toggled.bind(shot_type))
+		shot_type_item.connect("apply_button_toggled", _on_shot_apply_button_toggled.bind(shot_type))
+
+	for force_type: Globals.BulletForceType in _force_type_mapping:
+		var force_type_item: UIItem = _force_type_mapping[force_type]
+		force_type_item.set_apply_button_group(BULLET_FORCE_TYPE_BUTTON_GROUP)
+		force_type_item.set_label_text(force_type_item.name)
+		force_type_item.set_apply_button_text("Equip")
+
+		var prices: Dictionary = Globals.BULLET_FORCE_TYPE_PRICES[force_type]
+		force_type_item.set_select_button_normal_text(str(prices["buy"]))
+		force_type_item.set_select_button_pressed_text(str(prices["sell"]))
+
+		force_type_item.connect("select_button_toggled", _on_force_select_button_toggled.bind(force_type))
+		force_type_item.connect("apply_button_toggled", _on_force_apply_button_toggled.bind(force_type))
+
+	for shot_delay_type: Globals.GunShotDelayType in _shot_delay_type_mapping:
+		var shot_delay_type_item: UIItem = _shot_delay_type_mapping[shot_delay_type]
+		shot_delay_type_item.set_apply_button_group(SHOT_DELAY_TYPE_BUTTON_GROUP)
+		shot_delay_type_item.set_label_text(shot_delay_type_item.name)
+		shot_delay_type_item.set_apply_button_text("Equip")
+
+		var prices: Dictionary = Globals.GUN_SHOT_DELAY_TYPE_PRICES[shot_delay_type]
+		shot_delay_type_item.set_select_button_normal_text(str(prices["buy"]))
+		shot_delay_type_item.set_select_button_pressed_text(str(prices["sell"]))
+
+		shot_delay_type_item.connect("select_button_toggled", _on_shot_delay_select_button_toggled.bind(shot_delay_type))
+		shot_delay_type_item.connect("apply_button_toggled", _on_shot_delay_apply_button_toggled.bind(shot_delay_type))
+
+	for scatter_shot_delay_type: Globals.GunScatterShotDelayType in _scatter_shot_delay_type_mapping:
+		var scatter_shot_delay_type_item: UIItem = _scatter_shot_delay_type_mapping[scatter_shot_delay_type]
+		scatter_shot_delay_type_item.set_apply_button_group(SCATTER_SHOT_DELAY_TYPE_BUTTON_GROUP)
+		scatter_shot_delay_type_item.set_label_text(scatter_shot_delay_type_item.name)
+		scatter_shot_delay_type_item.set_apply_button_text("Equip")
+
+		var prices: Dictionary = Globals.GUN_SCATTER_SHOT_DELAY_TYPE_PRICES[scatter_shot_delay_type]
+		scatter_shot_delay_type_item.set_select_button_normal_text(str(prices["buy"]))
+		scatter_shot_delay_type_item.set_select_button_pressed_text(str(prices["sell"]))
+
+		scatter_shot_delay_type_item.connect("select_button_toggled", _on_scatter_shot_delay_select_button_toggled.bind(scatter_shot_delay_type))
+		scatter_shot_delay_type_item.connect("apply_button_toggled", _on_scatter_shot_delay_apply_button_toggled.bind(scatter_shot_delay_type))
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey:
@@ -84,96 +136,60 @@ func start(player: Player) -> void:
 	_player = player
 
 	#region ShotType
-	for shot_type: Globals.GunShotType in _shot_type_mapping:
-		var shot_type_item: UIItem = _shot_type_mapping[shot_type]
-		shot_type_item.set_button_group_equip_button(SHOT_TYPE_BUTTON_GROUP)
-		shot_type_item.set_label_text(shot_type_item.name)
-
-		var prices: Dictionary = Globals.GUN_SHOT_TYPE_PRICES[shot_type]
-		shot_type_item.set_idle_text(str(prices["buy"]))
-		shot_type_item.set_toggled_text(str(prices["sell"]))
-
 	var shot_type_upgrades: Dictionary = _player.get_shot_type_upgrades()
 	for shot_type_upgrade: Globals.GunShotType in shot_type_upgrades:
 		if shot_type_upgrades[shot_type_upgrade]:
 			var shot_type_upgrade_item: UIItem = _shot_type_mapping[shot_type_upgrade]
-			shot_type_upgrade_item.set_pressed_no_signal_ui_button(true)
+			shot_type_upgrade_item.set_select_button_pressed_no_signal(true)
 
 	var selected_shot_type: Globals.GunShotType = _player.get_shot_type()
 	if selected_shot_type != Globals.GunShotType.NONE:
 		var selected_shot_type_item: UIItem = _shot_type_mapping[selected_shot_type]
 		if selected_shot_type_item:
-			selected_shot_type_item.set_pressed_no_signal_equip_button(true)
+			selected_shot_type_item.set_apply_button_pressed_no_signal(true)
 
 	#endregion
 
 	#region ForceType
-	for force_type: Globals.BulletForceType in _force_type_mapping:
-		var force_type_item: UIItem = _force_type_mapping[force_type]
-		force_type_item.set_button_group_equip_button(BULLET_FORCE_TYPE_BUTTON_GROUP)
-		force_type_item.set_label_text(force_type_item.name)
-
-		var prices: Dictionary = Globals.BULLET_FORCE_TYPE_PRICES[force_type]
-		force_type_item.set_idle_text(str(prices["buy"]))
-		force_type_item.set_toggled_text(str(prices["sell"]))
-
 	var force_type_upgrades: Dictionary = _player.get_force_type_upgrades()
 	for force_type_upgrade: Globals.BulletForceType in force_type_upgrades:
 		if force_type_upgrades[force_type_upgrade]:
 			var force_type_upgrade_item: UIItem = _force_type_mapping[force_type_upgrade]
-			force_type_upgrade_item.set_pressed_no_signal_ui_button(true)
+			force_type_upgrade_item.set_select_button_pressed_no_signal(true)
 
 	var selected_force_type: Globals.BulletForceType = _player.get_force_type()
 	if selected_force_type != Globals.BulletForceType.NONE:
 		var selected_force_type_item: UIItem = _force_type_mapping[selected_force_type]
 		if selected_force_type_item:
-			selected_force_type_item.set_pressed_no_signal_equip_button(true)
+			selected_force_type_item.set_apply_button_pressed_no_signal(true)
 	#endregion
 
 	#region ShotDelayType
-	for shot_delay_type: Globals.GunShotDelayType in _shot_delay_type_mapping:
-		var shot_delay_type_item: UIItem = _shot_delay_type_mapping[shot_delay_type]
-		shot_delay_type_item.set_button_group_equip_button(SHOT_DELAY_TYPE_BUTTON_GROUP)
-		shot_delay_type_item.set_label_text(shot_delay_type_item.name)
-
-		var prices: Dictionary = Globals.GUN_SHOT_DELAY_TYPE_PRICES[shot_delay_type]
-		shot_delay_type_item.set_idle_text(str(prices["buy"]))
-		shot_delay_type_item.set_toggled_text(str(prices["sell"]))
-
 	var shot_delay_type_upgrades: Dictionary = _player.get_shot_delay_type_upgrades()
 	for shot_delay_type_upgrade: Globals.BulletForceType in shot_delay_type_upgrades:
 		if shot_delay_type_upgrades[shot_delay_type_upgrade]:
 			var shot_delay_type_upgrade_item: UIItem = _shot_delay_type_mapping[shot_delay_type_upgrade]
-			shot_delay_type_upgrade_item.set_pressed_no_signal_ui_button(true)
+			shot_delay_type_upgrade_item.set_select_button_pressed_no_signal(true)
 
 	var selected_shot_delay_type: Globals.GunShotDelayType = _player.get_shot_delay_type()
 	if selected_shot_delay_type != Globals.GunShotDelayType.NONE:
 		var selected_shot_delay_type_item: UIItem = _shot_delay_type_mapping[selected_shot_delay_type]
 		if selected_shot_delay_type_item:
-			selected_shot_delay_type_item.set_pressed_no_signal_equip_button(true)
+			selected_shot_delay_type_item.set_apply_button_pressed_no_signal(true)
 	#endregion
 
 	#region ScatterShotDelay
-	for scatter_shot_delay_type: Globals.GunScatterShotDelayType in _scatter_shot_delay_type_mapping:
-		var scatter_shot_delay_type_item: UIItem = _scatter_shot_delay_type_mapping[scatter_shot_delay_type]
-		scatter_shot_delay_type_item.set_button_group_equip_button(SCATTER_SHOT_DELAY_TYPE_BUTTON_GROUP)
-		scatter_shot_delay_type_item.set_label_text(scatter_shot_delay_type_item.name)
-
-		var prices: Dictionary = Globals.GUN_SCATTER_SHOT_DELAY_TYPE_PRICES[scatter_shot_delay_type]
-		scatter_shot_delay_type_item.set_idle_text(str(prices["buy"]))
-		scatter_shot_delay_type_item.set_toggled_text(str(prices["sell"]))
-
 	var scatter_shot_delay_type_upgrades: Dictionary = _player.get_scatter_shot_delay_type_upgrades()
 	for scatter_shot_delay_type_upgrade: Globals.BulletForceType in scatter_shot_delay_type_upgrades:
 		if scatter_shot_delay_type_upgrades[scatter_shot_delay_type_upgrade]:
 			var scatter_shot_delay_type_upgrade_item: UIItem = _scatter_shot_delay_type_mapping[scatter_shot_delay_type_upgrade]
-			scatter_shot_delay_type_upgrade_item.set_pressed_no_signal_ui_button(true)
+			scatter_shot_delay_type_upgrade_item.set_select_button_pressed_no_signal(true)
 
 	var selected_scatter_shot_delay_type: Globals.GunScatterShotDelayType = _player.get_scatter_shot_delay_type()
 	if selected_scatter_shot_delay_type != Globals.GunScatterShotDelayType.NONE:
 		var selected_scatter_shot_delay_type_item: UIItem = _scatter_shot_delay_type_mapping[selected_scatter_shot_delay_type]
 		if selected_scatter_shot_delay_type_item:
-			selected_scatter_shot_delay_type_item.set_pressed_no_signal_equip_button(true)
+			selected_scatter_shot_delay_type_item.set_apply_button_pressed_no_signal(true)
 	#endregion
 
 	_disable_all_ui_items()
@@ -195,11 +211,11 @@ func _disable_all_ui_items() -> void:
 	_disable_scatter_shot_delay_ui_items(selected_scatter_shot_delay_type)
 
 
-func _disable_ui_button(ui_item: UIItem, credits: int, price: int) -> void:
+func _disable_select_button(ui_item: UIItem, credits: int, price: int) -> void:
 	if credits < price:
-		ui_item.set_disabled_ui_button(true)
+		ui_item.set_select_button_disabled(true)
 	else:
-		ui_item.set_disabled_ui_button(false)
+		ui_item.set_select_button_disabled(false)
 
 
 #region ShotType
@@ -211,10 +227,10 @@ func _disable_shot_ui_items(exclude: Globals.GunShotType) -> void:
 		var prices: Dictionary = Globals.GUN_SHOT_TYPE_PRICES[shot_type]
 		var shot_type_item: UIItem = _shot_type_mapping[shot_type]
 		var to_buy: int = prices["buy"]
-		_disable_ui_button(shot_type_item, credits, to_buy)
+		_disable_select_button(shot_type_item, credits, to_buy)
 
 
-func _shot_toggled(toggled_on: bool, shot_type: Globals.GunShotType) -> void:
+func _on_shot_select_button_toggled(toggled_on: bool, shot_type: Globals.GunShotType) -> void:
 	var prices: Dictionary = Globals.GUN_SHOT_TYPE_PRICES[shot_type]
 	var credits: int = _player.get_credits()
 	var shot_type_upgrades: Dictionary = _player.get_shot_type_upgrades()
@@ -231,7 +247,7 @@ func _shot_toggled(toggled_on: bool, shot_type: Globals.GunShotType) -> void:
 	_set_credits_label(str(_player.get_credits()))
 
 
-func _shot_equiped(toggled_on: bool, shot_type: Globals.GunShotType) -> void:
+func _on_shot_apply_button_toggled(toggled_on: bool, shot_type: Globals.GunShotType) -> void:
 	if toggled_on:
 		_player.set_shot_type(shot_type)
 	else:
@@ -248,10 +264,10 @@ func _disable_force_ui_items(exclude: Globals.BulletForceType) -> void:
 		var prices: Dictionary = Globals.BULLET_FORCE_TYPE_PRICES[force_type]
 		var force_type_item: UIItem = _force_type_mapping[force_type]
 		var to_buy: int = prices["buy"]
-		_disable_ui_button(force_type_item, credits, to_buy)
+		_disable_select_button(force_type_item, credits, to_buy)
 
 
-func _force_toggled(toggled_on: bool, force_type: Globals.BulletForceType) -> void:
+func _on_force_select_button_toggled(toggled_on: bool, force_type: Globals.BulletForceType) -> void:
 	var prices: Dictionary = Globals.BULLET_FORCE_TYPE_PRICES[force_type]
 	var credits: int = _player.get_credits()
 	var force_type_upgrades: Dictionary = _player.get_force_type_upgrades()
@@ -268,7 +284,7 @@ func _force_toggled(toggled_on: bool, force_type: Globals.BulletForceType) -> vo
 	_set_credits_label(str(_player.get_credits()))
 
 
-func _force_equiped(toggled_on: bool, force_type: Globals.BulletForceType) -> void:
+func _on_force_apply_button_toggled(toggled_on: bool, force_type: Globals.BulletForceType) -> void:
 	if toggled_on:
 		_player.set_force_type(force_type)
 	else:
@@ -285,10 +301,10 @@ func _disable_shot_delay_ui_items(exclude: Globals.GunShotDelayType) -> void:
 		var prices: Dictionary = Globals.GUN_SHOT_DELAY_TYPE_PRICES[shot_delay_type]
 		var shot_delay_type_item: UIItem = _shot_delay_type_mapping[shot_delay_type]
 		var to_buy: int = prices["buy"]
-		_disable_ui_button(shot_delay_type_item, credits, to_buy)
+		_disable_select_button(shot_delay_type_item, credits, to_buy)
 
 
-func _shot_delay_toggled(toggled_on: bool, shot_delay_type: Globals.GunShotDelayType) -> void:
+func _on_shot_delay_select_button_toggled(toggled_on: bool, shot_delay_type: Globals.GunShotDelayType) -> void:
 	var prices: Dictionary = Globals.GUN_SHOT_DELAY_TYPE_PRICES[shot_delay_type]
 	var credits: int = _player.get_credits()
 	var shot_delay_type_upgrades: Dictionary = _player.get_shot_delay_type_upgrades()
@@ -305,7 +321,7 @@ func _shot_delay_toggled(toggled_on: bool, shot_delay_type: Globals.GunShotDelay
 	_set_credits_label(str(_player.get_credits()))
 
 
-func _shot_delay_equiped(toggled_on: bool, shot_delay_type: Globals.GunShotDelayType) -> void:
+func _on_shot_delay_apply_button_toggled(toggled_on: bool, shot_delay_type: Globals.GunShotDelayType) -> void:
 	if toggled_on:
 		_player.set_shot_delay_type(shot_delay_type)
 	else:
@@ -322,10 +338,10 @@ func _disable_scatter_shot_delay_ui_items(exclude: Globals.GunScatterShotDelayTy
 		var prices: Dictionary = Globals.GUN_SCATTER_SHOT_DELAY_TYPE_PRICES[scatter_shot_delay_type]
 		var scatter_shot_delay_type_item: UIItem = _scatter_shot_delay_type_mapping[scatter_shot_delay_type]
 		var to_buy: int = prices["buy"]
-		_disable_ui_button(scatter_shot_delay_type_item, credits, to_buy)
+		_disable_select_button(scatter_shot_delay_type_item, credits, to_buy)
 
 
-func _scatter_shot_delay_toggled(toggled_on: bool, scatter_shot_delay_type: Globals.GunScatterShotDelayType) -> void:
+func _on_scatter_shot_delay_select_button_toggled(toggled_on: bool, scatter_shot_delay_type: Globals.GunScatterShotDelayType) -> void:
 	var prices: Dictionary = Globals.GUN_SCATTER_SHOT_DELAY_TYPE_PRICES[scatter_shot_delay_type]
 	var credits: int = _player.get_credits()
 	var scatter_shot_delay_type_upgrades: Dictionary = _player.get_scatter_shot_delay_type_upgrades()
@@ -342,115 +358,11 @@ func _scatter_shot_delay_toggled(toggled_on: bool, scatter_shot_delay_type: Glob
 	_set_credits_label(str(_player.get_credits()))
 
 
-func _scatter_shot_delay_equiped(toggled_on: bool, scatter_shot_delay_type: Globals.GunScatterShotDelayType) -> void:
+func _on_scatter_shot_delay_apply_button_toggled(toggled_on: bool, scatter_shot_delay_type: Globals.GunScatterShotDelayType) -> void:
 	if toggled_on:
 		_player.set_scatter_shot_delay_type(scatter_shot_delay_type)
 	else:
 		_player.set_scatter_shot_delay_type(Globals.GunScatterShotDelayType.NONE)
-#endregion
-
-
-#region ShotType
-func _on_single_shot_toggled(toggled_on: bool) -> void:
-	_shot_toggled(toggled_on, Globals.GunShotType.SINGLE)
-
-
-func _on_double_shot_toggled(toggled_on: bool) -> void:
-	_shot_toggled(toggled_on, Globals.GunShotType.DOUBLE)
-
-
-func _on_triple_shot_toggled(toggled_on: bool) -> void:
-	_shot_toggled(toggled_on, Globals.GunShotType.TRIPLE)
-
-
-func _on_single_shot_equiped(toggled_on: bool) -> void:
-	_shot_equiped(toggled_on, Globals.GunShotType.SINGLE)
-
-
-func _on_double_shot_equiped(toggled_on: bool) -> void:
-	_shot_equiped(toggled_on, Globals.GunShotType.DOUBLE)
-
-
-func _on_triple_shot_equiped(toggled_on: bool) -> void:
-	_shot_equiped(toggled_on, Globals.GunShotType.TRIPLE)
-#endregion
-
-
-#region ForceType
-func _on_slow_force_toggled(toggled_on: bool) -> void:
-	_force_toggled(toggled_on, Globals.BulletForceType.SLOW)
-
-
-func _on_medium_force_toggled(toggled_on: bool) -> void:
-	_force_toggled(toggled_on, Globals.BulletForceType.MEDIUM)
-
-
-func _on_fast_force_toggled(toggled_on: bool) -> void:
-	_force_toggled(toggled_on, Globals.BulletForceType.FAST)
-
-
-func _on_slow_force_equiped(toggled_on: bool) -> void:
-	_force_equiped(toggled_on, Globals.BulletForceType.SLOW)
-
-
-func _on_medium_force_equiped(toggled_on: bool) -> void:
-	_force_equiped(toggled_on, Globals.BulletForceType.MEDIUM)
-
-
-func _on_fast_force_equiped(toggled_on: bool) -> void:
-	_force_equiped(toggled_on, Globals.BulletForceType.FAST)
-#endregion
-
-
-#region ShotDelayType
-func _on_slow_shot_delay_toggled(toggled_on: bool) -> void:
-	_shot_delay_toggled(toggled_on, Globals.GunShotDelayType.SLOW)
-
-
-func _on_medium_shot_delay_toggled(toggled_on: bool) -> void:
-	_shot_delay_toggled(toggled_on, Globals.GunShotDelayType.MEDIUM)
-
-
-func _on_fast_shot_delay_toggled(toggled_on: bool) -> void:
-	_shot_delay_toggled(toggled_on, Globals.GunShotDelayType.FAST)
-
-
-func _on_slow_shot_delay_equiped(toggled_on: bool) -> void:
-	_shot_delay_equiped(toggled_on, Globals.GunShotDelayType.SLOW)
-
-
-func _on_medium_shot_delay_equiped(toggled_on: bool) -> void:
-	_shot_delay_equiped(toggled_on, Globals.GunShotDelayType.MEDIUM)
-
-
-func _on_fast_shot_delay_equiped(toggled_on: bool) -> void:
-	_shot_delay_equiped(toggled_on, Globals.GunShotDelayType.FAST)
-#endregion
-
-
-#region ScatterShotDelayType
-func _on_slow_scatter_shot_delay_toggled(toggled_on: bool) -> void:
-	_scatter_shot_delay_toggled(toggled_on, Globals.GunScatterShotDelayType.SLOW)
-
-
-func _on_medium_scatter_shot_delay_toggled(toggled_on: bool) -> void:
-	_scatter_shot_delay_toggled(toggled_on, Globals.GunScatterShotDelayType.MEDIUM)
-
-
-func _on_fast_scatter_shot_delay_toggled(toggled_on: bool) -> void:
-	_scatter_shot_delay_toggled(toggled_on, Globals.GunScatterShotDelayType.FAST)
-
-
-func _on_slow_scatter_shot_delay_equiped(toggled_on: bool) -> void:
-	_scatter_shot_delay_equiped(toggled_on, Globals.GunScatterShotDelayType.SLOW)
-
-
-func _on_medium_scatter_shot_delay_equiped(toggled_on: bool) -> void:
-	_scatter_shot_delay_equiped(toggled_on, Globals.GunScatterShotDelayType.MEDIUM)
-
-
-func _on_fast_scatter_shot_delay_equiped(toggled_on: bool) -> void:
-	_scatter_shot_delay_equiped(toggled_on, Globals.GunScatterShotDelayType.FAST)
 #endregion
 
 

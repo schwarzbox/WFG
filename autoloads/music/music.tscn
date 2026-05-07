@@ -11,11 +11,14 @@ script = ExtResource("1_ntjc8")
 [node name="MainAudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=855010652]
 stream = ExtResource("2_bv2dx")
 volume_db = -4.0
+bus = &"Music"
 
 [node name="LevelAudioStreamPlayer1" type="AudioStreamPlayer" parent="." unique_id=1570627841]
 stream = ExtResource("3_57klw")
 volume_db = -4.0
+bus = &"Music"
 
 [node name="LevelAudioStreamPlayer2" type="AudioStreamPlayer" parent="." unique_id=1217994527]
 stream = ExtResource("4_ukbxp")
 volume_db = -4.0
+bus = &"Music"

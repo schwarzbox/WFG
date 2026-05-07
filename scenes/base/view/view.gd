@@ -26,45 +26,39 @@ func _set_transition(
 	callable: Callable = Callable(),
 	delay: float = Globals.TRANSITION_DELAY
 ) -> void:
-	Transition.set_alpha(0.0)
 	Transition.color_fade_out_in(callable, delay)
-
-
-func _set_audio_transition(
-	callable: Callable = Callable(),
-	delay: float = Globals.AUDIO_TRANSITION_DELAY,
-) -> void:
-	Transition.set_volume_linear(1.0)
-	Transition.audio_fade_out_in(callable, delay)
-
-
-func _set_transition_fade_in(
-	callable: Callable = Callable(),
-	delay: float = Globals.TRANSITION_DELAY,
-) -> void:
-	Transition.set_alpha(1.0)
-	Transition.color_fade_in(callable, delay)
 
 
 func _set_transition_fade_out(
 	callable: Callable = Callable(),
 	delay: float = Globals.TRANSITION_DELAY,
 ) -> void:
-	Transition.set_alpha(0.0)
 	Transition.color_fade_out(callable, delay)
 
 
-func _set_audio_transition_fade_in(
+func _set_transition_fade_in(
+	callable: Callable = Callable(),
+	delay: float = Globals.TRANSITION_DELAY,
+) -> void:
+	Transition.color_fade_in(callable, delay)
+
+
+func _set_audio_transition(
 	callable: Callable = Callable(),
 	delay: float = Globals.AUDIO_TRANSITION_DELAY,
 ) -> void:
-	Transition.set_volume_linear(0.0)
-	Transition.audio_fade_in(callable, delay)
+	Transition.audio_fade_out_in(callable, delay)
 
 
 func _set_audio_transition_fade_out(
 	callable: Callable = Callable(),
 	delay: float = Globals.AUDIO_TRANSITION_DELAY,
 ) -> void:
-	Transition.set_volume_linear(1.0)
 	Transition.audio_fade_out(callable, delay)
+
+
+func _set_audio_transition_fade_in(
+	callable: Callable = Callable(),
+	delay: float = Globals.AUDIO_TRANSITION_DELAY,
+) -> void:
+	Transition.audio_fade_in(callable, delay)

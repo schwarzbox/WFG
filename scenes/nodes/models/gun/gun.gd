@@ -20,6 +20,8 @@ var _scatter_shot_aiming_time: float = 0.0
 
 
 func _ready() -> void:
+	$ShotAudio.bus = Globals.AUDIO_BUSES[Globals.AudioBus.SFX]
+
 	$ShotTimer.wait_time = _shot_delay
 	$ShotTimer.one_shot = true
 	$ShotTimer.connect(
@@ -136,6 +138,7 @@ func _single_shot(
 		)
 		bullet.set_min_force_squared(_bullet_min_force_squared)
 
+		$ShotAudio.play()
 		$ShotTimer.start()
 
 		# convert to BW

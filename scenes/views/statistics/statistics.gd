@@ -19,7 +19,7 @@ func _ready() -> void:
 			$CanvasLayer/InputWindow/CenterContainer/VBoxContainer/LastEntry/Row/Time,
 			$CanvasLayer/InputWindow/CenterContainer/VBoxContainer/LastEntry/Row/Score,
 	]:
-		node.label_settings = Globals.MEDIUM_LABEL_SETTINGS
+		node.label_settings = Globals.LABEL_SETTINGS["MEDIUM"]
 
 	for node: Container in [
 			$CanvasLayer/MainContainer/VBoxContainer,
@@ -37,9 +37,9 @@ func _ready() -> void:
 	)
 
 	_time_table = $CanvasLayer/MainContainer/VBoxContainer/Tables/TimeTable
-	_setup_title(_time_table, Globals.LABEL_SETTINGS.SMALL)
+	_setup_title(_time_table, Globals.LABEL_SETTINGS["SMALL"])
 	_score_table = $CanvasLayer/MainContainer/VBoxContainer/Tables/ScoreTable
-	_setup_title(_score_table, Globals.LABEL_SETTINGS.SMALL)
+	_setup_title(_score_table, Globals.LABEL_SETTINGS["SMALL"])
 	for _i: int in range(ROW_COUNT):
 		_add_row(_time_table)
 		_add_row(_score_table)
@@ -50,7 +50,7 @@ func _ready() -> void:
 	$CanvasLayer/InputWindow.set_line_edit_placeholder_text(LINE_EDIT_TEXT)
 	$CanvasLayer/InputWindow.set_cancel_button_text(CANCEL_BUTTON_TEXT)
 	$CanvasLayer/InputWindow.set_ok_button_text(OK_BUTTON_TEXT)
-	$CanvasLayer/InputWindow.hide_cancel_button()
+	$CanvasLayer/InputWindow.cancel_button_hide()
 
 
 #entry point
@@ -65,7 +65,7 @@ func _setup() -> void:
 		#show input window
 		$CanvasLayer/InputWindow.popup_centered()
 		$CanvasLayer/InputWindow.set_line_edit_grab_focus()
-		$CanvasLayer/InputWindow.set_disabled_ok_button(true)
+		$CanvasLayer/InputWindow.set_ok_button_disabled(true)
 
 		$CanvasLayer/InputWindow/CenterContainer/VBoxContainer/LastEntry/Row/Time.text = _game_time_converter(game_time)
 		$CanvasLayer/InputWindow/CenterContainer/VBoxContainer/LastEntry/Row/Score.text = _game_score_converter(game_score)
