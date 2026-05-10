@@ -6,16 +6,12 @@ extends View
 #docstringw
 # Main Scene
 
-# move button and label styles to ui_button and ui_label
+# FileUtil? or GameSaveUtil? move methods to FileUtil?
 
-# move StatisticsUtil to globals? check first launch
-# update export templates 4.6 before 9 of may
-
+# Check Engine.get_license_text to generate license?
 # move main to views? create main as view manager stages
 
-# Check Engine.get_license_text
-
-# rename screenshot or screenshots check .gdignore
+# rename screenshot or screenshots/media? check .gdignore
 # add my license to love game builds
 # check github releases description tags and pages
 # update MIT license template and update all my licenses

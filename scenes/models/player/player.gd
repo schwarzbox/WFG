@@ -297,9 +297,9 @@ func save_state() -> void:
 	_state["player_hp"] = get_hp()
 	_state["player_score"] = get_score()
 
-	Globals.STATISTICS_UTIL.save_start_time()
-	Globals.STATISTICS_UTIL.save_init_time()
-	Globals.STATISTICS_UTIL.save_start_score()
+	Statistics.save_start_time()
+	Statistics.save_init_time()
+	Statistics.save_start_score()
 
 
 func load_state() -> void:
@@ -308,21 +308,21 @@ func load_state() -> void:
 	set_hp(player_hp)
 	set_score(player_score)
 
-	Globals.STATISTICS_UTIL.set_game_time(Globals.STATISTICS_UTIL.get_init_time())
-	Globals.STATISTICS_UTIL.set_game_score(Globals.STATISTICS_UTIL.get_init_score())
+	Statistics.set_game_time(Statistics.get_init_time())
+	Statistics.set_game_score(Statistics.get_init_score())
 
 
 func reset_state() -> void:
 	_state.clear()
-	Globals.STATISTICS_UTIL.reset_game_score()
-	Globals.STATISTICS_UTIL.reset_game_time()
+	Statistics.reset_game_score()
+	Statistics.reset_game_time()
 
 
 func pause_state(value: bool) -> void:
 	if value:
-		Globals.STATISTICS_UTIL.save_game_time()
+		Statistics.save_game_time()
 	else:
-		Globals.STATISTICS_UTIL.save_start_time()
+		Statistics.save_start_time()
 #endregion
 
 
@@ -343,7 +343,7 @@ func win(body: Exit) -> void:
 	_win_tween.tween_callback(
 		func() -> void:
 		won.emit()
-		Globals.STATISTICS_UTIL.save_game_time()
+		Statistics.save_game_time()
 	)
 
 
@@ -361,8 +361,8 @@ func serialize() -> Dictionary:
 	return {
 		"level": get_level(),
 		"hp": get_hp(),
-		"game_time": Globals.STATISTICS_UTIL.get_game_time(),
-		"game_score": Globals.STATISTICS_UTIL.get_game_score(),
+		"game_time": Statistics.get_game_time(),
+		"game_score": Statistics.get_game_score(),
 		#upgrades
 		"shot_type_upgrades": get_shot_type_upgrades(),
 		"shot_type": get_shot_type(),
@@ -396,9 +396,9 @@ func deserialize(data: Dictionary) -> void:
 	set_hp(hp)
 	set_score(game_score)
 	#restore game time
-	Globals.STATISTICS_UTIL.set_game_time(game_time)
+	Statistics.set_game_time(game_time)
 	#restore game score
-	Globals.STATISTICS_UTIL.set_game_score(game_score)
+	Statistics.set_game_score(game_score)
 	set_shot_type_upgrades(shot_type_upgrades)
 	set_shot_type(shot_type)
 	set_force_type_upgrades(force_type_upgrades)
@@ -611,7 +611,7 @@ func _on_bullet_exploded(pos: Vector2, rot: float) -> void:
 func _on_bullet_died(is_hit: bool = false) -> void:
 	if is_hit:
 		set_score(_score + 1)
-		Globals.STATISTICS_UTIL.save_game_score(1)
+		Statistics.save_game_score(1)
 
 	bullet_removed.emit()
 

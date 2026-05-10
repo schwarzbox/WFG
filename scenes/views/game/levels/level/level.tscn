@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bqdg2idsev2if"]
+[gd_scene format=3 uid="uid://bqdg2idsev2if"]
 
 [ext_resource type="PackedScene" uid="uid://kn4un6yv7630" path="res://scenes/base/view/view.tscn" id="1_llbr5"]
 [ext_resource type="Script" uid="uid://dnc47qi56ffma" path="res://scenes/views/game/levels/level/level.gd" id="2_xa387"]
@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://whqthtb8tpty" path="res://scenes/nodes/views/bar/bar.tscn" id="4_1qlp6"]
 [ext_resource type="PackedScene" uid="uid://vbjphhnejpr8" path="res://scenes/models/enemy/enemy.tscn" id="4_3whkn"]
 [ext_resource type="Script" uid="uid://bbvwek1dojmug" path="res://scenes/views/game/levels/level/world.gd" id="4_f3skk"]
-[ext_resource type="LabelSettings" uid="uid://bfmg4ke5qx0j7" path="res://shared/label_settings/medium_label_settings.tres" id="5_cnulr"]
+[ext_resource type="LabelSettings" uid="uid://bfmg4ke5qx0j7" path="res://scenes/nodes/views/ui_label/medium_label_settings.tres" id="5_cnulr"]
 [ext_resource type="PackedScene" uid="uid://dxohchoj45dfl" path="res://scenes/nodes/views/ui_button/ui_button.tscn" id="6_ya3v0"]
 [ext_resource type="Shader" uid="uid://dhkd7fl8swh22" path="res://shaders/noise.gdshader" id="7_q8pr5"]
 [ext_resource type="Shader" uid="uid://cjdyxyqd2bvsu" path="res://shaders/displacement.gdshader" id="11_nqfba"]
@@ -120,10 +120,10 @@ _data = {
 &"RESET": SubResource("Animation_ec0ab")
 }
 
-[node name="Level" instance=ExtResource("1_llbr5")]
+[node name="Level" unique_id=747036579 instance=ExtResource("1_llbr5")]
 script = ExtResource("2_xa387")
 
-[node name="LevelContainer" type="CenterContainer" parent="CanvasLayer" index="0"]
+[node name="LevelContainer" type="CenterContainer" parent="CanvasLayer" index="0" unique_id=112784820]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -131,32 +131,32 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="UILabel" parent="CanvasLayer/LevelContainer" index="0" instance=ExtResource("3_5xdgx")]
+[node name="UILabel" parent="CanvasLayer/LevelContainer" index="0" unique_id=100318022 instance=ExtResource("3_5xdgx")]
 layout_mode = 2
 text = "0"
 
-[node name="CountersContainer" type="VBoxContainer" parent="CanvasLayer" index="1"]
+[node name="CountersContainer" type="VBoxContainer" parent="CanvasLayer" index="1" unique_id=229412765]
 offset_right = 325.0
 offset_bottom = 153.0
 theme_override_constants/separation = 4
 
-[node name="HealthBar" parent="CanvasLayer/CountersContainer" index="0" instance=ExtResource("4_1qlp6")]
+[node name="HealthBar" parent="CanvasLayer/CountersContainer" index="0" unique_id=1845566732 instance=ExtResource("4_1qlp6")]
 layout_mode = 2
 _label = "HP"
 
-[node name="EnemyCounter" parent="CanvasLayer/CountersContainer" index="1" instance=ExtResource("3_hlvps")]
+[node name="EnemyCounter" parent="CanvasLayer/CountersContainer" index="1" unique_id=69184912 instance=ExtResource("3_hlvps")]
 layout_mode = 2
 _label = "Enemies"
 
-[node name="ScoreCounter" parent="CanvasLayer/CountersContainer" index="2" instance=ExtResource("3_hlvps")]
+[node name="ScoreCounter" parent="CanvasLayer/CountersContainer" index="2" unique_id=1160141055 instance=ExtResource("3_hlvps")]
 layout_mode = 2
 _label = "Score"
 
-[node name="BulletCounter" parent="CanvasLayer/CountersContainer" index="3" instance=ExtResource("3_hlvps")]
+[node name="BulletCounter" parent="CanvasLayer/CountersContainer" index="3" unique_id=1801369908 instance=ExtResource("3_hlvps")]
 layout_mode = 2
 _label = "Bullet"
 
-[node name="PauseContainer" type="CenterContainer" parent="CanvasLayer" index="2"]
+[node name="PauseContainer" type="CenterContainer" parent="CanvasLayer" index="2" unique_id=906102770]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -164,28 +164,28 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PauseContainer" index="0"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PauseContainer" index="0" unique_id=1509153259]
 layout_mode = 2
 theme_override_constants/separation = 32
 
-[node name="UILabel" parent="CanvasLayer/PauseContainer/VBoxContainer" index="0" instance=ExtResource("3_5xdgx")]
+[node name="UILabel" parent="CanvasLayer/PauseContainer/VBoxContainer" index="0" unique_id=1675984735 instance=ExtResource("3_5xdgx")]
 layout_mode = 2
 text = "Pause"
 label_settings = ExtResource("5_cnulr")
 
-[node name="Resume" parent="CanvasLayer/PauseContainer/VBoxContainer" index="1" instance=ExtResource("6_ya3v0")]
+[node name="Resume" parent="CanvasLayer/PauseContainer/VBoxContainer" index="1" unique_id=846240953 instance=ExtResource("6_ya3v0")]
 layout_mode = 2
 text = "Resume"
 
-[node name="Restart" parent="CanvasLayer/PauseContainer/VBoxContainer" index="2" instance=ExtResource("6_ya3v0")]
+[node name="Restart" parent="CanvasLayer/PauseContainer/VBoxContainer" index="2" unique_id=499021305 instance=ExtResource("6_ya3v0")]
 layout_mode = 2
 text = "Restart"
 
-[node name="Back" parent="CanvasLayer/PauseContainer/VBoxContainer" index="3" instance=ExtResource("6_ya3v0")]
+[node name="Back" parent="CanvasLayer/PauseContainer/VBoxContainer" index="3" unique_id=2105099763 instance=ExtResource("6_ya3v0")]
 layout_mode = 2
 text = "Back"
 
-[node name="GameOverContainer" type="CenterContainer" parent="CanvasLayer" index="3"]
+[node name="GameOverContainer" type="CenterContainer" parent="CanvasLayer" index="3" unique_id=419644706]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -193,7 +193,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="UILabel" parent="CanvasLayer/GameOverContainer" index="0" instance=ExtResource("3_5xdgx")]
+[node name="UILabel" parent="CanvasLayer/GameOverContainer" index="0" unique_id=749584004 instance=ExtResource("3_5xdgx")]
 layout_mode = 2
 text = "Game Over"
 
@@ -201,14 +201,14 @@ text = "Game Over"
 script = ExtResource("4_f3skk")
 _enemy_scene = ExtResource("4_3whkn")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="World" index="0"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World" index="0" unique_id=996199009]
 environment = SubResource("Environment_rh5hf")
 
-[node name="DirectionalLight2D" type="DirectionalLight2D" parent="World" index="1"]
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="World" index="1" unique_id=71977082]
 color = Color(0.78431374, 0.78431374, 0.76862746, 0.98039216)
 blend_mode = 1
 
-[node name="TextureRect" type="TextureRect" parent="World" index="2"]
+[node name="TextureRect" type="TextureRect" parent="World" index="2" unique_id=1974104271]
 material = SubResource("ShaderMaterial_cnulr")
 anchors_preset = 15
 anchor_right = 1.0
@@ -221,7 +221,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("NoiseTexture2D_5xdgx")
 
-[node name="ShockWave" type="ColorRect" parent="World" index="3"]
+[node name="ShockWave" type="ColorRect" parent="World" index="3" unique_id=1406725653]
 material = SubResource("ShaderMaterial_ec0ab")
 anchors_preset = 15
 anchor_right = 1.0
@@ -229,14 +229,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="World" index="4"]
-libraries = {
-&"": SubResource("AnimationLibrary_qhl2l")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="World" index="4" unique_id=418256868]
+libraries/ = SubResource("AnimationLibrary_qhl2l")
 
-[node name="EnemyTimer" type="Timer" parent="World" index="5"]
+[node name="EnemyTimer" type="Timer" parent="World" index="5" unique_id=756508112]
 
-[node name="Models" type="Node2D" parent="World" index="6"]
+[node name="Models" type="Node2D" parent="World" index="6" unique_id=800934630]
 
 [connection signal="pressed" from="CanvasLayer/PauseContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseContainer/VBoxContainer/Restart" to="." method="_on_restart_pressed"]

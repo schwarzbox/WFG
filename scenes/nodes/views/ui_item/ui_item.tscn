@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://bugb36xq3sh25" path="res://scenes/nodes/views/ui_item/ui_item.gd" id="1_bcrs5"]
 [ext_resource type="PackedScene" uid="uid://dxohchoj45dfl" path="res://scenes/nodes/views/ui_button/ui_button.tscn" id="1_r7sxd"]
 [ext_resource type="PackedScene" uid="uid://cb2uwdhqqnlny" path="res://scenes/nodes/views/ui_label/ui_label.tscn" id="2_41rqm"]
-[ext_resource type="LabelSettings" uid="uid://dlfypgb1ah5mq" path="res://shared/label_settings/small_label_settings.tres" id="3_41rqm"]
-[ext_resource type="StyleBox" uid="uid://de54rm0hfpmdx" path="res://shared/button_styles/pressed_highlight_style_box_flat.tres" id="5_jusad"]
+[ext_resource type="LabelSettings" uid="uid://dlfypgb1ah5mq" path="res://scenes/nodes/views/ui_label/small_label_settings.tres" id="3_41rqm"]
+[ext_resource type="StyleBox" uid="uid://de54rm0hfpmdx" path="res://scenes/nodes/views/ui_item/pressed_highlight_style_box_flat.tres" id="5_jusad"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_bcrs5"]
 size = Vector2(128, 128)

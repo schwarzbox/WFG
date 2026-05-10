@@ -35,6 +35,7 @@ Transition="*res://autoloads/transition/transition.tscn"
 Cursor="*res://autoloads/cursor/cursor.tscn"
 Music="*res://autoloads/music/music.tscn"
 Settings="*uid://5v45c1opjoij"
+Statistics="*uid://dlt3hlv0ubf1q"
 
 [debug]
 
@@ -67,7 +68,7 @@ folder_colors={
 
 [gui]
 
-theme/custom_font="res://shared/fonts/custom_font_file.tres"
+theme/custom_font="res://main/custom_font_file.tres"
 
 [input]
 

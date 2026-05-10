@@ -1,43 +1,43 @@
-[gd_scene load_steps=6 format=3 uid="uid://dyx2ahtopf24g"]
+[gd_scene format=3 uid="uid://dyx2ahtopf24g"]
 
 [ext_resource type="PackedScene" uid="uid://kn4un6yv7630" path="res://scenes/base/view/view.tscn" id="1"]
 [ext_resource type="Script" uid="uid://b2licuysqqe14" path="res://scenes/views/game/game.gd" id="2"]
-[ext_resource type="LabelSettings" uid="uid://bfmg4ke5qx0j7" path="res://shared/label_settings/medium_label_settings.tres" id="3_o5tny"]
+[ext_resource type="LabelSettings" uid="uid://bfmg4ke5qx0j7" path="res://scenes/nodes/views/ui_label/medium_label_settings.tres" id="3_o5tny"]
 [ext_resource type="PackedScene" uid="uid://cb2uwdhqqnlny" path="res://scenes/nodes/views/ui_label/ui_label.tscn" id="3_rmt47"]
 [ext_resource type="PackedScene" uid="uid://dxohchoj45dfl" path="res://scenes/nodes/views/ui_button/ui_button.tscn" id="4_nqsdw"]
 
-[node name="Game" instance=ExtResource("1")]
+[node name="Game" unique_id=1324194061 instance=ExtResource("1")]
 script = ExtResource("2")
 
-[node name="MainContainer" type="CenterContainer" parent="CanvasLayer" index="0"]
+[node name="MainContainer" type="CenterContainer" parent="CanvasLayer" index="0" unique_id=1383961650]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainContainer" index="0"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainContainer" index="0" unique_id=1236390625]
 layout_mode = 2
 theme_override_constants/separation = 32
 
-[node name="UILabel" parent="CanvasLayer/MainContainer/VBoxContainer" index="0" instance=ExtResource("3_rmt47")]
+[node name="UILabel" parent="CanvasLayer/MainContainer/VBoxContainer" index="0" unique_id=85834161 instance=ExtResource("3_rmt47")]
 layout_mode = 2
 text = "Levels"
 label_settings = ExtResource("3_o5tny")
 
-[node name="GridContainer" type="GridContainer" parent="CanvasLayer/MainContainer/VBoxContainer" index="1"]
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/MainContainer/VBoxContainer" index="1" unique_id=408868318]
 layout_mode = 2
 theme_override_constants/h_separation = 32
 theme_override_constants/v_separation = 32
 columns = 4
 
-[node name="Upgrades" parent="CanvasLayer/MainContainer/VBoxContainer" index="2" instance=ExtResource("4_nqsdw")]
+[node name="Upgrades" parent="CanvasLayer/MainContainer/VBoxContainer" index="2" unique_id=1888912777 instance=ExtResource("4_nqsdw")]
 layout_mode = 2
 text = "Upgrades"
 
-[node name="Save" parent="CanvasLayer/MainContainer/VBoxContainer" index="3" instance=ExtResource("4_nqsdw")]
+[node name="Save" parent="CanvasLayer/MainContainer/VBoxContainer" index="3" unique_id=2007285073 instance=ExtResource("4_nqsdw")]
 layout_mode = 2
 text = "Save"
 
-[node name="Back" parent="CanvasLayer/MainContainer/VBoxContainer" index="4" instance=ExtResource("4_nqsdw")]
+[node name="Back" parent="CanvasLayer/MainContainer/VBoxContainer" index="4" unique_id=831614321 instance=ExtResource("4_nqsdw")]
 layout_mode = 2
 text = "Main Menu
 "

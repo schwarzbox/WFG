@@ -59,8 +59,8 @@ func start() -> void:
 
 
 func _setup() -> void:
-	var game_time: int = Globals.STATISTICS_UTIL.get_game_time()
-	var game_score: int = Globals.STATISTICS_UTIL.get_game_score()
+	var game_time: int = Statistics.get_game_time()
+	var game_score: int = Statistics.get_game_score()
 	if game_time > 0 or game_score > 0:
 		#show input window
 		$CanvasLayer/InputWindow.popup_centered()
@@ -73,10 +73,11 @@ func _setup() -> void:
 	else:
 		$CanvasLayer/MainContainer/VBoxContainer/Back.disabled = false
 
-	var game_time_entries: Dictionary = Globals.STATISTICS_UTIL.load_game_time_data()
+	Statistics.load_all_data()
+	var game_time_entries: Dictionary = Statistics.get_game_time_data()
 	_update_table(_time_table, game_time_entries, true, _game_time_converter)
 
-	var score_entries: Dictionary = Globals.STATISTICS_UTIL.load_game_score_data()
+	var score_entries: Dictionary = Statistics.get_game_score_data()
 	_update_table(_score_table, score_entries, false, _game_score_converter)
 
 
@@ -172,8 +173,7 @@ func _on_input_window_close_requested() -> void:
 func _on_input_window_ok_pressed() -> void:
 	var new_text: String = $CanvasLayer/InputWindow.get_line_edit_text()
 
-	Globals.STATISTICS_UTIL.save_game_time_data(new_text)
-	Globals.STATISTICS_UTIL.save_game_score_data(new_text)
+	Statistics.save_all_data(new_text)
 
 	#hide InputWindow
 	call_deferred("_setup")

@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://b6kk7ppr2vpmk"]
+[gd_scene format=3 uid="uid://b6kk7ppr2vpmk"]
 
 [ext_resource type="PackedScene" uid="uid://gua33j0stdlv" path="res://scenes/base/window/base_window.tscn" id="1_gncjd"]
 [ext_resource type="Script" uid="uid://xg6cyvff6xrs" path="res://scenes/nodes/views/dialog_window/dialog_window.gd" id="2_f3xqj"]
 [ext_resource type="PackedScene" uid="uid://cb2uwdhqqnlny" path="res://scenes/nodes/views/ui_label/ui_label.tscn" id="3_ahgy1"]
-[ext_resource type="LabelSettings" uid="uid://bfmg4ke5qx0j7" path="res://shared/label_settings/medium_label_settings.tres" id="3_ickf1"]
+[ext_resource type="LabelSettings" uid="uid://bfmg4ke5qx0j7" path="res://scenes/nodes/views/ui_label/medium_label_settings.tres" id="3_ickf1"]
 
 [node name="DialogWindow" instance=ExtResource("1_gncjd")]
 script = ExtResource("2_f3xqj")

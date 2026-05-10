@@ -4,7 +4,7 @@ extends VBoxContainer
 signal select_button_toggled(toggled_on: bool)
 signal apply_button_toggled(toggled_on: bool)
 
-const _pressed_highlight_style_box: StyleBox = preload("res://shared/button_styles/pressed_highlight_style_box_flat.tres")
+const _pressed_highlight_style_box: StyleBox = preload("res://scenes/nodes/views/ui_item/pressed_highlight_style_box_flat.tres")
 
 var _select_button_normal_text: String = "":
 	set = set_select_button_normal_text

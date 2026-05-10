@@ -3,9 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://kn4un6yv7630" path="res://scenes/base/view/view.tscn" id="1_5e7wp"]
 [ext_resource type="Script" uid="uid://c1o5ep46n3vl4" path="res://scenes/views/game/upgrades/upgrades.gd" id="2_wsgnr"]
 [ext_resource type="PackedScene" uid="uid://cb2uwdhqqnlny" path="res://scenes/nodes/views/ui_label/ui_label.tscn" id="3_s8xjp"]
-[ext_resource type="LabelSettings" uid="uid://bfmg4ke5qx0j7" path="res://shared/label_settings/medium_label_settings.tres" id="4_s8xjp"]
+[ext_resource type="LabelSettings" uid="uid://bfmg4ke5qx0j7" path="res://scenes/nodes/views/ui_label/medium_label_settings.tres" id="4_s8xjp"]
 [ext_resource type="PackedScene" uid="uid://dxohchoj45dfl" path="res://scenes/nodes/views/ui_button/ui_button.tscn" id="5_7842n"]
-[ext_resource type="LabelSettings" uid="uid://dlfypgb1ah5mq" path="res://shared/label_settings/small_label_settings.tres" id="5_o7u12"]
+[ext_resource type="LabelSettings" uid="uid://dlfypgb1ah5mq" path="res://scenes/nodes/views/ui_label/small_label_settings.tres" id="5_o7u12"]
 [ext_resource type="PackedScene" uid="uid://disygw5bmyrvo" path="res://scenes/nodes/views/ui_item/ui_item.tscn" id="6_oqi3v"]
 
 [node name="Upgrades" unique_id=2001454398 instance=ExtResource("1_5e7wp")]

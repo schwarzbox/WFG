@@ -166,7 +166,7 @@ const ENEMY_SCALE_DELAY: float = 0.8
 
 const EXIT_OPEN_DELAY: float = 2.0
 
-const LEVEL_COUNT: int = 8
+const LEVEL_COUNT: int = 1
 const LEVEL_CREDITS: int = 4
 const ENEMY_COUNT: int = 2
 const ENEMY_CHANCE_TO_CREATE: float = 0.005
@@ -179,9 +179,9 @@ const FONT_SIZES: Dictionary[String, int] = {
 }
 
 const LABEL_SETTINGS: Dictionary[String, LabelSettings] = {
-	"SMALL": preload("res://shared/label_settings/small_label_settings.tres"),
-	"MEDIUM": preload("res://shared/label_settings/medium_label_settings.tres"),
-	"LARGE": preload("res://shared/label_settings/large_label_settings.tres"),
+	"SMALL": preload("res://scenes/nodes/views/ui_label/small_label_settings.tres"),
+	"MEDIUM": preload("res://scenes/nodes/views/ui_label/medium_label_settings.tres"),
+	"LARGE": preload("res://scenes/nodes/views/ui_label/large_label_settings.tres"),
 }
 
 const COLORS: Dictionary = {
@@ -202,9 +202,6 @@ const GLOW_COLORS: Dictionary = {
 	"MIDDLE": Color(1.6, 1.6, 1.6, 1.0),
 	"HIGH": Color(2.0, 2.0, 2.0, 1.0),
 }
-
-#save player statistics
-var STATISTICS_UTIL: Resource = preload("res://utils/statistics_util.tres")
 
 
 func _ready() -> void:

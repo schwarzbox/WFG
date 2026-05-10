@@ -15,12 +15,13 @@ func set_window_extended_info(node: Node) -> void:
 	# get_window()
 	# get_tree().get_root()
 	node.get_viewport().set_title(
-		"Project: {title} | Node: {name} | Count: {count} | FPS: {fps}".format(
+		"Project: {title} | Node: {name} | Count: {count} | FPS: {fps} | VSYNC: {vsync}".format(
 			{
 			"title": title,
 			"name": node.get_name(),
 			"count": node.get_child_count(),
-			"fps": str(Engine.get_frames_per_second())
+			"fps": str(Engine.get_frames_per_second()),
+			"vsync": str(DisplayServer.window_get_vsync_mode())
 			}
 		)
 	)

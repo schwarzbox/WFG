@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://cb2uwdhqqnlny" path="res://scenes/nodes/views/ui_label/ui_label.tscn" id="1_lwxwq"]
 [ext_resource type="Script" uid="uid://7cga7x3ckx7u" path="res://scenes/nodes/views/ui_slider/ui_slider.gd" id="1_vubgi"]
-[ext_resource type="LabelSettings" uid="uid://bfmg4ke5qx0j7" path="res://shared/label_settings/medium_label_settings.tres" id="3_3uifk"]
-[ext_resource type="LabelSettings" uid="uid://dlfypgb1ah5mq" path="res://shared/label_settings/small_label_settings.tres" id="4_0kte0"]
+[ext_resource type="LabelSettings" uid="uid://bfmg4ke5qx0j7" path="res://scenes/nodes/views/ui_label/medium_label_settings.tres" id="3_3uifk"]
+[ext_resource type="LabelSettings" uid="uid://dlfypgb1ah5mq" path="res://scenes/nodes/views/ui_label/small_label_settings.tres" id="4_0kte0"]
 
 [sub_resource type="Gradient" id="Gradient_3uifk"]
 offsets = PackedFloat32Array(1)

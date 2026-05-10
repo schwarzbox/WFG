@@ -6,7 +6,7 @@ var config_file: ConfigFile = ConfigFile.new()
 
 var defaults: Dictionary[String, Dictionary] = {
 	Globals.SETTINGS_SECTIONS[Globals.SettingsSection.AUDIO]: {
-		Globals.AUDIO_BUSES[Globals.AudioBus.MASTER]: 1.0,
+		Globals.AUDIO_BUSES[Globals.AudioBus.MASTER]: true,
 		Globals.AUDIO_BUSES[Globals.AudioBus.MUSIC]: 1.0,
 		Globals.AUDIO_BUSES[Globals.AudioBus.SFX]: 1.0,
 	} ,
@@ -82,9 +82,16 @@ func _apply(section: String, key: String, value: Variant) -> void:
 
 func _apply_audio(key: String, value: Variant) -> void:
 	var bus_idx: int = AudioServer.get_bus_index(key)
-	if bus_idx != -1:
-		var volume_linear: float = value
-		AudioServer.set_bus_volume_linear(bus_idx, volume_linear)
+	if bus_idx == -1:
+		return
+
+	match bus_idx:
+		0:
+			var is_muted: bool = value
+			AudioServer.set_bus_mute(bus_idx, is_muted)
+		_:
+			var volume_linear: float = value
+			AudioServer.set_bus_volume_linear(bus_idx, volume_linear)
 
 
 func _apply_video(key: String, value: Variant) -> void:

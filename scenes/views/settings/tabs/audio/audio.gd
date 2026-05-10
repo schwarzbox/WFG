@@ -14,7 +14,6 @@ func _ready() -> void:
 
 #entry point
 func start() -> void:
-
 	var music_bus_volume: float = Settings.get_config(
 		Globals.SETTINGS_SECTIONS[Globals.SettingsSection.AUDIO],
 		Globals.AUDIO_BUSES[Globals.AudioBus.MUSIC]
@@ -25,11 +24,10 @@ func start() -> void:
 		Globals.AUDIO_BUSES[Globals.AudioBus.SFX]
 	)
 	$CanvasLayer/MainContainer/VBoxContainer/SFX.set_slider_value_no_signal(sfx_bus_volume * 100)
-	var master_bus_volume: float = Settings.get_config(
+	var is_master_bus_muted: float = Settings.get_config(
 		Globals.SETTINGS_SECTIONS[Globals.SettingsSection.AUDIO],
 		Globals.AUDIO_BUSES[Globals.AudioBus.MASTER]
 	)
-	var is_master_bus_muted: bool = !bool(master_bus_volume)
 	$CanvasLayer/MainContainer/VBoxContainer/Mute.set_on_off_buttons_pressed_no_signal(is_master_bus_muted)
 
 
@@ -50,10 +48,9 @@ func _on_sfx_slider_value_changed(value: float) -> void:
 
 
 func _on_mute_button_toggled(toggled_on: bool) -> void:
-	var value: float = 0.0 if toggled_on else 1.0
 	Settings.set_config(
 		Globals.SETTINGS_SECTIONS[Globals.SettingsSection.AUDIO],
-		Globals.AUDIO_BUSES[Globals.AudioBus.MASTER], value
+		Globals.AUDIO_BUSES[Globals.AudioBus.MASTER], toggled_on
 	)
 
 

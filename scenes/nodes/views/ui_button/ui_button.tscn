@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://dxohchoj45dfl"]
 
-[ext_resource type="StyleBox" uid="uid://cgfraa2n3ued0" path="res://shared/button_styles/normal_style_box_flat.tres" id="1_f2ypq"]
-[ext_resource type="StyleBox" uid="uid://kexy31qggn0i" path="res://shared/button_styles/hover_style_box_flat.tres" id="2_gy0qs"]
-[ext_resource type="StyleBox" uid="uid://dkfkorchoxieb" path="res://shared/button_styles/pressed_style_box_flat.tres" id="3_b2toi"]
-[ext_resource type="StyleBox" uid="uid://rr2pkqn34cct" path="res://shared/button_styles/hover_pressed_style_box_flat.tres" id="4_7dkwg"]
+[ext_resource type="StyleBox" uid="uid://cgfraa2n3ued0" path="res://scenes/nodes/views/ui_button/normal_style_box_flat.tres" id="1_f2ypq"]
+[ext_resource type="StyleBox" uid="uid://kexy31qggn0i" path="res://scenes/nodes/views/ui_button/hover_style_box_flat.tres" id="2_gy0qs"]
+[ext_resource type="StyleBox" uid="uid://dkfkorchoxieb" path="res://scenes/nodes/views/ui_button/pressed_style_box_flat.tres" id="3_b2toi"]
+[ext_resource type="StyleBox" uid="uid://rr2pkqn34cct" path="res://scenes/nodes/views/ui_button/hover_pressed_style_box_flat.tres" id="4_7dkwg"]
 [ext_resource type="Script" uid="uid://dhapumr01kivg" path="res://scenes/nodes/views/ui_button/ui_button.gd" id="5_k7h2h"]
 [ext_resource type="AudioStream" uid="uid://cb8ccvc8tt1y5" path="res://scenes/nodes/views/ui_button/click.wav" id="6_7dkwg"]
 
