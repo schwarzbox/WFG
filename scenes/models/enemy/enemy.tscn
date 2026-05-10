@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://vbjphhnejpr8"]
+[gd_scene format=3 uid="uid://vbjphhnejpr8"]
 
 [ext_resource type="Script" uid="uid://btp308yrdq5l0" path="res://scenes/models/enemy/enemy.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://dpx4yemm3vxwk" path="res://scenes/nodes/models/armor/armor.tscn" id="2_6tr86"]
@@ -11,24 +11,24 @@ size = Vector2(36, 24)
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_sbhpg"]
 size = Vector2(36, 24)
 
-[node name="Enemy" type="AnimatableBody2D"]
+[node name="Enemy" type="AnimatableBody2D" unique_id=2067850471]
 collision_layer = 2
 collision_mask = 8
 script = ExtResource("1")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=814688394]
 shape = SubResource("RectangleShape2D_gcxbd")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1197167240]
 texture = SubResource("PlaceholderTexture2D_sbhpg")
 
-[node name="Armor" parent="." instance=ExtResource("2_6tr86")]
+[node name="Armor" parent="." unique_id=12793607 instance=ExtResource("2_6tr86")]
 
-[node name="ExplodeParticles" parent="." instance=ExtResource("3_u5232")]
+[node name="ExplodeParticles" parent="." unique_id=1424660418 instance=ExtResource("3_u5232")]
 emitting = false
 emission_shape = 3
 emission_rect_extents = Vector2(16, 12)
 
-[node name="ScreenTeleportator" parent="." instance=ExtResource("2_ects2")]
+[node name="ScreenTeleportator" parent="." unique_id=1904734725 instance=ExtResource("2_ects2")]
 
 [connection signal="screen_exited" from="ScreenTeleportator" to="." method="_on_screen_teleportator_screen_exited"]

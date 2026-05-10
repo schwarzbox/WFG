@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dpx4yemm3vxwk"]
+[gd_scene format=3 uid="uid://dpx4yemm3vxwk"]
 
 [ext_resource type="Script" uid="uid://en8jnhean1fu" path="res://scenes/nodes/models/armor/armor.gd" id="1_22woo"]
 
-[node name="Armor" type="Node2D"]
+[node name="Armor" type="Node2D" unique_id=1501294202]
 script = ExtResource("1_22woo")
 
-[node name="RegenerationTimer" type="Timer" parent="."]
+[node name="RegenerationTimer" type="Timer" parent="." unique_id=1873670096]

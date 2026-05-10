@@ -8,127 +8,127 @@
 [ext_resource type="LabelSettings" uid="uid://dlfypgb1ah5mq" path="res://scenes/nodes/views/ui_label/small_label_settings.tres" id="5_yi2sy"]
 [ext_resource type="PackedScene" uid="uid://63skdfg5s3u5" path="res://scenes/nodes/views/input_window/input_window.tscn" id="7_jixr2"]
 
-[node name="Statistics" instance=ExtResource("1_xgh6q")]
+[node name="Statistics" unique_id=1419266944 instance=ExtResource("1_xgh6q")]
 script = ExtResource("2_yi2sy")
 
-[node name="MainContainer" type="CenterContainer" parent="CanvasLayer" index="0"]
+[node name="MainContainer" type="CenterContainer" parent="CanvasLayer" parent_id_path=PackedInt32Array(1528962764) index="0" unique_id=990357546]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainContainer" index="0"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainContainer" index="0" unique_id=1477924612]
 layout_mode = 2
 theme_override_constants/separation = 32
 
-[node name="UILabel" parent="CanvasLayer/MainContainer/VBoxContainer" index="0" instance=ExtResource("3_jixr2")]
+[node name="UILabel" parent="CanvasLayer/MainContainer/VBoxContainer" index="0" unique_id=1080987666 instance=ExtResource("3_jixr2")]
 layout_mode = 2
 text = "Statistics"
 label_settings = ExtResource("4_axqal")
 
-[node name="Tables" type="HBoxContainer" parent="CanvasLayer/MainContainer/VBoxContainer" index="1"]
+[node name="Tables" type="HBoxContainer" parent="CanvasLayer/MainContainer/VBoxContainer" index="1" unique_id=871335096]
 layout_mode = 2
 theme_override_constants/separation = 32
 
-[node name="TimeTable" type="VBoxContainer" parent="CanvasLayer/MainContainer/VBoxContainer/Tables" index="0"]
+[node name="TimeTable" type="VBoxContainer" parent="CanvasLayer/MainContainer/VBoxContainer/Tables" index="0" unique_id=1953766635]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/separation = 32
 
-[node name="Title" type="HBoxContainer" parent="CanvasLayer/MainContainer/VBoxContainer/Tables/TimeTable" index="0"]
+[node name="Title" type="HBoxContainer" parent="CanvasLayer/MainContainer/VBoxContainer/Tables/TimeTable" index="0" unique_id=250949041]
 layout_mode = 2
 
-[node name="Number" parent="CanvasLayer/MainContainer/VBoxContainer/Tables/TimeTable/Title" index="0" instance=ExtResource("3_jixr2")]
+[node name="Number" parent="CanvasLayer/MainContainer/VBoxContainer/Tables/TimeTable/Title" index="0" unique_id=235499736 instance=ExtResource("3_jixr2")]
 layout_mode = 2
 text = "#"
 label_settings = ExtResource("5_yi2sy")
 horizontal_alignment = 0
 
-[node name="Name" parent="CanvasLayer/MainContainer/VBoxContainer/Tables/TimeTable/Title" index="1" instance=ExtResource("3_jixr2")]
+[node name="Name" parent="CanvasLayer/MainContainer/VBoxContainer/Tables/TimeTable/Title" index="1" unique_id=1574799396 instance=ExtResource("3_jixr2")]
 layout_mode = 2
 text = "Name"
 label_settings = ExtResource("5_yi2sy")
 horizontal_alignment = 0
 
-[node name="Value" parent="CanvasLayer/MainContainer/VBoxContainer/Tables/TimeTable/Title" index="2" instance=ExtResource("3_jixr2")]
+[node name="Value" parent="CanvasLayer/MainContainer/VBoxContainer/Tables/TimeTable/Title" index="2" unique_id=1273295429 instance=ExtResource("3_jixr2")]
 layout_mode = 2
 text = "Time"
 label_settings = ExtResource("5_yi2sy")
 horizontal_alignment = 2
 
-[node name="Rows" type="VBoxContainer" parent="CanvasLayer/MainContainer/VBoxContainer/Tables/TimeTable" index="1"]
+[node name="Rows" type="VBoxContainer" parent="CanvasLayer/MainContainer/VBoxContainer/Tables/TimeTable" index="1" unique_id=860310394]
 layout_mode = 2
 
-[node name="ScoreTable" type="VBoxContainer" parent="CanvasLayer/MainContainer/VBoxContainer/Tables" index="1"]
+[node name="ScoreTable" type="VBoxContainer" parent="CanvasLayer/MainContainer/VBoxContainer/Tables" index="1" unique_id=122313141]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/separation = 32
 
-[node name="Title" type="HBoxContainer" parent="CanvasLayer/MainContainer/VBoxContainer/Tables/ScoreTable" index="0"]
+[node name="Title" type="HBoxContainer" parent="CanvasLayer/MainContainer/VBoxContainer/Tables/ScoreTable" index="0" unique_id=1165130299]
 layout_mode = 2
 
-[node name="Number" parent="CanvasLayer/MainContainer/VBoxContainer/Tables/ScoreTable/Title" index="0" instance=ExtResource("3_jixr2")]
+[node name="Number" parent="CanvasLayer/MainContainer/VBoxContainer/Tables/ScoreTable/Title" index="0" unique_id=1738219443 instance=ExtResource("3_jixr2")]
 layout_mode = 2
 text = "#"
 label_settings = ExtResource("5_yi2sy")
 horizontal_alignment = 0
 
-[node name="Name" parent="CanvasLayer/MainContainer/VBoxContainer/Tables/ScoreTable/Title" index="1" instance=ExtResource("3_jixr2")]
+[node name="Name" parent="CanvasLayer/MainContainer/VBoxContainer/Tables/ScoreTable/Title" index="1" unique_id=14396081 instance=ExtResource("3_jixr2")]
 layout_mode = 2
 text = "Name"
 label_settings = ExtResource("5_yi2sy")
 horizontal_alignment = 0
 
-[node name="Value" parent="CanvasLayer/MainContainer/VBoxContainer/Tables/ScoreTable/Title" index="2" instance=ExtResource("3_jixr2")]
+[node name="Value" parent="CanvasLayer/MainContainer/VBoxContainer/Tables/ScoreTable/Title" index="2" unique_id=1874149448 instance=ExtResource("3_jixr2")]
 layout_mode = 2
 text = "Score"
 label_settings = ExtResource("5_yi2sy")
 horizontal_alignment = 2
 
-[node name="Rows" type="VBoxContainer" parent="CanvasLayer/MainContainer/VBoxContainer/Tables/ScoreTable" index="1"]
+[node name="Rows" type="VBoxContainer" parent="CanvasLayer/MainContainer/VBoxContainer/Tables/ScoreTable" index="1" unique_id=1159636006]
 layout_mode = 2
 
-[node name="Back" parent="CanvasLayer/MainContainer/VBoxContainer" index="2" instance=ExtResource("5_tgmau")]
+[node name="Back" parent="CanvasLayer/MainContainer/VBoxContainer" index="2" unique_id=1521807069 instance=ExtResource("5_tgmau")]
 layout_mode = 2
 text = "Main Menu"
 icon_alignment = 1
 
-[node name="InputWindow" parent="CanvasLayer" index="1" instance=ExtResource("7_jixr2")]
+[node name="InputWindow" parent="CanvasLayer" parent_id_path=PackedInt32Array(1528962764) index="1" unique_id=2058369499 instance=ExtResource("7_jixr2")]
 title = "Base"
 
-[node name="ColorRect" parent="CanvasLayer/InputWindow" index="0"]
+[node name="ColorRect" parent="CanvasLayer/InputWindow" index="0" unique_id=1853966321]
 color = Color(0.1254902, 0.1254902, 0.1254902, 1)
 
-[node name="LastEntry" type="VBoxContainer" parent="CanvasLayer/InputWindow/CenterContainer/VBoxContainer" index="0"]
+[node name="LastEntry" type="VBoxContainer" parent="CanvasLayer/InputWindow/CenterContainer/VBoxContainer" parent_id_path=PackedInt32Array(2058369499, 976857191) index="0" unique_id=1159100676]
 layout_mode = 2
 theme_override_constants/separation = 32
 
-[node name="Title" type="HBoxContainer" parent="CanvasLayer/InputWindow/CenterContainer/VBoxContainer/LastEntry" index="0"]
+[node name="Title" type="HBoxContainer" parent="CanvasLayer/InputWindow/CenterContainer/VBoxContainer/LastEntry" index="0" unique_id=1087506674]
 layout_mode = 2
 
-[node name="Time" parent="CanvasLayer/InputWindow/CenterContainer/VBoxContainer/LastEntry/Title" index="0" instance=ExtResource("3_jixr2")]
+[node name="Time" parent="CanvasLayer/InputWindow/CenterContainer/VBoxContainer/LastEntry/Title" index="0" unique_id=98038356 instance=ExtResource("3_jixr2")]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Time"
 label_settings = ExtResource("4_axqal")
 
-[node name="Score" parent="CanvasLayer/InputWindow/CenterContainer/VBoxContainer/LastEntry/Title" index="1" instance=ExtResource("3_jixr2")]
+[node name="Score" parent="CanvasLayer/InputWindow/CenterContainer/VBoxContainer/LastEntry/Title" index="1" unique_id=1755068308 instance=ExtResource("3_jixr2")]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Score"
 label_settings = ExtResource("4_axqal")
 
-[node name="Row" type="HBoxContainer" parent="CanvasLayer/InputWindow/CenterContainer/VBoxContainer/LastEntry" index="1"]
+[node name="Row" type="HBoxContainer" parent="CanvasLayer/InputWindow/CenterContainer/VBoxContainer/LastEntry" index="1" unique_id=1237307195]
 layout_mode = 2
 
-[node name="Time" parent="CanvasLayer/InputWindow/CenterContainer/VBoxContainer/LastEntry/Row" index="0" instance=ExtResource("3_jixr2")]
+[node name="Time" parent="CanvasLayer/InputWindow/CenterContainer/VBoxContainer/LastEntry/Row" index="0" unique_id=499719948 instance=ExtResource("3_jixr2")]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0"
 label_settings = ExtResource("4_axqal")
 
-[node name="Score" parent="CanvasLayer/InputWindow/CenterContainer/VBoxContainer/LastEntry/Row" index="1" instance=ExtResource("3_jixr2")]
+[node name="Score" parent="CanvasLayer/InputWindow/CenterContainer/VBoxContainer/LastEntry/Row" index="1" unique_id=1511411507 instance=ExtResource("3_jixr2")]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0"

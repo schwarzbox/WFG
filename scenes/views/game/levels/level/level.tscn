@@ -123,7 +123,7 @@ _data = {
 [node name="Level" unique_id=747036579 instance=ExtResource("1_llbr5")]
 script = ExtResource("2_xa387")
 
-[node name="LevelContainer" type="CenterContainer" parent="CanvasLayer" index="0" unique_id=112784820]
+[node name="LevelContainer" type="CenterContainer" parent="CanvasLayer" parent_id_path=PackedInt32Array(1528962764) index="0" unique_id=112784820]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -135,7 +135,7 @@ grow_vertical = 2
 layout_mode = 2
 text = "0"
 
-[node name="CountersContainer" type="VBoxContainer" parent="CanvasLayer" index="1" unique_id=229412765]
+[node name="CountersContainer" type="VBoxContainer" parent="CanvasLayer" parent_id_path=PackedInt32Array(1528962764) index="1" unique_id=229412765]
 offset_right = 325.0
 offset_bottom = 153.0
 theme_override_constants/separation = 4
@@ -156,7 +156,7 @@ _label = "Score"
 layout_mode = 2
 _label = "Bullet"
 
-[node name="PauseContainer" type="CenterContainer" parent="CanvasLayer" index="2" unique_id=906102770]
+[node name="PauseContainer" type="CenterContainer" parent="CanvasLayer" parent_id_path=PackedInt32Array(1528962764) index="2" unique_id=906102770]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -185,7 +185,7 @@ text = "Restart"
 layout_mode = 2
 text = "Back"
 
-[node name="GameOverContainer" type="CenterContainer" parent="CanvasLayer" index="3" unique_id=419644706]
+[node name="GameOverContainer" type="CenterContainer" parent="CanvasLayer" parent_id_path=PackedInt32Array(1528962764) index="3" unique_id=419644706]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -197,7 +197,7 @@ grow_vertical = 2
 layout_mode = 2
 text = "Game Over"
 
-[node name="World" parent="." index="1"]
+[node name="World" parent="." index="1" unique_id=222922855]
 script = ExtResource("4_f3skk")
 _enemy_scene = ExtResource("4_3whkn")
 

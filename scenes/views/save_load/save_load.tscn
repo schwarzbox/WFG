@@ -10,27 +10,27 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1k8h5"]
 
-[node name="SaveLoad" instance=ExtResource("1_b1bk6")]
+[node name="SaveLoad" unique_id=933825360 instance=ExtResource("1_b1bk6")]
 script = ExtResource("1_gndvv")
 
-[node name="MainContainer" type="CenterContainer" parent="CanvasLayer" index="0"]
+[node name="MainContainer" type="CenterContainer" parent="CanvasLayer" parent_id_path=PackedInt32Array(1528962764) index="0" unique_id=1002277915]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainContainer" index="0"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainContainer" index="0" unique_id=1883028857]
 layout_mode = 2
 theme_override_constants/separation = 32
 alignment = 1
 
-[node name="UILabel" parent="CanvasLayer/MainContainer/VBoxContainer" index="0" instance=ExtResource("3_fqyh5")]
+[node name="UILabel" parent="CanvasLayer/MainContainer/VBoxContainer" index="0" unique_id=699282585 instance=ExtResource("3_fqyh5")]
 layout_mode = 2
 text = "Save / Load"
 label_settings = ExtResource("2_gndvv")
 
-[node name="SaveList" type="ItemList" parent="CanvasLayer/MainContainer/VBoxContainer" index="1"]
+[node name="SaveList" type="ItemList" parent="CanvasLayer/MainContainer/VBoxContainer" index="1" unique_id=1657553771]
 custom_minimum_size = Vector2(768, 512)
 layout_mode = 2
 theme_override_constants/h_separation = 8
@@ -47,27 +47,27 @@ same_column_width = true
 fixed_column_width = 768
 item_0/text = "New Save File"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MainContainer/VBoxContainer" index="2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MainContainer/VBoxContainer" index="2" unique_id=1296632977]
 layout_mode = 2
 theme_override_constants/separation = 32
 alignment = 1
 
-[node name="Cancel" parent="CanvasLayer/MainContainer/VBoxContainer/HBoxContainer" index="0" instance=ExtResource("3_uh4au")]
+[node name="Cancel" parent="CanvasLayer/MainContainer/VBoxContainer/HBoxContainer" index="0" unique_id=1173181969 instance=ExtResource("3_uh4au")]
 layout_mode = 2
 text = "Cancel"
 
-[node name="Delete" parent="CanvasLayer/MainContainer/VBoxContainer/HBoxContainer" index="1" instance=ExtResource("3_uh4au")]
+[node name="Delete" parent="CanvasLayer/MainContainer/VBoxContainer/HBoxContainer" index="1" unique_id=519240008 instance=ExtResource("3_uh4au")]
 layout_mode = 2
 text = "Delete"
 
-[node name="SaveLoad" parent="CanvasLayer/MainContainer/VBoxContainer/HBoxContainer" index="2" instance=ExtResource("3_uh4au")]
+[node name="SaveLoad" parent="CanvasLayer/MainContainer/VBoxContainer/HBoxContainer" index="2" unique_id=2122344512 instance=ExtResource("3_uh4au")]
 layout_mode = 2
 text = "Save/Load"
 
-[node name="InputWindow" parent="CanvasLayer" index="1" instance=ExtResource("5_1k8h5")]
+[node name="InputWindow" parent="CanvasLayer" parent_id_path=PackedInt32Array(1528962764) index="1" unique_id=1532325541 instance=ExtResource("5_1k8h5")]
 visible = false
 
-[node name="DialogWindow" parent="CanvasLayer" index="2" instance=ExtResource("6_l64lu")]
+[node name="DialogWindow" parent="CanvasLayer" parent_id_path=PackedInt32Array(1528962764) index="2" unique_id=574454959 instance=ExtResource("6_l64lu")]
 visible = false
 
 [connection signal="item_selected" from="CanvasLayer/MainContainer/VBoxContainer/SaveList" to="." method="_on_save_list_item_selected"]

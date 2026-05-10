@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://ducjhfuc3vymf"]
+[gd_scene format=3 uid="uid://ducjhfuc3vymf"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_gfsmh"]
 size = Vector2(4, 4)
@@ -11,7 +11,7 @@ point_count = 3
 offsets = PackedFloat32Array(0.51860464, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
-[node name="TrailParticles" type="CPUParticles2D"]
+[node name="TrailParticles" type="CPUParticles2D" unique_id=1687673933]
 amount = 128
 texture = SubResource("PlaceholderTexture2D_gfsmh")
 lifetime = 0.8

@@ -4,18 +4,18 @@
 [ext_resource type="PackedScene" uid="uid://cb2uwdhqqnlny" path="res://scenes/nodes/views/ui_label/ui_label.tscn" id="2_rji8s"]
 [ext_resource type="LabelSettings" uid="uid://dlfypgb1ah5mq" path="res://scenes/nodes/views/ui_label/small_label_settings.tres" id="2_ugkl8"]
 
-[node name="Counter" type="HBoxContainer"]
+[node name="Counter" type="HBoxContainer" unique_id=571952913]
 offset_right = 95.0
 offset_bottom = 17.0
 theme_override_constants/separation = 8
 script = ExtResource("1_yyp1c")
 
-[node name="UILabel" parent="." instance=ExtResource("2_rji8s")]
+[node name="UILabel" parent="." unique_id=1043245813 instance=ExtResource("2_rji8s")]
 layout_mode = 2
 text = "Counter"
 label_settings = ExtResource("2_ugkl8")
 
-[node name="Value" type="Label" parent="."]
+[node name="Value" type="Label" parent="." unique_id=271411904]
 layout_mode = 2
 text = "0"
 label_settings = ExtResource("2_ugkl8")

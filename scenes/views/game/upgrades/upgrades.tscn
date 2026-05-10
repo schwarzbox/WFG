@@ -11,7 +11,7 @@
 [node name="Upgrades" unique_id=2001454398 instance=ExtResource("1_5e7wp")]
 script = ExtResource("2_wsgnr")
 
-[node name="MainContainer" type="CenterContainer" parent="CanvasLayer" index="0" unique_id=2108858330]
+[node name="MainContainer" type="CenterContainer" parent="CanvasLayer" parent_id_path=PackedInt32Array(1528962764) index="0" unique_id=2108858330]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

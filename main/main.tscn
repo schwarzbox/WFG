@@ -8,7 +8,7 @@
 [node name="Main" unique_id=1244640870 instance=ExtResource("1")]
 script = ExtResource("2")
 
-[node name="MainContainer" type="CenterContainer" parent="CanvasLayer" index="0" unique_id=404772089]
+[node name="MainContainer" type="CenterContainer" parent="CanvasLayer" parent_id_path=PackedInt32Array(1528962764) index="0" unique_id=404772089]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

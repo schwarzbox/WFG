@@ -6,21 +6,21 @@ extends View
 #docstringw
 # Main Scene
 
-# FileUtil? or GameSaveUtil? move methods to FileUtil?
-
-# Check Engine.get_license_text to generate license?
 # move main to views? create main as view manager stages
+
+# partially update old projects with new template (main structure)
 
 # rename screenshot or screenshots/media? check .gdignore
 # add my license to love game builds
 # check github releases description tags and pages
 # update MIT license template and update all my licenses
-
-# partially update old projects with new template (main structure)
+# check git history
 
 # itch.io add engine info for 3 games
 # check game descriptions itch.io 3 games
 # check photon itch.io edit help
+
+# Check Engine.get_license_text to generate license?
 
 # data classes
 # fluent interface return self from methods when init class

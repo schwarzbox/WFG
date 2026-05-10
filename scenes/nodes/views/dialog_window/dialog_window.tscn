@@ -5,10 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://cb2uwdhqqnlny" path="res://scenes/nodes/views/ui_label/ui_label.tscn" id="3_ahgy1"]
 [ext_resource type="LabelSettings" uid="uid://bfmg4ke5qx0j7" path="res://scenes/nodes/views/ui_label/medium_label_settings.tres" id="3_ickf1"]
 
-[node name="DialogWindow" instance=ExtResource("1_gncjd")]
+[node name="DialogWindow" unique_id=1391082965 instance=ExtResource("1_gncjd")]
 script = ExtResource("2_f3xqj")
 
-[node name="UILabel" parent="CenterContainer/VBoxContainer" index="0" instance=ExtResource("3_ahgy1")]
+[node name="UILabel" parent="CenterContainer/VBoxContainer" parent_id_path=PackedInt32Array(976857191) index="0" unique_id=452705928 instance=ExtResource("3_ahgy1")]
 custom_minimum_size = Vector2(768, 0)
 layout_mode = 2
 text = ""

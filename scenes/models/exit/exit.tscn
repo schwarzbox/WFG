@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dkx1t6ghxrcb6"]
+[gd_scene format=3 uid="uid://dkx1t6ghxrcb6"]
 
 [ext_resource type="Script" uid="uid://b65qpm3i74hpe" path="res://scenes/models/exit/exit.gd" id="1_sauib"]
 [ext_resource type="PackedScene" uid="uid://cimvxxl6pjyt0" path="res://scenes/nodes/models/radial_light/radial_light.tscn" id="2_px82w"]
@@ -9,19 +9,19 @@ size = Vector2(64, 64)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nbwbx"]
 size = Vector2(64, 64)
 
-[node name="Exit" type="Area2D"]
+[node name="Exit" type="Area2D" unique_id=1608912771]
 collision_layer = 0
 monitorable = false
 script = ExtResource("1_sauib")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2112531047]
 modulate = Color(0, 1, 1, 1)
 texture = SubResource("PlaceholderTexture2D_kdmnh")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=632698420]
 shape = SubResource("RectangleShape2D_nbwbx")
 
-[node name="RadialLight" parent="." instance=ExtResource("2_px82w")]
+[node name="RadialLight" parent="." unique_id=1225526533 instance=ExtResource("2_px82w")]
 visible = false
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

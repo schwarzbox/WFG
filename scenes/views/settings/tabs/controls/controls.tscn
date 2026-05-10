@@ -10,7 +10,7 @@
 [node name="Controls" unique_id=358730145 instance=ExtResource("1_4g7su")]
 script = ExtResource("2_kwt5q")
 
-[node name="MainContainer" type="CenterContainer" parent="CanvasLayer" index="0" unique_id=1002078092]
+[node name="MainContainer" type="CenterContainer" parent="CanvasLayer" parent_id_path=PackedInt32Array(1528962764) index="0" unique_id=1002078092]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

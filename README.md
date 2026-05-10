@@ -1,6 +1,6 @@
 # WFG
 
-v0.28
+v0.3
 
 Godot Engine template
 

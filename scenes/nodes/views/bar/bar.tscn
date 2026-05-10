@@ -16,18 +16,18 @@ border_width_left = 6
 border_width_top = 6
 border_width_bottom = 6
 
-[node name="HealthBar" type="HBoxContainer"]
+[node name="HealthBar" type="HBoxContainer" unique_id=223669919]
 offset_right = 197.0
 offset_bottom = 42.0
 theme_override_constants/separation = 0
 script = ExtResource("1_frhoq")
 
-[node name="UILabel" parent="." instance=ExtResource("2_mantt")]
+[node name="UILabel" parent="." unique_id=1902294010 instance=ExtResource("2_mantt")]
 layout_mode = 2
 text = "Bar"
 label_settings = ExtResource("1_rdnsg")
 
-[node name="Value" type="ProgressBar" parent="."]
+[node name="Value" type="ProgressBar" parent="." unique_id=1452310500]
 custom_minimum_size = Vector2(256, 42)
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_frhoq")

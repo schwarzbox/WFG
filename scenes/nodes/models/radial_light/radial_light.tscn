@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cimvxxl6pjyt0"]
+[gd_scene format=3 uid="uid://cimvxxl6pjyt0"]
 
 [ext_resource type="Script" uid="uid://b2smvykod8124" path="res://scenes/nodes/models/radial_light/radial_light.gd" id="1_2h38i"]
 
@@ -14,10 +14,10 @@ height = 128
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
-[node name="RadialLight" type="Node2D"]
+[node name="RadialLight" type="Node2D" unique_id=873625489]
 script = ExtResource("1_2h38i")
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1217178940]
 blend_mode = 2
 shadow_enabled = true
 shadow_color = Color(0, 0, 0, 0.25098)
