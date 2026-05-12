@@ -1,4 +1,4 @@
-class_name View
+class_name BaseView
 extends Node
 
 @warning_ignore("unused_signal")

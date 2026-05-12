@@ -1,4 +1,4 @@
-extends View
+extends BaseView
 
 var SHOT_TYPE_BUTTON_GROUP: ButtonGroup = preload("res://scenes/views/game/upgrades/shot_type_button_group.tres")
 var BULLET_FORCE_TYPE_BUTTON_GROUP: ButtonGroup = preload("res://scenes/views/game/upgrades/bullet_force_type_button_group.tres")

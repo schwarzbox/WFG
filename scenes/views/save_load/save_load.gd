@@ -1,4 +1,4 @@
-extends View
+extends BaseView
 
 signal file_loaded
 signal file_saved

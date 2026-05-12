@@ -1,4 +1,4 @@
-extends View
+extends BaseView
 
 const ROW_COUNT: int = 8
 

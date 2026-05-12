@@ -1,13 +1,13 @@
-extends View
+extends BaseView
 
 signal changed
 
 var _player: Player = null
 
-var _level_views: Array[View] = []
+var _level_views: Array[BaseView] = []
 var _level_scenes: Dictionary = {}
-var _save_load_view: View = null
-var _upgrades_view: View = null
+var _save_load_view: BaseView = null
+var _upgrades_view: BaseView = null
 
 
 func _ready() -> void:
@@ -72,7 +72,7 @@ func start(objects: Array[Node] = []) -> void:
 func _setup() -> void:
 	_level_views.clear()
 	for level_scene: PackedScene in _level_scenes.values():
-		var view: View = level_scene.instantiate()
+		var view: BaseView = level_scene.instantiate()
 		view.connect("restarted", _on_level_view_restarted)
 		view.connect("changed", _on_level_view_changed)
 		view.connect("finished", _on_level_view_finished)
@@ -101,7 +101,7 @@ func _setup() -> void:
 #view helpers
 func _start_level() -> void:
 	var level: int = _player.get_level()
-	var view: View = _level_views[level - 1]
+	var view: BaseView = _level_views[level - 1]
 	add_world_child(view)
 	view.start(_player)
 
@@ -129,7 +129,7 @@ func _start_upgrades() -> void:
 
 
 #level view
-func _on_level_view_changed(view: View) -> void:
+func _on_level_view_changed(view: BaseView) -> void:
 	Music.main_audio_stream_paused(false)
 
 	var level: int = _player.get_level()
@@ -155,19 +155,19 @@ func _on_level_view_changed(view: View) -> void:
 		#_setup()
 
 
-func _on_level_view_finished(view: View) -> void:
+func _on_level_view_finished(view: BaseView) -> void:
 	view.queue_free()
 
 	start()
 
 
-func _on_level_view_restarted(view: View) -> void:
+func _on_level_view_restarted(view: BaseView) -> void:
 	#remove player due set_player implementation
 	view.remove_models_child(_player)
 	view.restart(_player)
 
 
-func _on_level_view_closed(view: View) -> void:
+func _on_level_view_closed(view: BaseView) -> void:
 	#protect player from being deleted
 	view.remove_models_child(_player)
 	#clear view
@@ -178,20 +178,20 @@ func _on_level_view_closed(view: View) -> void:
 
 
 #save_load view
-func _on_save_load_view_file_saved(view: View) -> void:
+func _on_save_load_view_file_saved(view: BaseView) -> void:
 	view.queue_free()
 
 	_setup()
 
 
-func _on_save_load_view_closed(view: View) -> void:
+func _on_save_load_view_closed(view: BaseView) -> void:
 	view.queue_free()
 
 	_setup()
 
 
 #upgrade view
-func _on_upgrades_view_closed(view: View) -> void:
+func _on_upgrades_view_closed(view: BaseView) -> void:
 	view.queue_free()
 
 	_setup()

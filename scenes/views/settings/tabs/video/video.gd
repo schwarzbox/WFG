@@ -1,4 +1,4 @@
-extends View
+extends BaseView
 
 
 func _ready() -> void:

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cbnfadiogf05v"]
 
-[ext_resource type="PackedScene" uid="uid://kn4un6yv7630" path="res://scenes/base/view/view.tscn" id="1_5e7wp"]
+[ext_resource type="PackedScene" uid="uid://kn4un6yv7630" path="res://scenes/base/view/base_view.tscn" id="1_5e7wp"]
 [ext_resource type="Script" uid="uid://c1o5ep46n3vl4" path="res://scenes/views/game/upgrades/upgrades.gd" id="2_wsgnr"]
 [ext_resource type="PackedScene" uid="uid://cb2uwdhqqnlny" path="res://scenes/nodes/views/ui_label/ui_label.tscn" id="3_s8xjp"]
 [ext_resource type="LabelSettings" uid="uid://bfmg4ke5qx0j7" path="res://scenes/nodes/views/ui_label/medium_label_settings.tres" id="4_s8xjp"]

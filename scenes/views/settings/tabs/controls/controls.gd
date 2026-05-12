@@ -1,4 +1,4 @@
-extends View
+extends BaseView
 
 var _mouse_button_abbreviation_map: Dictionary = {
 	MouseButton.MOUSE_BUTTON_LEFT: "LMB",

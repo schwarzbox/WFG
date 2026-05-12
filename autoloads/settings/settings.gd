@@ -16,8 +16,8 @@ var defaults: Dictionary[String, Dictionary] = {
 	} ,
 	Globals.SETTINGS_SECTIONS[Globals.SettingsSection.CONTROLS]: {
 		"input/ui_up": { "type": "key", "code": 87 } ,
-		"input/ui_down": { "type": "key", "code": 65 } ,
-		"input/ui_left": { "type": "key", "code": 83 } ,
+		"input/ui_down": { "type": "key", "code": 83 } ,
+		"input/ui_left": { "type": "key", "code": 65 } ,
 		"input/ui_right": { "type": "key", "code": 68 } ,
 		"input/ui_first_action": { "type": "mouse_button", "code": MouseButton.MOUSE_BUTTON_LEFT } ,
 		"input/ui_second_action": { "type": "mouse_button", "code": MouseButton.MOUSE_BUTTON_RIGHT }

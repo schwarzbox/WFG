@@ -1,8 +1,8 @@
-extends View
+extends BaseView
 
-var _audio_view: View = null
-var _video_view: View = null
-var _controls_view: View = null
+var _audio_view: BaseView = null
+var _video_view: BaseView = null
+var _controls_view: BaseView = null
 
 
 func _ready() -> void:
@@ -61,7 +61,7 @@ func _start_controls() -> void:
 		$CanvasLayer.hide()
 
 
-func _on_view_closed(view: View) -> void:
+func _on_view_closed(view: BaseView) -> void:
 	view.queue_free()
 
 	_setup()

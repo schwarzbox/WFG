@@ -166,7 +166,7 @@ const ENEMY_SCALE_DELAY: float = 0.8
 
 const EXIT_OPEN_DELAY: float = 2.0
 
-const LEVEL_COUNT: int = 1
+const LEVEL_COUNT: int = 4
 const LEVEL_CREDITS: int = 4
 const ENEMY_COUNT: int = 2
 const ENEMY_CHANCE_TO_CREATE: float = 0.005

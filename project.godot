@@ -56,7 +56,7 @@ enabled=PackedStringArray("res://addons/diff-margin/plugin.cfg", "res://addons/s
 
 folder_colors={
 "res://autoloads/": "gray",
-"res://scenes/models/": "blue",
+"res://scenes/models/": "purple",
 "res://scenes/nodes/": "green",
 "res://scenes/views/": "yellow",
 "res://utils/": "gray"

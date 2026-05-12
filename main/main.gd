@@ -1,12 +1,13 @@
 #tool
 #class_name
 #extends
-extends View
+extends BaseView
 
 #docstringw
 # Main Scene
 
 # move main to views? create main as view manager stages
+# move all comments to new main
 
 # partially update old projects with new template (main structure)
 
@@ -14,7 +15,6 @@ extends View
 # add my license to love game builds
 # check github releases description tags and pages
 # update MIT license template and update all my licenses
-# check git history
 
 # itch.io add engine info for 3 games
 # check game descriptions itch.io 3 games
@@ -96,10 +96,10 @@ extends View
 #public variables
 #private variables
 #region Views
-var _game_view: View = null
-var _save_load_view: View = null
-var _settings_view: View = null
-var _statistics_view: View = null
+var _game_view: BaseView = null
+var _save_load_view: BaseView = null
+var _settings_view: BaseView = null
+var _statistics_view: BaseView = null
 
 #endregion
 #public onready variables
@@ -252,7 +252,7 @@ func _start_settings() -> void:
 
 
 #game view
-func _on_game_view_changed(view: View) -> void:
+func _on_game_view_changed(view: BaseView) -> void:
 	view.queue_free()
 	if Utils.is_web():
 		# remove statistics for web
@@ -262,13 +262,13 @@ func _on_game_view_changed(view: View) -> void:
 
 
 #save_load view
-func _on_save_load_view_file_loaded(view: View, objects: Array[Node]) -> void:
+func _on_save_load_view_file_loaded(view: BaseView, objects: Array[Node]) -> void:
 	view.queue_free()
 
 	_start_game(objects)
 
 
-func _on_view_closed(view: View) -> void:
+func _on_view_closed(view: BaseView) -> void:
 	view.queue_free()
 
 	_setup()

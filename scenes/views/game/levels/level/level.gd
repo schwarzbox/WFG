@@ -1,4 +1,4 @@
-extends View
+extends BaseView
 
 signal restarted
 signal changed
