@@ -1,12 +1,14 @@
 # WFG
 
-v0.3
+## v0.3
 
-Godot Engine template
+Template project for Godot engine
 
 ```bash
 curl -L -O https://github.com/schwarzbox/WFG/archive/main.zip
 ```
+
+### Credits
 
 Design/Art/Code: [Aliaksandr Veledzimovich](https://twitter.com/veledzimovich)<br>
 Music: [Mubert](https://mubert.com)<br>
